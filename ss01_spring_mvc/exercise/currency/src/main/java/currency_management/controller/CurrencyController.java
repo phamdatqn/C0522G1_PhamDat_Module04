@@ -16,11 +16,11 @@ public class CurrencyController {
 
     @GetMapping("/")
     public String home(){
-        return "/index";
+        return "index";
     }
 
-    @PostMapping("/rersult")
+    @PostMapping("result")
     public ModelAndView convert(@RequestParam int inputNumber){
-        return new ModelAndView("/index","result",iCurrenCyService.convert(inputNumber));
+        return new ModelAndView("index","result",iCurrenCyService.convert(inputNumber));
     }
 }

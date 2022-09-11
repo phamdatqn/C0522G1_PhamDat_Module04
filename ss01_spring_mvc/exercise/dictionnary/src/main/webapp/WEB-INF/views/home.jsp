@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/search">
+<form action="search">
     <input type="text" name="search">
     <button type="submit">Dịch</button>
     <input type="text" disabled value="${result}">

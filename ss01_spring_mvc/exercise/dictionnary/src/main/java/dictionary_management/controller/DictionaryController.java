@@ -9,16 +9,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class DictionaryController {
+
     @Autowired
     private IDictionaryService iDictionaryService;
 
     @GetMapping("/")
-    public String home(){
+    public String home() {
         return "/home";
     }
 
-    @GetMapping("/search")
-    public ModelAndView search(@RequestParam String search){
-        return new ModelAndView("/home","result",iDictionaryService.search(search));
+    @GetMapping("search")
+    public ModelAndView search(@RequestParam String search) {
+        return new ModelAndView("home", "result", iDictionaryService.search(search));
     }
 }

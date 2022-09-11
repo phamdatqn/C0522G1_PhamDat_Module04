@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form method="post" action="/rersult">
+<form method="post" action="result">
     <input type="text" name="inputNumber" placeholder="Nhập số tiền USD">
     <button type="submit"> Convert</button>
 </form>
