@@ -21,6 +21,7 @@ dependencies {
 
     compileJava.options.encoding = 'UTF-8'
     tasks.withType(JavaCompile) {    options.encoding = 'UTF-8'}
+    implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
 }
 
 test {

@@ -26,6 +26,6 @@ public class DictionaryRepository implements IDictionaryRepository {
                 return dictionary.getVietNam();
             }
         }
-        return "Không tìm thấy";
+        return "Không tìm thấy trong từ điển !";
     }
 }
