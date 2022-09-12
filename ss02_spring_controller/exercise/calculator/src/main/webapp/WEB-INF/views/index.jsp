@@ -7,20 +7,20 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
+<head>
     <title>$Title$</title>
-  </head>
-  <body>
-  <form action="/calculation">
+</head>
+<body>
+<form action="/calculation">
     <input type="text" name="inputNumber1">
     <input type="text" name="inputNumber2"><br><br>
     <button type="submit" name="calculation" value="addition">Addition (+)</button>
     <button type="submit" name="calculation" value="subtraction">Subtraction (-)</button>
     <button type="submit" name="calculation" value="multiplication">Multiplication (X)</button>
     <button type="submit" name="calculation" value="division">Division (/)</button>
-  </form>
-  </body>
+</form>
+</body>
 <p>
-  Kết quả: ${result}
+    Kết quả: ${result}
 </p>
 </html>

@@ -10,12 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class SandwichController {
 
     @GetMapping("/")
-    public String home(){
+    public String home() {
         return "index";
     }
 
-    @PostMapping ("/save")
+    @PostMapping("/save")
     public ModelAndView save(@RequestParam("condiment") String[] condiment) {
-        return new ModelAndView("order","condiment",condiment);
+        return new ModelAndView("order", "condiment", condiment);
     }
 }

@@ -26,10 +26,10 @@ public class CustomerController {
     }
 
     @GetMapping("/customer/{id}")
-    public ModelAndView showInfo(@PathVariable long id){
+    public ModelAndView showInfo(@PathVariable long id) {
         ModelAndView modelAndView = new ModelAndView("info");
-        Customer customer= customerService.findOne(id);
-        modelAndView.addObject("customer",customer);
+        Customer customer = customerService.findOne(id);
+        modelAndView.addObject("customer", customer);
         return modelAndView;
     }
 
@@ -37,14 +37,12 @@ public class CustomerController {
     public String update(@RequestParam long id,
                          @RequestParam String name,
                          @RequestParam String email,
-                         @RequestParam String address){
+                         @RequestParam String address) {
 
-        Customer customer =new Customer(id,name,email,address);
+        Customer customer = new Customer(id, name, email, address);
         customerService.save(customer);
         return "redirect:/";
     }
-
-
 
 
 }
