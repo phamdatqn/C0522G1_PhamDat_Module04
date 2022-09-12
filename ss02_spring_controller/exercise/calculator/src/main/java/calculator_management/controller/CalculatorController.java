@@ -19,7 +19,7 @@ public class CalculatorController {
     }
 
     @GetMapping("/calculation")
-    public ModelAndView addition(@RequestParam String inputNumber1, @RequestParam String inputNumber2, String calculation) {
+    public ModelAndView calculation(@RequestParam String inputNumber1, @RequestParam String inputNumber2, String calculation) {
         return new ModelAndView("index", "result", iCalculatorService.calculator(inputNumber1, inputNumber2, calculation));
     }
 }
