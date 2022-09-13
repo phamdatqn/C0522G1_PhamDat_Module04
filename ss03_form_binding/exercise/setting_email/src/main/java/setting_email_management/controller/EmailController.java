@@ -46,7 +46,6 @@ public class EmailController {
     @PostMapping("/update")
     public String update(@ModelAttribute Email email) {
         iEmailService.save(email);
-
         return "redirect:/";
     }
 }
