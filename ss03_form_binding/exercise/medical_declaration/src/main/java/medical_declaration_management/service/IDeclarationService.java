@@ -11,7 +11,7 @@ public interface IDeclarationService {
 
     List<String> country();
 
-    List<String> phuongTien();
+    List<String> vehicle();
 
     Declaration findById(int id);
 

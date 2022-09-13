@@ -31,7 +31,7 @@ public class DeclarationController {
     public String create(Model model) {
         List<String> genderList = iDeclarationService.gender();
         List<String> countryList = iDeclarationService.country();
-        List<String> vehicleList = iDeclarationService.phuongTien();
+        List<String> vehicleList = iDeclarationService.vehicle();
         model.addAttribute("declaration", new Declaration());
         model.addAttribute("genderList", genderList);
         model.addAttribute("countryList", countryList);
@@ -45,7 +45,7 @@ public class DeclarationController {
         Declaration declaration = iDeclarationService.findById(id);
         List<String> genderList = iDeclarationService.gender();
         List<String> countryList = iDeclarationService.country();
-        List<String> vehicleList = iDeclarationService.phuongTien();
+        List<String> vehicleList = iDeclarationService.vehicle();
 
         modelAndView.addObject("genderList", genderList);
         modelAndView.addObject("countryList", countryList);

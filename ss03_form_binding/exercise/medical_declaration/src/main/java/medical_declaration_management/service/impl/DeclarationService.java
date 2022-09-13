@@ -30,8 +30,8 @@ public class DeclarationService implements IDeclarationService {
     }
 
     @Override
-    public List<String> phuongTien() {
-        return iDeclarationRepository.phuongTien();
+    public List<String> vehicle() {
+        return iDeclarationRepository.vehicle();
     }
 
     @Override

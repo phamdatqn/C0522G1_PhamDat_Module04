@@ -55,7 +55,7 @@ public class DeclarationRepository implements IDeclarationRepository {
     }
 
     @Override
-    public List<String> phuongTien() {
+    public List<String> vehicle() {
         return new ArrayList<>(vehicleList);
     }
 
