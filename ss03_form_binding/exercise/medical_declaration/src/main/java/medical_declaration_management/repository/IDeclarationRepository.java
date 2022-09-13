@@ -9,5 +9,6 @@ public interface IDeclarationRepository {
     List<String> gender();
     List<String> country();
     List<String> phuongTien();
+    void save(Declaration declaration);
 
 }

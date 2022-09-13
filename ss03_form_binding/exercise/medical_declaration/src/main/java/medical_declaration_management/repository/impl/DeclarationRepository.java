@@ -56,4 +56,9 @@ public class DeclarationRepository implements IDeclarationRepository {
     public List<String> phuongTien() {
         return new ArrayList<>(danhSachPhuongTien);
     }
+
+    @Override
+    public void save(Declaration declaration) {
+        declarationList.add(declaration);
+    }
 }

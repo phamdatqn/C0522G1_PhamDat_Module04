@@ -33,4 +33,9 @@ public class DeclarationService implements IDeclarationService {
     public List<String> phuongTien() {
         return iDeclarationRepository.phuongTien();
     }
+
+    @Override
+    public void save(Declaration declaration) {
+        iDeclarationRepository.save(declaration);
+    }
 }

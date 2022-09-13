@@ -17,6 +17,21 @@ public class Declaration {
     public Declaration() {
     }
 
+    public Declaration(String name, String birthday, String gender, String country, String idCard, String phuongTien,
+                       String tenPhuongTien, String soGhe, String ngayKhoiHanh, String ngayKetThuc, String tinhDaDen) {
+        this.name = name;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.country = country;
+        this.idCard = idCard;
+        this.phuongTien = phuongTien;
+        this.tenPhuongTien = tenPhuongTien;
+        this.soGhe = soGhe;
+        this.ngayKhoiHanh = ngayKhoiHanh;
+        this.ngayKetThuc = ngayKetThuc;
+        this.tinhDaDen = tinhDaDen;
+    }
+
     public Declaration(int id, String name, String birthday, String gender, String country, String idCard, String phuongTien,
                        String tenPhuongTien, String soGhe, String ngayKhoiHanh, String ngayKetThuc, String tinhDaDen) {
         this.id = id;

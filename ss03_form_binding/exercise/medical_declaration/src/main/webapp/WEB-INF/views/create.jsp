@@ -77,7 +77,7 @@
                 </tr>
                 <tr>
                     <td colspan="6">
-                        <form:radiobuttons path="phuongTien" items="${}"/>
+                        <form:radiobuttons path="phuongTien" items="${danhSachPhuongTien}"/>
                     </td>
                 </tr>
 
@@ -87,10 +87,10 @@
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <input style="width: 100%" name="tenPhuongTien" type="text" placeholder="VD: VN123">
+                        <form:input path="tenPhuongTien"/>
                     </td>
                     <td colspan="3">
-                        <input style="width: 100%" name="soGhe" type="text">
+                        <form:input path="soGhe"/>
                     </td>
                 </tr>
 
@@ -100,10 +100,10 @@
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <input name="ngayThangNam" type="date">
+                        <form:input path="ngayKhoiHanh"/>
                     </td>
                     <td colspan="3">
-                        <input name="ngayKetThuc" type="date">
+                        <form:input path="ngayKetThuc"/>
                     </td>
                 </tr>
 
@@ -113,7 +113,7 @@
                 </tr>
                 <tr>
                     <td colspan="6">
-                        <input style="width: 100%" name="noiDen" type="text">
+                        <form:input path="tinhDaDen"/>
                     </td>
                 </tr>
 

@@ -12,4 +12,6 @@ public interface IDeclarationService {
     List<String> country();
 
     List<String> phuongTien();
+
+    void save(Declaration declaration);
 }
