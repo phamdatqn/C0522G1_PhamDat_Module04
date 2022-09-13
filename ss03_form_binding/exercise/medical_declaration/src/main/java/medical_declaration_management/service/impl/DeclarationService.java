@@ -35,7 +35,17 @@ public class DeclarationService implements IDeclarationService {
     }
 
     @Override
-    public void save(Declaration declaration) {
-        iDeclarationRepository.save(declaration);
+    public Declaration findById(int id) {
+        return iDeclarationRepository.findById(id);
+    }
+
+    @Override
+    public boolean update(Declaration declaration) {
+        return iDeclarationRepository.update(declaration);
+    }
+
+    @Override
+    public void create(Declaration declaration) {
+        iDeclarationRepository.create(declaration);
     }
 }

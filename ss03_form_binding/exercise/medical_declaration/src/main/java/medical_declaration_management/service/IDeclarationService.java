@@ -13,5 +13,10 @@ public interface IDeclarationService {
 
     List<String> phuongTien();
 
-    void save(Declaration declaration);
+    Declaration findById(int id);
+
+    boolean update(Declaration declaration);
+
+    void create(Declaration declaration);
+
 }

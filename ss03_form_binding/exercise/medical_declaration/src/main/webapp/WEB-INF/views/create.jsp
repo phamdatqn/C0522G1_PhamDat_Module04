@@ -43,6 +43,9 @@
         <form:form action="/create" method="post" modelAttribute="declaration">
             <table class="table table-striped">
                 <tr>
+                    <td>ID: <form:input path="id"/></td>
+                </tr>
+                <tr>
                     <td colspan="6"><p class="fw-bold">Họ tên (ghi chữ IN HOA) <span style="color: red">(*)</span></p>
                     </td>
                 </tr>
@@ -56,7 +59,7 @@
                     <td colspan="2"><span class="fw-bold">Quốc tịch <span style="color: red">(*)</span></span></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><form:input path="birthday"/> </td>
+                    <td colspan="2"><form:input path="birthday"/></td>
                     <td colspan="2"><form:select path="gender" items="${genderList}"/>
                     <td colspan="2"><form:select path="country" items="${countryList}"/></td>
                 </tr>
@@ -77,7 +80,7 @@
                 </tr>
                 <tr>
                     <td colspan="6">
-                        <form:radiobuttons path="phuongTien" items="${danhSachPhuongTien}"/>
+                        <form:radiobuttons path="vehicle" items="${vehicleList}"/>
                     </td>
                 </tr>
 
@@ -87,10 +90,10 @@
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <form:input path="tenPhuongTien"/>
+                        <form:input path="nameVehicle"/>
                     </td>
                     <td colspan="3">
-                        <form:input path="soGhe"/>
+                        <form:input path="numberOfSeats"/>
                     </td>
                 </tr>
 
@@ -100,10 +103,10 @@
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <form:input path="ngayKhoiHanh"/>
+                        <form:input path="startDay"/>
                     </td>
                     <td colspan="3">
-                        <form:input path="ngayKetThuc"/>
+                        <form:input path="endDay"/>
                     </td>
                 </tr>
 
@@ -113,7 +116,7 @@
                 </tr>
                 <tr>
                     <td colspan="6">
-                        <form:input path="tinhDaDen"/>
+                        <form:input path="theCityHasCome"/>
                     </td>
                 </tr>
 

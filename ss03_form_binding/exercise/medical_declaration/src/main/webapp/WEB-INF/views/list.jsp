@@ -11,8 +11,11 @@
 <html>
 <head>
     <title>Title</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
 
@@ -27,18 +30,21 @@
         <th>Số CMND/Hộ chiếu</th>
         <th>Tên phương tiện</th>
     </tr>
-   <c:forEach varStatus="status" var="declaration" items="${declarationList}">
-       <tr>
-           <td>${status.count}</td>
-           <td>${declaration.name}</td>
-           <td>${declaration.birthday}</td>
-           <td>${declaration.gender}</td>
-           <td>${declaration.country}</td>
-           <td>${declaration.idCard}</td>
-           <td>${declaration.tenPhuongTien}</td>
-       </tr>
-   </c:forEach>
+    <c:forEach varStatus="status" var="declaration" items="${declarationList}">
+        <tr>
+            <td>${status.count}</td>
+            <td><a href="/update/${declaration.id}">${declaration.name}</a>
+            </td>
+            <td>${declaration.birthday}</td>
+            <td>${declaration.gender}</td>
+            <td>${declaration.country}</td>
+            <td>${declaration.idCard}</td>
+            <td>${declaration.nameVehicle}</td>
+        </tr>
+    </c:forEach>
 </table>
-<a href="/create"><button>create</button></a>
+<a href="/create">
+    <button>create</button>
+</a>
 </body>
 </html>

@@ -7,45 +7,30 @@ public class Declaration {
     private String gender;
     private String country;
     private String idCard;
-    private String phuongTien;
-    private String tenPhuongTien;
-    private String soGhe;
-    private String ngayKhoiHanh;
-    private String ngayKetThuc;
-    private String tinhDaDen;
+    private String vehicle;
+    private String nameVehicle;
+    private String numberOfSeats;
+    private String startDay;
+    private String endDay;
+    private String theCityHasCome;
 
     public Declaration() {
     }
 
-    public Declaration(String name, String birthday, String gender, String country, String idCard, String phuongTien,
-                       String tenPhuongTien, String soGhe, String ngayKhoiHanh, String ngayKetThuc, String tinhDaDen) {
-        this.name = name;
-        this.birthday = birthday;
-        this.gender = gender;
-        this.country = country;
-        this.idCard = idCard;
-        this.phuongTien = phuongTien;
-        this.tenPhuongTien = tenPhuongTien;
-        this.soGhe = soGhe;
-        this.ngayKhoiHanh = ngayKhoiHanh;
-        this.ngayKetThuc = ngayKetThuc;
-        this.tinhDaDen = tinhDaDen;
-    }
-
-    public Declaration(int id, String name, String birthday, String gender, String country, String idCard, String phuongTien,
-                       String tenPhuongTien, String soGhe, String ngayKhoiHanh, String ngayKetThuc, String tinhDaDen) {
+    public Declaration(int id, String name, String birthday, String gender, String country, String idCard,
+                       String vehicle, String nameVehicle, String numberOfSeats, String startDay, String endDay, String theCityHasCome) {
         this.id = id;
         this.name = name;
         this.birthday = birthday;
         this.gender = gender;
         this.country = country;
         this.idCard = idCard;
-        this.phuongTien = phuongTien;
-        this.tenPhuongTien = tenPhuongTien;
-        this.soGhe = soGhe;
-        this.ngayKhoiHanh = ngayKhoiHanh;
-        this.ngayKetThuc = ngayKetThuc;
-        this.tinhDaDen = tinhDaDen;
+        this.vehicle = vehicle;
+        this.nameVehicle = nameVehicle;
+        this.numberOfSeats = numberOfSeats;
+        this.startDay = startDay;
+        this.endDay = endDay;
+        this.theCityHasCome = theCityHasCome;
     }
 
     public int getId() {
@@ -96,51 +81,51 @@ public class Declaration {
         this.idCard = idCard;
     }
 
-    public String getPhuongTien() {
-        return phuongTien;
+    public String getVehicle() {
+        return vehicle;
     }
 
-    public void setPhuongTien(String phuongTien) {
-        this.phuongTien = phuongTien;
+    public void setVehicle(String vehicle) {
+        this.vehicle = vehicle;
     }
 
-    public String getTenPhuongTien() {
-        return tenPhuongTien;
+    public String getNameVehicle() {
+        return nameVehicle;
     }
 
-    public void setTenPhuongTien(String tenPhuongTien) {
-        this.tenPhuongTien = tenPhuongTien;
+    public void setNameVehicle(String nameVehicle) {
+        this.nameVehicle = nameVehicle;
     }
 
-    public String getSoGhe() {
-        return soGhe;
+    public String getNumberOfSeats() {
+        return numberOfSeats;
     }
 
-    public void setSoGhe(String soGhe) {
-        this.soGhe = soGhe;
+    public void setNumberOfSeats(String numberOfSeats) {
+        this.numberOfSeats = numberOfSeats;
     }
 
-    public String getNgayKhoiHanh() {
-        return ngayKhoiHanh;
+    public String getStartDay() {
+        return startDay;
     }
 
-    public void setNgayKhoiHanh(String ngayKhoiHanh) {
-        this.ngayKhoiHanh = ngayKhoiHanh;
+    public void setStartDay(String startDay) {
+        this.startDay = startDay;
     }
 
-    public String getNgayKetThuc() {
-        return ngayKetThuc;
+    public String getEndDay() {
+        return endDay;
     }
 
-    public void setNgayKetThuc(String ngayKetThuc) {
-        this.ngayKetThuc = ngayKetThuc;
+    public void setEndDay(String endDay) {
+        this.endDay = endDay;
     }
 
-    public String getTinhDaDen() {
-        return tinhDaDen;
+    public String getTheCityHasCome() {
+        return theCityHasCome;
     }
 
-    public void setTinhDaDen(String tinhDaDen) {
-        this.tinhDaDen = tinhDaDen;
+    public void setTheCityHasCome(String theCityHasCome) {
+        this.theCityHasCome = theCityHasCome;
     }
 }
