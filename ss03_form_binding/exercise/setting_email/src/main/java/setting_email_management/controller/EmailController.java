@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import setting_email_management.model.Email;
 import setting_email_management.service.IEmailService;
 
@@ -44,8 +45,11 @@ public class EmailController {
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute Email email) {
+    public String update(@ModelAttribute Email email, RedirectAttributes redirectAttributes) {
         iEmailService.save(email);
+
+        redirectAttributes.addFlashAttribute("message","Cập nhập thành công");
+
         return "redirect:/";
     }
 }

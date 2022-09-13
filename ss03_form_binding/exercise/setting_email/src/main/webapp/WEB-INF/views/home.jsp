@@ -19,6 +19,8 @@
 
 </head>
 <body>
+
+<h2 style="color: darkgreen">${message}</h2>
 <table class="table table-striped">
     <tr>
         <th>STT</th>
