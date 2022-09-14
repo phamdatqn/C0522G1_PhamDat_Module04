@@ -7,9 +7,11 @@ import java.util.List;
 public interface IProducService {
     List<Product> displayAll();
 
+    void save(Product product);
+
     Product findById(int id);
 
-    void update(int id, Product product);
+    void update(Product product);
 
     void delete(int id);
 

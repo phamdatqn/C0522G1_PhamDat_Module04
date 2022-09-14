@@ -34,20 +34,23 @@
     </tr>
     <tr th:each="row,rowStat : ${productList}">
         <td th:text="${rowStat.count}"></td>
-        <td th:text="${row.getName()}"></td>
-        <td th:text="${row.getPrice()}"></td>
-        <td th:text="${row.getDescription()}"></td>
-        <td th:text="${row.getProducer()}"></td>
-        <td><a th:href="@{/product/update/__${row.getId()}__}">
+        <td th:text="${row.name}"></td>
+        <td th:text="${row.price}"></td>
+        <td th:text="${row.description}"></td>
+        <td th:text="${row.producer}"></td>
+        <td><a th:href="@{/product/update/__${row.id}__}">
             <button class="btn btn-primary">Cập nhập</button>
         </a></td>
-        <td><a th:href="@{/product/delete/__${row.getId()}__}">
+        <td><a th:href="@{/product/delete/__${row.id}__}">
             <button class="btn btn-danger">Xóa</button>
         </a></td>
-        <td><a th:href="@{/product/view/__${row.getId()}__}">
+        <td><a th:href="@{/product/view/__${row.id}__}">
             <button class="btn btn-warning">Xem chi tiết</button>
         </a></td>
     </tr>
 </table>
+<a th:href="@{/product/create}">
+    <button class="btn btn-success">Create</button>
+</a>
 </body>
 </html>

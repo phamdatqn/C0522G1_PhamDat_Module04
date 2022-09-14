@@ -7,11 +7,13 @@ import java.util.List;
 public interface IProducRepository {
     List<Product> displayAll();
 
+    void save(Product product);
+
     Product findById(int id);
 
     List<Product> searchByName(String name);
 
-    void update(int id, Product product);
+    void update(Product product);
 
     void delete(int id);
 }

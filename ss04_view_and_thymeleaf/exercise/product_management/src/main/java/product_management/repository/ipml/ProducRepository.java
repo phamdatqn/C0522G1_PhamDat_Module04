@@ -26,6 +26,11 @@ public class ProducRepository implements IProducRepository {
     }
 
     @Override
+    public void save(Product product) {
+        productList.put(product.getId(), product);
+    }
+
+    @Override
     public Product findById(int id) {
         return productList.get(id);
     }
@@ -42,8 +47,8 @@ public class ProducRepository implements IProducRepository {
     }
 
     @Override
-    public void update(int id, Product product) {
-        productList.put(id, product);
+    public void update(Product product) {
+        productList.put(product.getId(), product);
     }
 
     @Override

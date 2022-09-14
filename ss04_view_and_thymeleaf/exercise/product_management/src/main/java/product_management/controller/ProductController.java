@@ -26,6 +26,12 @@ public class ProductController {
         return "home";
     }
 
+    @GetMapping("/create")
+    public String showFormCreate(Model model) {
+        model.addAttribute("product", new Product());
+        return "create";
+    }
+
     @GetMapping("/update/{id}")
     public String showFormUpdate(@PathVariable int id, Model model) {
         model.addAttribute("product", iProducService.findById(id));
@@ -59,9 +65,16 @@ public class ProductController {
         return "home";
     }
 
+    @PostMapping("/save")
+    public String save(Product product, RedirectAttributes redirectAttributes) {
+        iProducService.save(product);
+        redirectAttributes.addFlashAttribute("message", "Thêm mới thành công: " + product.getName());
+        return "redirect:/product";
+    }
+
     @PostMapping("/update")
     public String update(Product product, RedirectAttributes redirectAttributes) {
-        iProducService.update(product.getId(), product);
+        iProducService.update(product);
         redirectAttributes.addFlashAttribute("message", "Cập nhập thành công: " + product.getName());
         return "redirect:/product";
     }

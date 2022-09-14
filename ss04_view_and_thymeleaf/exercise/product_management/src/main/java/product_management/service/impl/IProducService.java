@@ -19,13 +19,18 @@ public class IProducService implements product_management.service.IProducService
     }
 
     @Override
+    public void save(Product product) {
+        iProducRepository.save(product);
+    }
+
+    @Override
     public Product findById(int id) {
         return iProducRepository.findById(id);
     }
 
     @Override
-    public void update(int id, Product product) {
-        iProducRepository.update(id, product);
+    public void update(Product product) {
+        iProducRepository.update(product);
     }
 
     @Override
