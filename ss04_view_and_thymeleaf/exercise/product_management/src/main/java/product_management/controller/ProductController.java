@@ -45,30 +45,31 @@ public class ProductController {
     }
 
     @GetMapping("/search/")
-    public String search(@RequestParam String search, Model model, RedirectAttributes redirectAttributes) {
+    public String search(@RequestParam String search, Model model) {
         List<Product> productList;
         if (StringUtils.hasText(search)) {
             productList = iProducService.searchByName(search);
-
+            model.addAttribute("message", "Bạn đang tìm thông tin liên quan đến: " + search);
+            model.addAttribute("productList", productList);
         } else {
+            model.addAttribute("message", "Vui lòng nhập từ khóa để tìm kiếm !");
             productList = iProducService.displayAll();
+            model.addAttribute("productList", productList);
         }
-        redirectAttributes.addFlashAttribute("message", "Bạn đang tìm thông tin liên quan đến " + search);
-        model.addAttribute("productList", productList);
         return "home";
     }
 
     @PostMapping("/update")
     public String update(Product product, RedirectAttributes redirectAttributes) {
         iProducService.update(product.getId(), product);
-        redirectAttributes.addFlashAttribute("message", "Cập nhập thành công " + product.getName());
+        redirectAttributes.addFlashAttribute("message", "Cập nhập thành công: " + product.getName());
         return "redirect:/product";
     }
 
     @PostMapping("/delete")
     public String delete(Product product, RedirectAttributes redirectAttributes) {
         iProducService.delete(product.getId());
-        redirectAttributes.addFlashAttribute("message", "Xóa thành công " + product.getName());
+        redirectAttributes.addFlashAttribute("message", "Xóa thành công: " + product.getName());
         return "redirect:/product";
     }
 }
