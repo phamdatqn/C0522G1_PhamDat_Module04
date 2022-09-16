@@ -7,9 +7,9 @@ import product_management.model.Product;
 
 import java.util.List;
 
-public interface IProducRepository extends JpaRepository<Product,Integer> {
-    @Query (value = "select * from Product where name like %:keySearch%", nativeQuery=true)
-    List<Product> findByName(@Param("keySearch")String keySearch);
+public interface IProducRepository extends JpaRepository<Product, Integer> {
+    @Query(value = "select * from Product where name like %:keySearch%", nativeQuery = true)
+    List<Product> findByName(@Param("keySearch") String keySearch);
 
 //    List<Product> findAll();
 //

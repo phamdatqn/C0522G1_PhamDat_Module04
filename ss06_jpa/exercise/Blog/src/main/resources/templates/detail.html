@@ -11,7 +11,7 @@
           crossorigin="anonymous">
 </head>
 <body>
-<form th:object="${blog}"  >
+<form th:object="${blog}">
     <fieldset>
         <legend style="color: crimson">Thông tin Blog</legend>
         <table>
@@ -25,7 +25,7 @@
             </tr>
             <tr>
                 <td>Nội dung</td>
-                <td><textarea  th:field="*{content}" readonly> </textarea></td>
+                <td><textarea th:field="*{content}" readonly> </textarea></td>
             </tr>
             <tr>
                 <td>Tác giả</td>
