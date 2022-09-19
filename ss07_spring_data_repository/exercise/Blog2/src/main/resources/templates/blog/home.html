@@ -33,6 +33,7 @@
             <tr>
                 <th>STT</th>
                 <th>Tên blog</th>
+                <th>Thể loại</th>
                 <th>Tác giả</th>
                 <th>Ngày viết</th>
                 <th>Cập nhập</th>
@@ -42,6 +43,8 @@
             <tr th:each="blog,status : ${blogList}">
                 <td th:text="${blogList.number*2 + status.count}"></td>
                 <td style="color: #0c63e4" th:text="${blog.title}"></td>
+                <td th:if="${blog.category}" th:text="${blog.category.categoryName}"></td>
+                <td th:unless="${blog.category}"></td>
                 <td th:text="${blog.writer}"></td>
                 <td th:text="${blog.dateOfWriting}"></td>
                 <td><a th:href="@{/blog/update/__${blog.id}__}">
