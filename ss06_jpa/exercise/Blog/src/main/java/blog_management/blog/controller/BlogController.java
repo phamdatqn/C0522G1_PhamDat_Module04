@@ -22,32 +22,34 @@ public class BlogController {
 
     @GetMapping("")
     public String home(Model model) {
+
         List<Blog> blogList = iBlogService.findAll();
-        model.addAttribute("blogList",blogList);
+        model.addAttribute("blogList", blogList);
+
         return "home";
     }
 
     @GetMapping("/create")
     public String showFormCreate(Model model) {
-        model.addAttribute("blogList",new Blog());
+        model.addAttribute("blogList", new Blog());
         return "create";
     }
 
     @GetMapping("/update/{id}")
-    public String showFormUpdate(@PathVariable int id,Model model) {
-        model.addAttribute("blog",iBlogService.findById(id));
+    public String showFormUpdate(@PathVariable int id, Model model) {
+        model.addAttribute("blog", iBlogService.findById(id));
         return "update";
     }
 
     @GetMapping("/detail/{id}")
-    public String showFormDetail(@PathVariable int id,Model model) {
-        model.addAttribute("blog",iBlogService.findById(id));
+    public String showFormDetail(@PathVariable int id, Model model) {
+        model.addAttribute("blog", iBlogService.findById(id));
         return "detail";
     }
 
     @GetMapping("/delete/{id}")
-    public String showFormDelete(@PathVariable int id,Model model) {
-        model.addAttribute("blog",iBlogService.findById(id));
+    public String showFormDelete(@PathVariable int id, Model model) {
+        model.addAttribute("blog", iBlogService.findById(id));
         return "delete";
     }
 

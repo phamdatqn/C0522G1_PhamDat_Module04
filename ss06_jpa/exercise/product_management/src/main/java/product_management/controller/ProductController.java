@@ -20,9 +20,16 @@ public class ProductController {
     private IProducService iProducService;
 
     @GetMapping("")
-    public String home(Model model) {
-        List<Product> productList = iProducService.findAll();
-        model.addAttribute("productList", productList);
+    public String search(Model model, @RequestParam(defaultValue = "") String search) {
+        List<Product> productList;
+        if (StringUtils.hasText(search)) {
+            productList = iProducService.findByName(search);
+            model.addAttribute("message", "Bạn đang tìm thông tin liên quan đến: " + search);
+            model.addAttribute("productList", productList);
+        } else {
+            productList = iProducService.findAll();
+            model.addAttribute("productList", productList);
+        }
         return "home";
     }
 
@@ -48,21 +55,6 @@ public class ProductController {
     public String showFormInfo(@PathVariable int id, Model model) {
         model.addAttribute("product", iProducService.findById(id));
         return "view";
-    }
-
-    @GetMapping("/search/")
-    public String search(@RequestParam String search, Model model) {
-        List<Product> productList;
-        if (StringUtils.hasText(search)) {
-            productList = iProducService.findByName(search);
-            model.addAttribute("message", "Bạn đang tìm thông tin liên quan đến: " + search);
-            model.addAttribute("productList", productList);
-        } else {
-            model.addAttribute("message", "Vui lòng nhập từ khóa để tìm kiếm !");
-            productList = iProducService.findAll();
-            model.addAttribute("productList", productList);
-        }
-        return "home";
     }
 
     @PostMapping("/save")

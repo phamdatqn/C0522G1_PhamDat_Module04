@@ -10,12 +10,4 @@ import java.util.List;
 public interface IProducRepository extends JpaRepository<Product, Integer> {
     @Query(value = "select * from Product where name like %:keySearch%", nativeQuery = true)
     List<Product> findByName(@Param("keySearch") String keySearch);
-
-//    List<Product> findAll();
-//
-//    Product findById(int id);
-//
-//    List<Product> searchByName(String name);
-
-//    void delete(int id);
 }
