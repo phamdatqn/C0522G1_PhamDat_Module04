@@ -136,13 +136,18 @@
                     </ul>
                 </li>
 
-                <li class="nav-item dropdown ">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle chu_menu" href="#" id="navbarCustomer" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
                         Thể loại
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarCustomer">
-                        <li>
+
+                        <li th:each="category: ${categoryList}">
+                            <a class="dropdown-item"
+                               th:text="${category.categoryName}"
+                               th:href="@{/category/select/__${category.id}__}">
+                            </a>
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href="/category">Quản lý thể loại</a></li>

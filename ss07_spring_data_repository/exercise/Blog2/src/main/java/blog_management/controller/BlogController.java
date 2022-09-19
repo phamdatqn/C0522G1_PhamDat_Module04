@@ -22,9 +22,11 @@ public class BlogController {
     private ICategoryService iCategoryService;
 
     @GetMapping("")
-    public String home(@PageableDefault(value = 3, sort = "date_of_writing") Pageable pageable, Model model, @RequestParam(defaultValue = "") String search) {
+    public String home(@PageableDefault(value = 2, sort = "date_of_writing") Pageable pageable,
+                       Model model, @RequestParam(defaultValue = "") String search) {
         model.addAttribute("blogList", iBlogService.findByName(search, pageable));
-        model.addAttribute("category", iCategoryService.findAll());
+        model.addAttribute("categoryList", iCategoryService.findAll());
+        model.addAttribute("search", search);
         return "blog/home";
     }
 
