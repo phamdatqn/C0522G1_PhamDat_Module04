@@ -1,0 +1,7 @@
+package blog_management.blog.repository;
+
+import blog_management.blog.model.Blog;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface IBlogRepository extends JpaRepository<Blog, Integer> {
+}
