@@ -14,5 +14,7 @@ public interface IBlogService {
 
     Page<Blog> findByName(String keySearch, Pageable pageable);
 
+    Page<Blog> findByCategory(int chooseSelect, Pageable pageable);
+
     void delete(Blog blog);
 }

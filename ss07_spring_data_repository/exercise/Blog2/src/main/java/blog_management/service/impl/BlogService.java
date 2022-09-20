@@ -36,6 +36,11 @@ public class BlogService implements IBlogService {
     }
 
     @Override
+    public Page<Blog> findByCategory(int chooseSelect, Pageable pageable) {
+        return iBlogRepository.findByCategory(chooseSelect, pageable);
+    }
+
+    @Override
     public void delete(Blog blog) {
         iBlogRepository.delete(blog);
     }

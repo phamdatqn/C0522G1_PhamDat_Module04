@@ -58,6 +58,15 @@ public class BlogController {
         return "blog/delete";
     }
 
+    @GetMapping("/select/{idCategory}")
+    public String chooseSelect(@PageableDefault(value = 2, sort = "date_of_writing") Pageable pageable,
+                               Model model, @PathVariable int idCategory) {
+        model.addAttribute("blogList", iBlogService.findByCategory(idCategory, pageable));
+        model.addAttribute("categoryList", iCategoryService.findAll());
+        model.addAttribute("search", idCategory);
+        return "blog/home";
+    }
+
     @PostMapping("/save")
     public String save(Blog blog, RedirectAttributes redirectAttributes) {
         iBlogService.save(blog);

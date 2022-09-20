@@ -146,11 +146,11 @@
                         <li th:each="category: ${categoryList}">
                             <a class="dropdown-item"
                                th:text="${category.categoryName}"
-                               th:href="@{/category/select/__${category.id}__}">
+                               th:href="@{/blog/select/__${category.id}__}">
                             </a>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="/category">Quản lý thể loại</a></li>
+                        <li><a class="dropdown-item" href="/blog">Quản lý thể loại</a></li>
                     </ul>
                 </li>
 

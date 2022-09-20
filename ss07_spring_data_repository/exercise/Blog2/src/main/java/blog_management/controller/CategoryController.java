@@ -1,6 +1,5 @@
 package blog_management.controller;
 
-import blog_management.model.Blog;
 import blog_management.model.Category;
 import blog_management.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.Set;
 
 @Controller
 @RequestMapping("/category")
@@ -32,12 +29,6 @@ public class CategoryController {
         return "category/update";
     }
 
-    @GetMapping("/select/{id}")
-    public String selectCategory(@PathVariable int id, Model model) {
-        Set<Blog> blogs = iCategoryService.findById(id).getBlogs();
-        model.addAttribute("blogList", blogs);
-        return "blog/home";
-    }
 
     @GetMapping("/delete/{id}")
     public String showFormDelete(@PathVariable int id, Model model) {
