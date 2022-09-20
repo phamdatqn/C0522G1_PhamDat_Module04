@@ -46,6 +46,7 @@ public class MusicController {
 
     @PostMapping("/create")
     public String save(@ModelAttribute @Validated MusicDto musicDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        new MusicDto().validate(musicDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
             return "create";
         } else {
@@ -59,6 +60,8 @@ public class MusicController {
 
     @PostMapping("/update")
     public String update(MusicDto musicDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        new MusicDto().validate(musicDto, bindingResult);
+
         if (bindingResult.hasFieldErrors()) {
             return "/update";
         } else {
@@ -68,6 +71,5 @@ public class MusicController {
             redirectAttributes.addFlashAttribute("message", "cập nhập bài hát: " + music.getMusicName() + " Thành công !");
             return "redirect:/music";
         }
-
     }
 }

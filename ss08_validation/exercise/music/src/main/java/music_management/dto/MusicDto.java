@@ -1,11 +1,16 @@
 package music_management.dto;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class MusicDto {
+public class MusicDto implements Validator {
     private int id;
 
     @NotEmpty(message = "Không được để trống")
@@ -59,5 +64,18 @@ public class MusicDto {
 
     public void setKindOfMusic(String kindOfMusic) {
         this.kindOfMusic = kindOfMusic;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        MusicDto musicDto = (MusicDto) target;
+        if (musicDto.musicName.equals("admin")){
+            errors.rejectValue("musicName","","Không được nhập tên bài hát là: admin");
+        }
     }
 }

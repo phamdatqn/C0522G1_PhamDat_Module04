@@ -15,11 +15,6 @@ public class MusicService implements IMusicService {
     private IMusicRepository iMusicRepository;
 
     @Override
-    public Page<Music> findAll(Pageable pageable) {
-        return iMusicRepository.findAll(pageable);
-    }
-
-    @Override
     public void save(Music music) {
         iMusicRepository.save(music);
     }
