@@ -8,4 +8,8 @@ public interface IMusicService {
     Page<Music> findAll(Pageable pageable);
 
     void save(Music music);
+
+    Music findById(int id);
+
+    Page<Music> findByName(String keySearch, Pageable pageable);
 }

@@ -38,6 +38,7 @@
                 <th>Tên bài hát</th>
                 <th>Tên ca sỹ</th>
                 <th>Thể loại</th>
+                <th>Cập nhập</th>
 
             </tr>
             <tr th:each="music,status : ${musicList}">
@@ -45,7 +46,9 @@
                 <td style="color: #0c63e4" th:text="${music.musicName}"></td>
                 <td style="color: #0c63e4" th:text="${music.singerName}"></td>
                 <td th:text="${music.kindOfMusic}"></td>
-
+                <td><a th:href="@{/music/update/__${music.id}__}">
+                    <button class="btn btn-primary"><span class="bi bi-pencil-square"></span></button>
+                </a></td>
             </tr>
         </table>
     </div>

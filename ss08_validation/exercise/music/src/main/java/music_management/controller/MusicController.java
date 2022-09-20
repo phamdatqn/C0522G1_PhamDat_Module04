@@ -22,10 +22,10 @@ public class MusicController {
     private IMusicService iMusicService;
 
     @GetMapping("")
-    public String home(@PageableDefault(value = 2)Pageable pageable, Model model,
-                       @RequestParam(defaultValue = "")String search){
-        model.addAttribute("musicList",iMusicService.findAll(pageable));
-        model.addAttribute("search",search);
+    public String home(@PageableDefault(value = 2) Pageable pageable, Model model,
+                       @RequestParam(defaultValue = "") String search) {
+        model.addAttribute("musicList", iMusicService.findByName(search, pageable));
+        model.addAttribute("search", search);
         return "home";
     }
 
@@ -35,16 +35,37 @@ public class MusicController {
         return "/create";
     }
 
+    @GetMapping("/update/{id}")
+    public String showFormUpdate(@PathVariable int id, Model model) {
+        Music music = iMusicService.findById(id);
+        MusicDto musicDto = new MusicDto();
+        BeanUtils.copyProperties(music, musicDto);
+        model.addAttribute("musicDto", musicDto);
+        return "/update";
+    }
+
     @PostMapping("/create")
-    public  String save(@ModelAttribute @Validated MusicDto musicDto, BindingResult bindingResult, RedirectAttributes redirectAttributes){
-        if (bindingResult.hasFieldErrors()){
+    public String save(@ModelAttribute @Validated MusicDto musicDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasFieldErrors()) {
             return "create";
-        }
-        else {
-            Music music=new Music();
-            BeanUtils.copyProperties(musicDto,music);
+        } else {
+            Music music = new Music();
+            BeanUtils.copyProperties(musicDto, music);
             iMusicService.save(music);
-            redirectAttributes.addFlashAttribute("message","Thêm mới bài hát: "+music.getMusicName()+ " Thành công !");
+            redirectAttributes.addFlashAttribute("message", "Thêm mới bài hát: " + music.getMusicName() + " Thành công !");
+            return "redirect:/music";
+        }
+    }
+
+    @PostMapping("/update")
+    public String update(MusicDto musicDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasFieldErrors()) {
+            return "/update";
+        } else {
+            Music music = new Music();
+            BeanUtils.copyProperties(musicDto, music);
+            iMusicService.save(music);
+            redirectAttributes.addFlashAttribute("message", "cập nhập bài hát: " + music.getMusicName() + " Thành công !");
             return "redirect:/music";
         }
 

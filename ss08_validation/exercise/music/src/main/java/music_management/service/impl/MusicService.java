@@ -23,4 +23,14 @@ public class MusicService implements IMusicService {
     public void save(Music music) {
         iMusicRepository.save(music);
     }
+
+    @Override
+    public Music findById(int id) {
+        return iMusicRepository.findById(id);
+    }
+
+    @Override
+    public Page<Music> findByName(String keySearch, Pageable pageable) {
+        return iMusicRepository.findByName(keySearch, pageable);
+    }
 }

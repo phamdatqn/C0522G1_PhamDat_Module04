@@ -1,6 +1,9 @@
 package music_management.dto;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class MusicDto {
     private int id;
@@ -8,19 +11,19 @@ public class MusicDto {
     @NotEmpty(message = "Không được để trống")
     @NotBlank(message = "Không được nhập ký tự trắng đầu tiên")
     @Size(max = 800)
-    @Pattern(regexp = "^([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Ll}][\\p{Ll}]{1,10}))*$",message = "Sai định dạng tên vài hát, vui lòng viết Hoa chữ cái đầu")
+    @Pattern(regexp = "^([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Ll}][\\p{Ll}]{1,10}))*$", message = "Sai định dạng tên vài hát, vui lòng viết Hoa chữ cái đầu")
     private String musicName;
 
     @NotEmpty(message = "Không được để trống")
     @NotBlank(message = "Không được nhập ký tự trắng đầu tiên")
     @Size(max = 300)
-    @Pattern(regexp = "^([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Ll}][\\p{Ll}]{1,10}))*$",message = "Sai định dạng tên ca sỹ, vui lòng viết Hoa chữ cái đầu !")
+    @Pattern(regexp = "^([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Ll}][\\p{Ll}]{1,10}))*$", message = "Sai định dạng tên ca sỹ, vui lòng viết Hoa chữ cái đầu !")
     private String singerName;
 
     @NotEmpty(message = "Không được để trống")
     @NotBlank(message = "Không được nhập ký tự trắng đầu tiên")
     @Size(max = 1000)
-    @Pattern(regexp = "^([\\p{Lu}][\\p{Ll},]{1,8})(\\s([\\p{Lu}]|[\\p{Ll}][\\p{Ll},]{1,10}))*$",message = "Sai định dạng thể loại nhạc, vui lòng viết hoa chữ cái đầu !")
+    @Pattern(regexp = "^([\\p{Lu}][\\p{Ll},]{1,8})(\\s([\\p{Lu}]|[\\p{Ll}][\\p{Ll},]{1,10}))*$", message = "Sai định dạng thể loại nhạc, vui lòng viết hoa chữ cái đầu !")
     private String kindOfMusic;
 
     public MusicDto() {
