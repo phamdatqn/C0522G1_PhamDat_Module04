@@ -1,9 +1,7 @@
 package music_management.dto;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -74,8 +72,8 @@ public class MusicDto implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         MusicDto musicDto = (MusicDto) target;
-        if (musicDto.musicName.equals("admin")){
-            errors.rejectValue("musicName","","Không được nhập tên bài hát là: admin");
+        if (musicDto.musicName.equals("admin")) {
+            errors.rejectValue("musicName", "", "Không được nhập tên bài hát là: admin");
         }
     }
 }

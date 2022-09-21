@@ -39,6 +39,7 @@
                 <th>Last name</th>
                 <th>Phone number</th>
                 <th>Age</th>
+                <th>Email</th>
             </tr>
             <tr th:each="user,status : ${userList}">
                 <td th:text="${userList.number * 2 + status.count}"></td>
@@ -46,6 +47,7 @@
                 <td style="color: #0c63e4" th:text="${user.lastName}"></td>
                 <td th:text="${user.phoneNumber}"></td>
                 <td th:text="${user.age}"></td>
+                <td th:text="${user.email}"></td>
             </tr>
         </table>
     </div>

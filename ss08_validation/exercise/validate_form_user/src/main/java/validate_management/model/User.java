@@ -13,13 +13,13 @@ public class User {
     private String firstName;
     private String lastName;
     private String PhoneNumber;
-    private String age;
+    private int age;
     private String email;
 
     public User() {
     }
 
-    public User(int id, String firstName, String lastName, String phoneNumber, String age, String email) {
+    public User(int id, String firstName, String lastName, String phoneNumber, int age, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -60,11 +60,11 @@ public class User {
         PhoneNumber = phoneNumber;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 

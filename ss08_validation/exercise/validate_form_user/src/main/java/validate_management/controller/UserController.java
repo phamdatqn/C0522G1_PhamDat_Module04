@@ -38,7 +38,7 @@ public class UserController {
     public String save(@ModelAttribute @Validated UserDto userDto, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
 
-        new UserDto().validate(userDto,bindingResult);
+        new UserDto().validate(userDto, bindingResult);
         if (bindingResult.hasFieldErrors())
             return "/create";
         else {

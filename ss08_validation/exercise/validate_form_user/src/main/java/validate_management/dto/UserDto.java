@@ -3,10 +3,7 @@ package validate_management.dto;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 
 public class UserDto implements Validator {
@@ -24,10 +21,12 @@ public class UserDto implements Validator {
     @Pattern(regexp = "^(090|091)[0-9]{7}$", message = "SĐT có định dạng 090|091 + 7 số")
     private String phoneNumber;
 
-    @Pattern(regexp = "[1-8][0-9]", message = "Tuổi phải lớn hơn 18 nhớ hơn 89 !")
+    @NotEmpty(message = "Không được để trống !")
+    @Min(value = 18, message = "Tuổi phải lớn hơn 18 !")
     private String age;
 
-    @Pattern(regexp = "^[a-zA-Z][.\\w]{7,}@[a-z]{2,9}([.][a-z]{2,3}){1,2}$")
+    @NotEmpty(message = "Không được để trống !")
+    @Email
     private String email;
 
     public UserDto() {
