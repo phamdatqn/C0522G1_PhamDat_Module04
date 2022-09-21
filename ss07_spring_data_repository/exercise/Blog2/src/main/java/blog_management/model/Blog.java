@@ -17,7 +17,6 @@ public class Blog {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfWriting;
 
-
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;

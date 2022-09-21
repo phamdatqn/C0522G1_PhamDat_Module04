@@ -1,8 +1,11 @@
 package blog_management.service;
 
+import blog_management.dto.IBlogDto;
 import blog_management.model.Blog;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface IBlogService {
 
@@ -17,4 +20,6 @@ public interface IBlogService {
     Page<Blog> findByCategory(int chooseSelect, Pageable pageable);
 
     void delete(Blog blog);
+
+    List<IBlogDto> findByNameDto();
 }

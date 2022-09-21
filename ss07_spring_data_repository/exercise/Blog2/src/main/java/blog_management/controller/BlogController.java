@@ -21,6 +21,12 @@ public class BlogController {
     @Autowired
     private ICategoryService iCategoryService;
 
+    @GetMapping("/dto")
+    public String homeDto(Model model) {
+        model.addAttribute("blogListDto", iBlogService.findByNameDto());
+        return "blog/homeDto";
+    }
+
     @GetMapping("")
     public String home(@PageableDefault(value = 2, sort = "date_of_writing") Pageable pageable,
                        Model model, @RequestParam(defaultValue = "") String search) {

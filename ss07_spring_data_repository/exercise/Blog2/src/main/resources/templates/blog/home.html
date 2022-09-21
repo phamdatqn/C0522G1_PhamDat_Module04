@@ -12,12 +12,10 @@
           crossorigin="anonymous">
 </head>
 <body>
-
+<div class="row">
+    <img style="width: 100%" src="../header.jpg">
+</div>
 <div class="row container-fluid">
-    <div class="row">
-        <img style="width: 100%" src="../header.jpg">
-    </div>
-
     <div class="row" th:replace="blog/layout :: navBar"></div>
     <div class="row">
         <h1>Blog Management</h1>
@@ -34,8 +32,6 @@
                 <th>STT</th>
                 <th>Tên blog</th>
                 <th>Thể loại</th>
-                <th>Tác giả</th>
-                <th>Ngày viết</th>
                 <th>Cập nhập</th>
                 <th>Xóa</th>
                 <th>Xem chi tiết</th>
@@ -45,8 +41,6 @@
                 <td style="color: #0c63e4" th:text="${blog.title}"></td>
                 <td th:if="${blog.category}" th:text="${blog.category.categoryName}"></td>
                 <td th:unless="${blog.category}"></td>
-                <td th:text="${blog.writer}"></td>
-                <td th:text="${blog.dateOfWriting}"></td>
                 <td><a th:href="@{/blog/update/__${blog.id}__}">
                     <button class="btn btn-primary"><span class="bi bi-pencil-square"></span></button>
                 </a></td>
