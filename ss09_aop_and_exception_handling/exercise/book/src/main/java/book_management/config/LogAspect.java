@@ -12,16 +12,16 @@ import java.time.LocalDateTime;
 @Aspect
 public class LogAspect {
 
-    @Pointcut("execution(* book_management.controller.BookController.update*(..))")
-    public void callUpdate() {
+    @Pointcut("execution(* book_management.controller.BookController.get*(..))")
+    public void callChangeBook() {
     }
 
-    @AfterReturning("callUpdate()")
-    public void afterThrowingCallUpdate(JoinPoint joinPoint) {
+    @AfterReturning("callChangeBook()")
+    public void afterThrowingChangeBook(JoinPoint joinPoint) {
         System.out.println("End method name: " + joinPoint.getSignature().getName() + " Time:" + LocalDateTime.now());
     }
 
-    @Pointcut("within(book_management.controller.*)")
+    @Pointcut("within(book_management.controller.BookController.*)")
     public void callAllMethod() {
     }
 
