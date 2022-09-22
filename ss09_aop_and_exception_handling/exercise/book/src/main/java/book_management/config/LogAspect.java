@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Aspect
 public class LogAspect {
 
-    @Pointcut("execution(* book_management.controller.BookController.get*(..))")
+    @Pointcut("execution(* book_management.controller.BookController.pointcut*(..))")
     public void callChangeBook() {
     }
 

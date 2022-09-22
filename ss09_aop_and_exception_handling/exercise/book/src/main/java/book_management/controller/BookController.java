@@ -56,21 +56,21 @@ public class BookController {
     }
 
     @PostMapping("/create")
-    public String getCreate(@ModelAttribute Book book, RedirectAttributes redirectAttributes) {
+    public String Create(@ModelAttribute Book book, RedirectAttributes redirectAttributes) {
         iBookService.save(book);
         redirectAttributes.addFlashAttribute("message", "Thêm mới sách: " + book.getBookName() + " thành công !");
         return "redirect:/book";
     }
 
     @PostMapping("/update")
-    public String getUpdate(@ModelAttribute Book book, RedirectAttributes redirectAttributes) {
+    public String pointcutUpdate(@ModelAttribute Book book, RedirectAttributes redirectAttributes) {
         iBookService.save(book);
         redirectAttributes.addFlashAttribute("message", "cập nhập sách: " + book.getBookName() + " thành công !");
         return "redirect:/book";
     }
 
     @PostMapping("/borrow/{id}")
-    public String getBorrow(@PathVariable int id, RedirectAttributes redirectAttributes) throws BookIdException, BookNullException {
+    public String pointcutBorrow(@PathVariable int id, RedirectAttributes redirectAttributes) throws BookIdException, BookNullException {
         if (iBookService.findById(id) == null) {
             throw new BookIdException();
         } else {
@@ -83,12 +83,11 @@ public class BookController {
                 redirectAttributes.addFlashAttribute("message", "Bạn đã mượn : " + book.getBookName() + " thành công !");
                 return "redirect:/book";
             }
-
         }
     }
 
     @PostMapping("/pay/{id}")
-    public String getUpdatePay(@PathVariable int id, RedirectAttributes redirectAttributes) throws BookIdException {
+    public String pointcutPay(@PathVariable int id, RedirectAttributes redirectAttributes) throws BookIdException {
         if (iBookService.findById(id) == null) {
             throw new BookIdException();
         } else {
