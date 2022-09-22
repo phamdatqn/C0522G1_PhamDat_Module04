@@ -2,6 +2,8 @@ package cg.wbd.grandemonstration.service.impl;
 
 import cg.wbd.grandemonstration.model.Customer;
 import cg.wbd.grandemonstration.service.CustomerService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +25,11 @@ public class SimpleCustomerServiceImpl implements CustomerService {
         );
     }
 
+//    public Page<Customer> findAll(Pageable pageInfo) throws Exception {
+//        if (true) throw new Exception("a dummy exception");
     @Override
-    public List<Customer> findAll() {
-        return new ArrayList<>(customers);
+    public Page<Customer> findAll(Pageable pageable)throws Exception  {
+        if (true) throw new Exception("a dummy exception");
     }
 
     @Override
