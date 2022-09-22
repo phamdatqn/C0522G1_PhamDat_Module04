@@ -70,7 +70,7 @@ public class BookController {
     }
 
     @PostMapping("/borrow/{id}")
-    public String borrow(@PathVariable int id, RedirectAttributes redirectAttributes) throws BookIdException, BookNullException {
+    public String updateBorrow(@PathVariable int id, RedirectAttributes redirectAttributes) throws BookIdException, BookNullException {
         if (iBookService.findById(id) == null) {
             throw new BookIdException();
         } else {
