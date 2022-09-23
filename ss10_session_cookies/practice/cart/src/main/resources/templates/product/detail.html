@@ -13,18 +13,22 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+<div>
+    <div th:replace="/navbar :: navBar"></div>
+</div>
 <div class="container-fluid" th:object="${product}">
     <div class="row">
-        <span  style="color: blue;font-size: 40px;text-align: center" th:text="*{name}"></span>
+        <span style="color: blue;font-size: 40px;text-align: center" th:text="*{name}"></span>
     </div>
     <div class="row">
         <div class="col-lg-6 ">
-            <img class="img-fluid" th:src="@{${product.image}}">
+            <img class="img-fluid" th:src="@{${product.image}}" style="width: 100%;height: autopx">
         </div>
         <div class="col-lg-6">
             <div th:text="${product.description}"></div>
-            <form th:href="@{/product/add/__${product.id}__}">
-                <button>Đặt Hoa</button>
+            <br>
+            <form th:action="@{/product/add/__${product.id}__}">
+                <button class="btn btn-danger" style="margin-left: 45%">Đặt Hoa</button>
             </form>
         </div>
     </div>

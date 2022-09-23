@@ -15,7 +15,7 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="row" th:fragment="navBar">
+<div th:fragment="navBar">
     <nav class="navbar navbar-expand-lg navbar-light" style="background: #0c63e4">
         <a class="navbar-brand chu_menu" href="/product" style="color: white;margin-left: 10%">Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -32,7 +32,7 @@
                         Cart
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarEmployee">
-                        <li><a class="dropdown-item" href="/book">Management Cart</a></li>
+                        <li><a class="dropdown-item" href="/cart">Management Cart</a></li>
                     </ul>
                 </li>
             </ul>

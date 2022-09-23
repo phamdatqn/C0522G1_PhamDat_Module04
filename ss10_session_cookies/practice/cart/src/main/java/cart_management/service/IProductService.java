@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface IProductService {
-    Page<Product> findAll(String search,Pageable pageable);
+    Page<Product> findAll(String search, Pageable pageable);
+
     Optional<Product> findById(int id);
 }

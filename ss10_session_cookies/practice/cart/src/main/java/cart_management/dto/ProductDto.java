@@ -1,31 +1,16 @@
-package cart_management.model;
+package cart_management.dto;
 
-import javax.persistence.*;
+import java.util.Objects;
 
-@Entity
-public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductDto {
     private int id;
     private String name;
     private String image;
-    @Column(columnDefinition = "TEXT")
     private String description;
     private long price;
-    @Column(columnDefinition = "TEXT")
     private short discount;
 
-    public Product() {
-    }
-
-    public Product(int id, String name, String image, String description, long price, short discount) {
-        this.id = id;
-        this.name = name;
-        this.image = image;
-        this.description = description;
-        this.price = price;
-        this.discount = discount;
+    public ProductDto() {
     }
 
     public int getId() {
@@ -76,4 +61,16 @@ public class Product {
         this.discount = discount;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductDto that = (ProductDto) o;
+        return id == that.id && price == that.price && Objects.equals(name, that.name) && Objects.equals(image, that.image) && Objects.equals(description, that.description) && Objects.equals(discount, that.discount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, image, description, price, discount);
+    }
 }
