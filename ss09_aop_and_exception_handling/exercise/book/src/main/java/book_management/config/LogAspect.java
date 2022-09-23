@@ -17,7 +17,7 @@ public class LogAspect {
     }
 
     @AfterReturning("callChangeBook()")
-    public void afterThrowingChangeBook(JoinPoint joinPoint) {
+    public void afterChangeBook(JoinPoint joinPoint) {
         System.out.println("End method name: " + joinPoint.getSignature().getName() + " Time:" + LocalDateTime.now());
     }
 
@@ -28,7 +28,7 @@ public class LogAspect {
     int count = 0;
 
     @AfterReturning("callAllMethod()")
-    public void afterThrowingAllMethod(JoinPoint joinPoint) {
+    public void afterAllMethod(JoinPoint joinPoint) {
         count++;
         System.out.println("End method name: " + joinPoint.getSignature().getName() + " Time:" + LocalDateTime.now());
         System.out.println("Số người thao tác với thư viện: " + count);
