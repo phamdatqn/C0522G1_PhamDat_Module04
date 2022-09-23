@@ -56,7 +56,7 @@ public class BookController {
     }
 
     @PostMapping("/create")
-    public String Create(@ModelAttribute Book book, RedirectAttributes redirectAttributes) {
+    public String create(@ModelAttribute Book book, RedirectAttributes redirectAttributes) {
         iBookService.save(book);
         redirectAttributes.addFlashAttribute("message", "Thêm mới sách: " + book.getBookName() + " thành công !");
         return "redirect:/book";
