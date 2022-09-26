@@ -30,10 +30,10 @@ public class CategoryControllerRestfull {
 
     @GetMapping("/{id}")
     public ResponseEntity<Category> findById(@PathVariable int id) {
-        Category categoryList = iCategoryService.findById(id);
-        if (categoryList == null) {
+        Category category = iCategoryService.findById(id);
+        if (category == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(categoryList, HttpStatus.OK);
+        return new ResponseEntity<>(category, HttpStatus.OK);
     }
 }
