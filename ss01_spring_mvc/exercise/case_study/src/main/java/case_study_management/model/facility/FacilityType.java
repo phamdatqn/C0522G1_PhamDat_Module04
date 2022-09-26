@@ -46,4 +46,13 @@ public class FacilityType {
     public void setName(String name) {
         this.name = name;
     }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
+    }
 }
+

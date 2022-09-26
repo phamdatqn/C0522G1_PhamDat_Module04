@@ -42,26 +42,28 @@ public class Facility {
     private double poolArea;
     private int numberOfFloors;
     private String facilityFree;
-    private boolean isDelete;
 
+    private boolean isDelete;
     public Facility() {
     }
 
-    public Facility(int id, String name, int area, double cost, int maxPeople,
-                    int rentTypeId, int facilityTypeId, String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloors, String facilityFree) {
+    public Facility(int id, String name, int area, double cost, int maxPeople, RentType rentType,
+                    FacilityType facilityType, String standardRoom, String descriptionOtherConvenience,
+                    double poolArea, int numberOfFloors, String facilityFree, boolean isDelete) {
         this.id = id;
         this.name = name;
         this.area = area;
         this.cost = cost;
         this.maxPeople = maxPeople;
+        this.rentType = rentType;
+        this.facilityType = facilityType;
         this.standardRoom = standardRoom;
         this.descriptionOtherConvenience = descriptionOtherConvenience;
         this.poolArea = poolArea;
         this.numberOfFloors = numberOfFloors;
         this.facilityFree = facilityFree;
+        this.isDelete = isDelete;
     }
-
-
 
     public int getId() {
         return id;
@@ -141,5 +143,13 @@ public class Facility {
 
     public void setFacilityFree(String facilityFree) {
         this.facilityFree = facilityFree;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 }

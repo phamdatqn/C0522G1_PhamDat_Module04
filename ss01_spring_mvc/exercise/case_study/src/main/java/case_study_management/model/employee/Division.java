@@ -1,34 +1,28 @@
-package case_study_management.model.facility;
+package case_study_management.model.employee;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class RentType {
+public class Division {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private boolean isDelete;
 
+    @OneToMany(mappedBy = "division")
+    private Set<Employee> employees;
 
-    @OneToMany(mappedBy = "rentType")
-    private Set<Facility>facilities;
-
-    public Set<Facility> getFacilities() {
-        return facilities;
+    public Division() {
     }
 
-    public void setFacilities(Set<Facility> facilities) {
-        this.facilities = facilities;
-    }
-
-    public RentType() {
-    }
-
-    public RentType(int id, String name) {
+    public Division(int id, String name, boolean isDelete, Set<Employee> employees) {
         this.id = id;
         this.name = name;
+        this.isDelete = isDelete;
+        this.employees = employees;
     }
 
     public int getId() {
@@ -53,5 +47,13 @@ public class RentType {
 
     public void setDelete(boolean delete) {
         isDelete = delete;
+    }
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 }

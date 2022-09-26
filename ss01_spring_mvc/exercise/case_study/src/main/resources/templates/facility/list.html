@@ -38,7 +38,6 @@
                 <th>Tiêu chuẩn phòng</th>
                 <th>dịch vụ miễn phí</th>
                 <th>Cập nhật</th>
-
             </tr>
             <tr th:each="facility,status : ${facilityList}">
                 <td th:text="${facilityList.number * 4 + status.count}"></td>
