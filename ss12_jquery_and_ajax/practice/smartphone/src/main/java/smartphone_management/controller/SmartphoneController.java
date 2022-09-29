@@ -38,12 +38,45 @@ public class SmartphoneController {
         return new ResponseEntity<>(smartphone, HttpStatus.OK);
     }
 
+    @GetMapping("delete/{id}")
+    public ResponseEntity<Smartphone> showInfoDelete(@PathVariable int id) {
+        Smartphone smartphone = iSmartphoneService.findById(id).get();
+        if (smartphone == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(smartphone, HttpStatus.OK);
+    }
+
+    @PutMapping("update/{id}")
+    public ResponseEntity saveUpdate(@PathVariable int id, @RequestBody SmartphoneDto smartphoneDto) {
+        Smartphone smartphone = iSmartphoneService.findById(id).get();
+        if (smartphone == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        smartphone.setModel(smartphoneDto.getModel());
+        smartphone.setProducer(smartphoneDto.getProducer());
+        smartphone.setPrice(smartphoneDto.getPrice());
+        iSmartphoneService.save(smartphone);
+        return new ResponseEntity(smartphone, HttpStatus.OK);
+    }
+
     @PostMapping()
     public ResponseEntity<Smartphone> addSmartphone(@RequestBody SmartphoneDto smartphoneDto) {
         Smartphone smartphone = new Smartphone();
         BeanUtils.copyProperties(smartphoneDto, smartphone);
         iSmartphoneService.save(smartphone);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteSmartphone(@PathVariable int id) {
+        Smartphone smartphone = iSmartphoneService.findById(id).get();
+        if (smartphone == null) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        } else {
+            iSmartphoneService.delete(id);
+            return new ResponseEntity(smartphone, HttpStatus.OK);
+        }
     }
 
 }

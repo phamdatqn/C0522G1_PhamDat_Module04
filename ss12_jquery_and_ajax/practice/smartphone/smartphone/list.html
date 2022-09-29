@@ -4,31 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="bootstrap-4.6.2-dist/bootstrap-4.6.2-dist/css/bootstrap.css">
-
 </head>
 <body>
 <h1>Smartphone List</h1>
-<form id="addSmartphone">
-    <table>
-        <tr>
-            <td>Producer:</td>
-            <td><input type="text" id="producer" placeholder="producer"></td>
-        </tr>
-        <tr>
-            <td>Model:</td>
-            <td><input type="text" id="model" placeholder="model"></td>
-        </tr>
-        <tr>
-            <td>Price:</td>
-            <td><input type="text" id="price" placeholder="price"></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit" value="Add" onclick="addNewSmartPhone()"></td>
-        </tr>
-    </table>
-</form>
-
 <table id="smartphoneList" class="table table-striped">
     <thead>
     <tr>
@@ -48,46 +26,126 @@
     </tr>
     </tbody>
 </table>
-
-
-<!-- Button trigger modal -->
-<button id="showModalUpdate" type="button" class="btn btn-primary btn-lg" data-toggle="modal"
-        data-target="#updateModal">
-    Launch
+<!-- Create -->
+<button id="showModalCreate" type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+        data-target="#createModal">
+    create
 </button>
 
-<!-- Modal -->
-<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Create Product</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <table id="smartphoneInfoTable" class="table table-striped">-->
-                    <tr>
-                        <input type="hidden" id="id" value="">
-                    </tr>
-                    <tr>
-                        <td>Producer:</td>
-                        <td><input type="text" id="producerEdit" placeholder="producer" value=""></td>
-                    </tr>
+                <table class="table table-striped">
+
                     <tr>
                         <td>Model:</td>
-                        <td><input type="text" id="modelEdit" placeholder="model" value=""></td>
+                        <td><input type="text" id="modelCreate" placeholder="model" value=""></td>
                     </tr>
                     <tr>
                         <td>Price:</td>
-                        <td><input type="text" id="priceEdit" placeholder="price" value=""></td>
+                        <td><input type="text" id="priceCreate" placeholder="price" value=""></td>
                     </tr>
+                    <tr>
+                        <td>Producer:</td>
+                        <td><input type="text" id="producerCreate" placeholder="producer" value=""></td>
+                    </tr>
+
                 </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button id="Create" type="button" class="btn btn-danger">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Update -->
+<button hidden id="showModalUpdate" type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+        data-target="#updateModal">
+    Update
+</button>
+
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Smartphone</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input id="idUpdate" hidden>
+                <table id="smartphoneInfoTable" class="table table-striped">
+
+                    <tr>
+                        <td>Model:</td>
+                        <td><input type="text" id="modelUpdate" placeholder="model" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Price:</td>
+                        <td><input type="text" id="priceUpdate" placeholder="price" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Producer:</td>
+                        <td><input type="text" id="producerUpdate" placeholder="producer" value=""></td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="saveUpdate" type="button" class="btn btn-warning">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete -->
+<button hidden id="showModalDelete" type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+        data-target="#deleteModal">
+    Update
+</button>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color: red">Xác nhận xóa !!!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input id="idDelete" hidden>
+                <table class="table table-striped">
+
+                    <tr>
+                        <td>Model:</td>
+                        <td><input type="text" id="modelDelete" placeholder="model" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Price:</td>
+                        <td><input type="text" id="priceDelete" placeholder="price" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Producer:</td>
+                        <td><input type="text" id="producerDelete" placeholder="producer" value=""></td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="saveDelete" type="button" class="btn btn-danger">Xóa</button>
             </div>
         </div>
     </div>
@@ -95,9 +153,9 @@
 
 
 </body>
-
-<script src="bootstrap-4.6.2-dist/bootstrap-4.6.2-dist/js/bootstrap.js"></script>
 <script src="jquery-3.6.1.js"></script>
+<script src="bootstrap-4.6.2-dist/bootstrap-4.6.2-dist/js/bootstrap.js"></script>
+
 <script>
     $(document).ready(function () {
         function list() {
@@ -115,8 +173,8 @@
                         tr.push("<td>" + data[i].model + "</td>");
                         tr.push("<td>" + data[i].price + "</td>");
                         tr.push("<td>" + data[i].producer + "</td>");
-                        tr.push("<td class='updateId'>" + "<span hidden >" + data[i].id + "</span>" + "<button >Update</button>" + "</td>");
-                        tr.push("<td class='deleteId'>" + "<span hidden >" + data[i].id + "</span>" + "<button>Delete</button>" + "</td>");
+                        tr.push("<td class='update'>" + "<span hidden >" + data[i].id + "</span>" + "<button >Update</button>" + "</td>");
+                        tr.push("<td class='delete'>" + "<span hidden >" + data[i].id + "</span>" + "<button>Delete</button>" + "</td>");
                         tr.push("</tr>");
                     }
                     $("#smartphoneList").append(tr.join(""));
@@ -124,53 +182,96 @@
             })
         }
 
-        $(document).on('click', '.updateId', function () {
+        //create
+        $("#Create").click(function () {
+            let producer = $("#producerCreate").val();
+            let model = $("#modelCreate").val();
+            let price = $("#priceCreate").val();
+            $.ajax({
+                url: "http://localhost:8080/api/smartphone",
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify({'producer': producer, 'model': model, 'price': price}),
+                success: function () {
+                    // $('#showModalCreate').modal('hide')
+                    list();
+
+                }
+            })
+        })
+
+//showUpdate
+        $(document).on('click', '.update', function () {
             let id = $(this).find(":first-child").text();
             $.ajax({
                 url: "http://localhost:8080/api/smartphone/update/" + id,
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
-                    alert(data)
                     console.log(data);
-                    // document.getElementById("id").value = (data.id);
-                    // document.getElementById("producerEdit").value = (data.producer);
-                    // document.getElementById("modelEdit").value = (data.model);
-                    // document.getElementById("priceEdit").value = (data.price);
+                    document.getElementById("idUpdate").value = (data.id);
+                    document.getElementById("producerUpdate").value = (data.producer);
+                    document.getElementById("modelUpdate").value = (data.model);
+                    document.getElementById("priceUpdate").value = (data.price);
                     $('#showModalUpdate').click();
                 }
+            })
+        })
 
+//update
+        $("#saveUpdate").click(function () {
+            let id = $("#idUpdate").val();
+            let producer = $("#producerUpdate").val();
+            let model = $("#modelUpdate").val();
+            let price = $("#priceUpdate").val();
+            $.ajax({
+                url: "http://localhost:8080/api/smartphone/update/" + id,
+                type: "PUT",
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify({'producer': producer, 'model': model, 'price': price}),
+                success: function () {
+                    $('#showModalUpdate').modal('hide')
+                    list();
+
+                }
+            })
+        })
+
+//showDelete
+        $(document).on('click', '.delete', function () {
+            let id = $(this).find(":first-child").text();
+            $.ajax({
+                url: "http://localhost:8080/api/smartphone/delete/" + id,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    document.getElementById("idDelete").value = (data.id);
+                    document.getElementById("producerDelete").value = (data.producer);
+                    document.getElementById("modelDelete").value = (data.model);
+                    document.getElementById("priceDelete").value = (data.price);
+                    $('#showModalDelete').click();
+                }
+            })
+        })
+//delete
+        $("#saveDelete").click(function () {
+            let id = $("#idDelete").val();
+            alert(id)
+            $.ajax({
+                url: "http://localhost:8080/api/smartphone/delete/" + id,
+                type: "DELETE",
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                success: function () {
+                    $('#showModalUpdate').modal('hide')
+                    list();
+
+                }
             })
         })
         list()
     })
 
-    function addNewSmartPhone() {
-        //lay du lieu
-        let producer = $('#producer').val();
-        let model = $('#model').val();
-        let price = $('#price').val();
-        let newSmartphone = {
-            producer: producer,
-            model: model,
-            price: price
-        };
-        // goi ajax
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            type: "POST",
-            data: JSON.stringify(newSmartphone),
-            //tên API
-            url: "http://localhost:8080/api/smartphone",
-            //xử lý khi thành công
-            success: list
-
-        });
-        //chặn sự kiện mặc định của thẻ
-        event.preventDefault();
-    }
 </script>
 </html>
