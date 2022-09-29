@@ -10,7 +10,7 @@ public class Smartphone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String producer;
     private String model;
     private double price;
@@ -18,18 +18,18 @@ public class Smartphone {
     public Smartphone() {
     }
 
-    public Smartphone(Long id, String producer, String model, double price) {
+    public Smartphone(int id, String producer, String model, double price) {
         this.id = id;
         this.producer = producer;
         this.model = model;
         this.price = price;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

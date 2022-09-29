@@ -29,10 +29,19 @@ public class SmartphoneController {
         return new ResponseEntity<>(smartphoneList, HttpStatus.OK);
     }
 
+    @GetMapping("update/{id}")
+    public ResponseEntity<Smartphone> update(@PathVariable int id) {
+        Smartphone smartphone = iSmartphoneService.findById(id).get();
+        if (smartphone == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(smartphone, HttpStatus.OK);
+    }
+
     @PostMapping()
-    public ResponseEntity<Smartphone> addSmartphone(@RequestBody SmartphoneDto smartphoneDto){
+    public ResponseEntity<Smartphone> addSmartphone(@RequestBody SmartphoneDto smartphoneDto) {
         Smartphone smartphone = new Smartphone();
-        BeanUtils.copyProperties(smartphoneDto,smartphone);
+        BeanUtils.copyProperties(smartphoneDto, smartphone);
         iSmartphoneService.save(smartphone);
         return new ResponseEntity<>(HttpStatus.OK);
     }
