@@ -1,8 +1,10 @@
 package case_study_management.model.customer;
 
+import case_study_management.model.contract.Contract;
+
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Customer {
@@ -10,10 +12,6 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @ManyToOne
-    @JoinColumn(name = "customer_typy_id",referencedColumnName = "id")
-    private CustomerType customerType;
 
     private String name;
     private Date dateOfBirth;
@@ -24,9 +22,31 @@ public class Customer {
     private String address;
     private boolean isDelete;
 
-    public Customer() {
+    @ManyToOne
+    @JoinColumn(name = "customer_type_id", referencedColumnName = "id")
+    private CustomerType customerType;
+
+    public CustomerType getCustomerType() {
+        return customerType;
     }
 
+    public void setCustomerType(CustomerType customerType) {
+        this.customerType = customerType;
+    }
+
+    @OneToMany(mappedBy = "customer")
+    private Set<Contract> contracts;
+
+    public Set<Contract> getContracts() {
+        return contracts;
+    }
+
+    public void setContracts(Set<Contract> contracts) {
+        this.contracts = contracts;
+    }
+
+    public Customer() {
+    }
 
     public Customer(int id, CustomerType customerType, String name, Date dateOfBirth, boolean gender,
                     String idCard, String phoneNumber, String email, String address, boolean isDelete) {
@@ -48,14 +68,6 @@ public class Customer {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public CustomerType getCustomerType() {
-        return customerType;
-    }
-
-    public void setCustomerType(CustomerType customerType) {
-        this.customerType = customerType;
     }
 
     public String getName() {

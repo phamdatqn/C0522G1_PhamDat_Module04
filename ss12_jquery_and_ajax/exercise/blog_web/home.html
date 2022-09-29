@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<h1 style="text-align: center">Blog List</h1>
+
+<form>
+    <input type="text" id="txtSearch" placeholder="search title">
+</form>
+
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>STT</th>
+        <th>Tiêu đề</th>
+        <th>Tác giả</th>
+        <!--        <th>Thể loại</th>-->
+        <th>Ngày viết</th>
+        <th>Cập nhập</th>
+        <th>Xóa</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <span>Loading...</span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<button type="submit" id="showMore">Xem thêm</button>
+</body>
+
+<script src="jquery-3.6.1.js"></script>
+<script>
+    $(document).ready(function () {
+        let page = 3;
+        $("tbody").empty();
+        $.ajax({
+            url: "http://localhost:8080/api/blog",
+            type: "GET",
+            dataTypes: "json",
+            success: function (data) {
+                let tr = [];
+                for (let i = 0; i < page; i++) {
+                    tr.push("<tr>");
+                    tr.push("<td>" + data[i].id + "</td>")
+                    tr.push("<td>" + data[i].title + "</td>")
+                    tr.push("<td>" + data[i].writer + "</td>")
+                    // tr.push("<td>" + data[i].category.categoryName + "</td>")
+                    tr.push("<td>" + data[i].dateOfWriting + "</td>")
+                    tr.push("<td>" + "<a href='#'>Update</a>")
+                    tr.push("<td>" + "<a href='#'>Delete</a>")
+                }
+                $("table").append(tr.join(""));
+            }
+        })
+
+        $("#showMore").click(function () {
+            $.ajax({
+                url: "http://localhost:8080/api/blog",
+                type: "GET",
+                dataTypes: "json",
+                success: function (data) {
+                    $("tbody").empty();
+                    let tr = [];
+                    page += 2;
+                    for (let i = 0; i < page; i++) {
+                        tr.push("<tr>");
+                        tr.push("<td>" + data[i].id + "</td>")
+                        tr.push("<td>" + data[i].title + "</td>")
+                        tr.push("<td>" + data[i].writer + "</td>")
+                        // tr.push("<td>" + data[i].category.categoryName + "</td>")
+                        tr.push("<td>" + data[i].dateOfWriting + "</td>")
+                        tr.push("<td>" + "<a href='${smartphone.id}'>Update</a>")
+                        tr.push("<td>" + "<a href='${smartphone.id}'>Delete</a>")
+                    }
+                    $("table").append(tr.join(""));
+                }
+            })
+        })
+    })
+
+    $(document).ready(function () {
+        $("#txtSearch").keyup(function () {
+            let searchName = $("#txtSearch").val();
+            console.log(searchName);
+            $("tbody").empty();
+            $.ajax({
+                url: "http://localhost:8080/api/blog/search?search=" + searchName,
+                type: "GET",
+                dataTypes: "json",
+                success: function (data) {
+                    let tr = [];
+                    for (let i = 0; i < data.length; i++) {
+                        tr.push("<tr>");
+                        tr.push("<td>" + data[i].id + "</td>")
+                        tr.push("<td>" + data[i].title + "</td>")
+                        tr.push("<td>" + data[i].writer + "</td>")
+                        // tr.push("<td>" + data[i].category.categoryName + "</td>")
+                        tr.push("<td>" + data[i].dateOfWriting + "</td>")
+                        tr.push("<td>" + "<a href='${smartphone.id}'>Update</a>")
+                        tr.push("<td>" + "<a href='${smartphone.id}'>Delete</a>")
+                    }
+                    $("table").append(tr.join(""));
+                }
+            })
+        })
+    })
+
+</script>
+
+</html>

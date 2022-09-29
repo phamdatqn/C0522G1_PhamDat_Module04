@@ -1,6 +1,9 @@
 package case_study_management.model.facility;
 
+import case_study_management.model.contract.Contract;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Facility {
@@ -11,6 +14,13 @@ public class Facility {
     private int area;
     private double cost;
     private int maxPeople;
+    private String standardRoom;
+    private String descriptionOtherConvenience;
+    private double poolArea;
+    private int numberOfFloors;
+    private String facilityFree;
+    private boolean isDelete;
+
 
     @ManyToOne
     @JoinColumn(name = "rent_type_id",referencedColumnName = "id")
@@ -37,13 +47,17 @@ public class Facility {
     }
 
 
-    private String standardRoom;
-    private String descriptionOtherConvenience;
-    private double poolArea;
-    private int numberOfFloors;
-    private String facilityFree;
+    @OneToMany(mappedBy = "facility")
+    private Set<Contract>contracts;
 
-    private boolean isDelete;
+    public Set<Contract> getContracts() {
+        return contracts;
+    }
+
+    public void setContracts(Set<Contract> contracts) {
+        this.contracts = contracts;
+    }
+
     public Facility() {
     }
 

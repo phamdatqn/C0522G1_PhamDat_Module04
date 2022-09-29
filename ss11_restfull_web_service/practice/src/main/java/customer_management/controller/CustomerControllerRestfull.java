@@ -27,7 +27,7 @@ public class CustomerControllerRestfull {
         return new ResponseEntity<>(customerList, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
+    @PostMapping("")
     public ResponseEntity createCustomer(@RequestBody CustomerDto customerDto) {
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDto, customer);
