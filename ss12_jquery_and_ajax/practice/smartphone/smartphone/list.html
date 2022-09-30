@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="bootstrap-4.6.2-dist/bootstrap-4.6.2-dist/css/bootstrap.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
-<h1>Smartphone List</h1>
+<h1 style="color: #b21f2d;text-align: center">Smartphone List</h1>
 <table id="smartphoneList" class="table table-striped">
     <thead>
     <tr>
@@ -103,7 +104,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="saveUpdate"  type="button" class="btn btn-warning" data-dismiss="modal">Update</button>
+                <button id="saveUpdate" type="button" class="btn btn-warning" data-dismiss="modal">Update</button>
             </div>
         </div>
     </div>
@@ -150,9 +151,8 @@
         </div>
     </div>
 </div>
-
-
 </body>
+
 <script src="jquery-3.6.1.js"></script>
 <script src="bootstrap-4.6.2-dist/bootstrap-4.6.2-dist/js/bootstrap.js"></script>
 
@@ -193,9 +193,8 @@
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify({'producer': producer, 'model': model, 'price': price}),
                 success: function () {
-                    $('#showModalCreate').modal('hide')
+                    // $('#showModalCreate').modal('hide')
                     list();
-
                 }
             })
         })
@@ -209,10 +208,10 @@
                 dataType: "json",
                 success: function (data) {
                     console.log(data);
-                    document.getElementById("idUpdate").value = (data.id);
-                    document.getElementById("producerUpdate").value = (data.producer);
-                    document.getElementById("modelUpdate").value = (data.model);
-                    document.getElementById("priceUpdate").value = (data.price);
+                    $("#idUpdate").val(data.id);
+                    $("#producerUpdate").val(data.producer);
+                    $("#modelUpdate").val(data.model);
+                    $("#priceUpdate").val(data.price);
                     $('#showModalUpdate').click();
                 }
             })
@@ -230,7 +229,7 @@
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify({'producer': producer, 'model': model, 'price': price}),
                 success: function () {
-                    $('#showModalUpdate').modal('hide')
+                    // $('#showModalUpdate').modal('hide')
                     list();
 
                 }
@@ -246,10 +245,10 @@
                 dataType: "json",
                 success: function (data) {
                     console.log(data);
-                    document.getElementById("idDelete").value = (data.id);
-                    document.getElementById("producerDelete").value = (data.producer);
-                    document.getElementById("modelDelete").value = (data.model);
-                    document.getElementById("priceDelete").value = (data.price);
+                    $("#idUpdate").val(data.id);
+                    $("#producerUpdate").val(data.producer);
+                    $("#modelUpdate").val(data.model);
+                    $("#priceUpdate").val(data.price);
                     $('#showModalDelete').click();
                 }
             })
@@ -263,9 +262,8 @@
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
                 success: function () {
-                    $('#showModalUpdate').hide()
+                    // $('#showModalUpdate').hide()
                     list();
-
                 }
             })
         })

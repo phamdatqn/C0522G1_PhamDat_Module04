@@ -30,6 +30,8 @@ public class SmartphoneController {
     }
 
     @GetMapping("update/{id}")
+
+    
     public ResponseEntity<Smartphone> update(@PathVariable int id) {
         Smartphone smartphone = iSmartphoneService.findById(id).get();
         if (smartphone == null) {
