@@ -20,8 +20,8 @@ public class MyUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
-        if (user==null){
-            throw new UsernameNotFoundException("User name: "+username+ "Không tồn tại !");
+        if (user == null) {
+            throw new UsernameNotFoundException("User name: " + username + "Không tồn tại !");
         }
         return new MyUserDetail(user);
     }

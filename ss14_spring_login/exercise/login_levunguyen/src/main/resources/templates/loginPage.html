@@ -12,7 +12,7 @@
 <!-- /login?error=true -->
 <div th:if="${#request.getParameter('error') == 'true'}"
      style="color:red;margin:10px 0px;">
-    Login Failed!!!<br />
+    Login Failed!!!<br/>
     Reason :
     <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
           th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
@@ -30,14 +30,14 @@
         </tr>
         <tr>
             <td>Password:</td>
-            <td><input type='password' name='password' /></td>
+            <td><input type='password' name='password'/></td>
         </tr>
         <tr>
             <td>Remember Me?</td>
-            <td><input type="checkbox" name="remember-me" /></td>
+            <td><input type="checkbox" name="remember-me"/></td>
         </tr>
         <tr>
-            <td><input name="submit" type="submit" value="submit" /></td>
+            <td><input name="submit" type="submit" value="submit"/></td>
         </tr>
     </table>
 </form>
