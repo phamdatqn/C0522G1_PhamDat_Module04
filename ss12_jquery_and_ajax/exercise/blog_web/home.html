@@ -44,36 +44,19 @@
 <script>
     $(document).ready(function () {
         let page = 3;
-        $("tbody").empty();
-        $.ajax({
-            url: "http://localhost:8080/api/blog",
-            type: "GET",
-            dataTypes: "json",
-            success: function (data) {
-                let tr = [];
-                for (let i = 0; i < page; i++) {
-                    tr.push("<tr>");
-                    tr.push("<td>" + data[i].id + "</td>")
-                    tr.push("<td>" + data[i].title + "</td>")
-                    tr.push("<td>" + data[i].writer + "</td>")
-                    // tr.push("<td>" + data[i].category.categoryName + "</td>")
-                    tr.push("<td>" + data[i].dateOfWriting + "</td>")
-                    tr.push("<td>" + "<a href='#'>Update</a>")
-                    tr.push("<td>" + "<a href='#'>Delete</a>")
-                }
-                $("table").append(tr.join(""));
-            }
-        })
+        showMore(page);
 
-        $("#showMore").click(function () {
+        function showMore(page) {
+            $("tbody").empty();
             $.ajax({
                 url: "http://localhost:8080/api/blog",
                 type: "GET",
                 dataTypes: "json",
                 success: function (data) {
-                    $("tbody").empty();
                     let tr = [];
-                    page += 2;
+                    if (page > data.length) {
+                        page = data.length;
+                    }
                     for (let i = 0; i < page; i++) {
                         tr.push("<tr>");
                         tr.push("<td>" + data[i].id + "</td>")
@@ -81,16 +64,29 @@
                         tr.push("<td>" + data[i].writer + "</td>")
                         // tr.push("<td>" + data[i].category.categoryName + "</td>")
                         tr.push("<td>" + data[i].dateOfWriting + "</td>")
-                        tr.push("<td>" + "<a href='${smartphone.id}'>Update</a>")
-                        tr.push("<td>" + "<a href='${smartphone.id}'>Delete</a>")
+                        tr.push("<td>" + "<a href='#'>Update</a>")
+                        tr.push("<td>" + "<a href='#'>Delete</a>")
                     }
                     $("table").append(tr.join(""));
                 }
             })
-        })
-    })
+        }
 
-    $(document).ready(function () {
+        $("#showMore").click(function () {
+            showMore(page += 3);
+        })
+
+        function getRow(blog) {
+            return "<tr>" +
+                "<td>" + blog.id + "</td>" +
+                "<td>" + blog.title + "</td>" +
+                "<td>" + blog.writer + "</td>" +
+                // tr.push("<td>" + data[i].category.categoryName + "</td>")
+                "<td>" + blog.dateOfWriting + "</td>" +
+                "<td>" + "<a href='${smartphone.id}'>Update</a>" +
+                "<td>" + "<a href='${smartphone.id}'>Delete</a>";
+        }
+
         $("#txtSearch").keyup(function () {
             let searchName = $("#txtSearch").val();
             console.log(searchName);
@@ -102,21 +98,12 @@
                 success: function (data) {
                     let tr = [];
                     for (let i = 0; i < data.length; i++) {
-                        tr.push("<tr>");
-                        tr.push("<td>" + data[i].id + "</td>")
-                        tr.push("<td>" + data[i].title + "</td>")
-                        tr.push("<td>" + data[i].writer + "</td>")
-                        // tr.push("<td>" + data[i].category.categoryName + "</td>")
-                        tr.push("<td>" + data[i].dateOfWriting + "</td>")
-                        tr.push("<td>" + "<a href='${smartphone.id}'>Update</a>")
-                        tr.push("<td>" + "<a href='${smartphone.id}'>Delete</a>")
+                        tr.push(getRow(data[i]));
                     }
                     $("table").append(tr.join(""));
                 }
             })
         })
     })
-
 </script>
-
 </html>
