@@ -1,4 +1,4 @@
-package login_levunguyen_management.service.impl;
+package login_levunguyen_management.service;
 
 
 import login_levunguyen_management.entity.AppUser;
@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private IAppUserRepository iAppUserRepository;
@@ -27,7 +28,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        AppUser appUser = this.iAppUserRepository.findByUsername(userName);
+        AppUser appUser = this.iAppUserRepository.findByUserName(userName);
 
         if (appUser == null) {
             System.out.println("AppUser not found! " + userName);
