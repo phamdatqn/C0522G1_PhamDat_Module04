@@ -80,5 +80,4 @@ public class SmartphoneController {
             return new ResponseEntity(smartphone, HttpStatus.OK);
         }
     }
-
 }
