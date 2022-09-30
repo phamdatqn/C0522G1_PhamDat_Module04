@@ -61,7 +61,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="Create" type="button" class="btn btn-danger">Create</button>
+                <button id="Create" type="button" class="btn btn-danger" data-dismiss="modal">Create</button>
             </div>
         </div>
     </div>
@@ -103,7 +103,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="saveUpdate" type="button" class="btn btn-warning">Update</button>
+                <button id="saveUpdate"  type="button" class="btn btn-warning" data-dismiss="modal">Update</button>
             </div>
         </div>
     </div>
@@ -112,7 +112,7 @@
 <!-- Delete -->
 <button hidden id="showModalDelete" type="button" class="btn btn-primary btn-lg" data-toggle="modal"
         data-target="#deleteModal">
-    Update
+    Delete
 </button>
 
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -145,7 +145,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="saveDelete" type="button" class="btn btn-danger">Xóa</button>
+                <button id="saveDelete" type="button" data-dismiss="modal" class="btn btn-danger">Xóa</button>
             </div>
         </div>
     </div>
@@ -193,7 +193,7 @@
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify({'producer': producer, 'model': model, 'price': price}),
                 success: function () {
-                    // $('#showModalCreate').modal('hide')
+                    $('#showModalCreate').modal('hide')
                     list();
 
                 }
@@ -257,14 +257,13 @@
 //delete
         $("#saveDelete").click(function () {
             let id = $("#idDelete").val();
-            alert(id)
             $.ajax({
                 url: "http://localhost:8080/api/smartphone/delete/" + id,
                 type: "DELETE",
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
                 success: function () {
-                    $('#showModalUpdate').modal('hide')
+                    $('#showModalUpdate').hide()
                     list();
 
                 }
@@ -272,6 +271,5 @@
         })
         list()
     })
-
 </script>
 </html>
