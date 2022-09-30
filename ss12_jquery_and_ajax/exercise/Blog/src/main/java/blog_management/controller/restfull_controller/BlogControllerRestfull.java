@@ -17,16 +17,7 @@ public class BlogControllerRestfull {
     @Autowired
     private IBlogService iBlogService;
 
-    @GetMapping()
-    public ResponseEntity<List<Blog>> home() {
-        List<Blog> blogList = iBlogService.findAll();
-        if (blogList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(blogList, HttpStatus.OK);
-    }
-
-    @GetMapping("/search")
+    @GetMapping("")
     public ResponseEntity<List<Blog>> search(@RequestParam(defaultValue = "") String search) {
         List<Blog> blogList = iBlogService.findByNameAjax(search);
         if (blogList.isEmpty()) {
