@@ -1,37 +1,32 @@
-package case_study_management.model.customer;
-
+package case_study_management.model.facility;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class CustomerType {
-
+public class RentType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private boolean isDelete;
 
-    @OneToMany(mappedBy = "customerType")
-    private Set<Customer> customers;
 
-    public Set<Customer> getCustomers() {
-        return customers;
+    @OneToMany(mappedBy = "rentType")
+    private Set<Facility>facilities;
+
+    public Set<Facility> getFacilities() {
+        return facilities;
     }
 
-    public void setCustomers(Set<Customer> customers) {
-        this.customers = customers;
+    public void setFacilities(Set<Facility> facilities) {
+        this.facilities = facilities;
     }
 
-    public CustomerType() {
+    public RentType() {
     }
 
-    public CustomerType(int id) {
-        this.id = id;
-    }
-
-    public CustomerType(int id, String name) {
+    public RentType(int id, String name) {
         this.id = id;
         this.name = name;
     }

@@ -1,19 +1,12 @@
-package case_study_management.model.customer;
+package case_study_management.dto;
 
-import case_study_management.model.contract.Contract;
+import case_study_management.model.customer.CustomerType;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
-@Entity
-public class Customer {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CustomerDto {
     private int id;
-
     private String name;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
@@ -22,48 +15,23 @@ public class Customer {
     private String phoneNumber;
     private String email;
     private String address;
+    private int customerType;
     private boolean isDelete;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_type_id", referencedColumnName = "id")
-    private CustomerType customerType;
+    public CustomerDto() {
+    }
 
-    public CustomerType getCustomerType() {
+    public CustomerDto(int id) {
+        this.id = id;
+    }
+
+    public int getCustomerType() {
         return customerType;
     }
 
-    public void setCustomerType(CustomerType customerType) {
+    public void setCustomerType(int customerType) {
         this.customerType = customerType;
     }
-
-    @OneToMany(mappedBy = "customer")
-    private Set<Contract> contracts;
-
-    public Set<Contract> getContracts() {
-        return contracts;
-    }
-
-    public void setContracts(Set<Contract> contracts) {
-        this.contracts = contracts;
-    }
-
-    public Customer() {
-    }
-
-    public Customer(int id, CustomerType customerType, String name, Date dateOfBirth, boolean gender,
-                    String idCard, String phoneNumber, String email, String address, boolean isDelete) {
-        this.id = id;
-        this.customerType = customerType;
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
-        this.idCard = idCard;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.address = address;
-        this.isDelete = isDelete;
-    }
-
     public int getId() {
         return id;
     }
@@ -135,5 +103,4 @@ public class Customer {
     public void setDelete(boolean delete) {
         isDelete = delete;
     }
-
 }

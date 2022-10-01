@@ -1,11 +1,10 @@
-package case_study_management.model.customer;
-
+package case_study_management.model.facility;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class CustomerType {
+public class FacilityType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,25 +12,21 @@ public class CustomerType {
     private String name;
     private boolean isDelete;
 
-    @OneToMany(mappedBy = "customerType")
-    private Set<Customer> customers;
+    @OneToMany(mappedBy = "facilityType")
+    private Set<Facility> facilities;
 
-    public Set<Customer> getCustomers() {
-        return customers;
+    public Set<Facility> getFacilities() {
+        return facilities;
     }
 
-    public void setCustomers(Set<Customer> customers) {
-        this.customers = customers;
+    public void setFacilities(Set<Facility> facilities) {
+        this.facilities = facilities;
     }
 
-    public CustomerType() {
+    public FacilityType() {
     }
 
-    public CustomerType(int id) {
-        this.id = id;
-    }
-
-    public CustomerType(int id, String name) {
+    public FacilityType(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -60,3 +55,4 @@ public class CustomerType {
         isDelete = delete;
     }
 }
+

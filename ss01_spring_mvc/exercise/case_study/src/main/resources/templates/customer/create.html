@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="row" th:replace="/navbar :: navBar"></div>
+<br><br>
+
+<h1 style="color: #0c63e4;text-align: center;font-size: 40px">Thêm mới khách hàng</h1>
+<form th:object="${newCustomerDto}" th:action="@{/customer/save}" method="post"
+      style="margin-left:30%;width: 40%;margin-top: 5%">
+    <table>
+        <tr>
+            <td>Tên khách hàng:</td>
+            <td><input name="name"></td>
+        </tr>
+        <tr>
+            <td>Giới tính:</td>
+            <td>
+                <input type="radio" value="true" name="gender" checked>Name
+                <input type="radio" value="false" name="gender">Nữ
+            </td>
+        </tr>
+        <tr>
+            <td>Ngày sinh:</td>
+            <td><input type="date" name="dateOfBirth"></td>
+        </tr>
+        <tr>
+            <td>Số CMND:</td>
+            <td><input name="idCard"></td>
+        </tr>
+        <tr>
+            <td>Số điện thoại:</td>
+            <td><input name="phoneNumber"></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><input name="email"></td>
+        </tr>
+        <tr>
+            <td>Địa chỉ:</td>
+            <td><input name="address"></td>
+        </tr>
+        <tr>
+            <td>Loại khách hàng:</td>
+            <td>
+                <select th:field="*{customerType}">
+                    <option th:each="customerType : ${customerTypeList}" th:value="${customerType.id}"
+                            th:text="${customerType.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Create"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
