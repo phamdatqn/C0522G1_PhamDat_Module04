@@ -155,4 +155,24 @@ public class Employee {
     public void setContracts(Set<Contract> contracts) {
         this.contracts = contracts;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", idCard='" + idCard + '\'' +
+                ", salary=" + salary +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", isDelete=" + isDelete +
+                ", position=" + position +
+                ", educationDegree=" + educationDegree +
+                ", division=" + division +
+                ", user=" + user +
+                ", contracts=" + contracts +
+                '}';
+    }
 }

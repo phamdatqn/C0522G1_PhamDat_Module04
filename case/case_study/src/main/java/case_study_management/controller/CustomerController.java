@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
@@ -25,55 +27,80 @@ public class CustomerController {
     private ICustomerTypeService iCustomerTypeService;
 
     @GetMapping("")
-    public String home(@PageableDefault(value = 3)Pageable pageable,
-                       @RequestParam(defaultValue = "") String search, Model model){
-        model.addAttribute("customerList",iCustomerService.findAll(pageable));
-        model.addAttribute("search",search);
+    public String home(@PageableDefault(value = 3) Pageable pageable,
+                       Model model, @RequestParam(defaultValue = "") String search) {
+        model.addAttribute("customerList", iCustomerService.findByNameCustomer(search,pageable));
+        model.addAttribute("search", search);
         return "customer/list";
     }
 
     @GetMapping("/create")
-    public String create(Model model){
-        model.addAttribute("newCustomerDto",new CustomerDto());
-        model.addAttribute("customerTypeList",iCustomerTypeService.findAll());
+    public String create(Model model) {
+        model.addAttribute("newCustomerDto", new CustomerDto());
+        model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
         return "/customer/create";
     }
 
     @GetMapping("/update/{id}")
-    public String showFormUpdate(@PathVariable int id, Model model){
-        model.addAttribute("customer",iCustomerService.findById(id));
-        model.addAttribute("customerTypeList",iCustomerTypeService.findAll());
+    public String showFormUpdate(@PathVariable int id, Model model) {
+        Customer customer = iCustomerService.findById(id).get();
+
+        CustomerDto customerDto = new CustomerDto();
+
+        CustomerType customerType = customer.getCustomerType();
+        customerDto.setCustomerType(customerType.getId());
+
+        BeanUtils.copyProperties(customer, customerDto);
+
+        model.addAttribute("customerDto", customerDto);
+        model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
         return "/customer/update";
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam int id,RedirectAttributes redirectAttributes){
-        Customer customer = iCustomerService.findById(id).get();
-        if (customer==null){
-            redirectAttributes.addFlashAttribute("message","LỖI: ID khách hàng không tồn tại!");
-            return "error";
+    public String delete(@RequestParam int id, RedirectAttributes redirectAttributes) {
+        Optional<Customer> customer = iCustomerService.findById(id);
+        if (!customer.isPresent()) {
+            redirectAttributes.addFlashAttribute("message", "LỖI: ID khách hàng không tồn tại!");
+            return "redirect:/error";
         }
         iCustomerService.delete(id);
-        redirectAttributes.addFlashAttribute("message","Đã xóa "+ customer.getName()+ " thành công !");
+        redirectAttributes.addFlashAttribute("message", "Đã xóa " + customer.get().getName() + " thành công !");
         return "redirect:/customer";
     }
 
     @PostMapping("/save")
     public String save(@ModelAttribute CustomerDto customerDto, RedirectAttributes redirectAttributes) {
         Customer customer = new Customer();
+
+        BeanUtils.copyProperties(customerDto, customer);
+
         CustomerType customerType = new CustomerType();
         customerType.setId(customerDto.getCustomerType());
-        BeanUtils.copyProperties(customerDto,customer);
         customer.setCustomerType(customerType);
+
         iCustomerService.save(customer);
         redirectAttributes.addFlashAttribute("message", "Thêm mới thành công: " + customerDto.getName());
         return "redirect:/customer";
     }
 
     @PostMapping("/update")
-    public String update(Customer customer, RedirectAttributes redirectAttributes) {
-        iCustomerService.save(customer);
-        redirectAttributes.addFlashAttribute("message", "Cập nhập thành công: " + customer.getName());
+    public String update(@ModelAttribute CustomerDto customerDto, RedirectAttributes redirectAttributes) {
+        Optional<Customer> customer = iCustomerService.findById(customerDto.getId());
+        if (!customer.isPresent()) {
+            redirectAttributes.addFlashAttribute("message", "LỖI: ID khách hàng không tồn tại!");
+            return "redirect:/error";
+        }
+        BeanUtils.copyProperties(customerDto, customer.get());
+
+        CustomerType customerType = new CustomerType();
+
+        customerType.setId(customerDto.getCustomerType());
+        customer.get().setCustomerType(customerType);
+
+        iCustomerService.save(customer.get());
+
+        redirectAttributes.addFlashAttribute("message", "Đã cập nhập " + customer.get().getName() + " thành công !");
         return "redirect:/customer";
     }
 }

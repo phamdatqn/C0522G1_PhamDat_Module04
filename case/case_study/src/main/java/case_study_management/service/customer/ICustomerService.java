@@ -4,18 +4,18 @@ import case_study_management.model.customer.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ICustomerService {
-    Page<Customer> findAll(Pageable pageable);
+
+    List<Customer> findAll();
 
     Optional<Customer> findById(int id);
 
     void save(Customer customer);
 
-    Page<Customer> findByName(String keySearch, Pageable pageable);
-
-    Page<Customer> findByCustomer(int chooseSelect, Pageable pageable);
+    Page<Customer> findByNameCustomer(String keySearch, Pageable pageable);
 
     void delete(int id);
 }

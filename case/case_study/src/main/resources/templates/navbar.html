@@ -38,7 +38,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li>
+                        <li><a class="dropdown-item" href="/employee">
                             <span style="color: red" class='bi bi-gear-wide-connected'></span>
                             <span style="color: red">Management</span></a></li>
                         </li>
@@ -112,9 +112,9 @@
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex align-items-center m-0">
-                <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success chu_menu" type="submit">Search</button>
+            <form class="d-flex align-items-center m-0 " th:action="@{/customer/}">
+                <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" name="search">
+                <button class="btn btn-outline-success chu_menu" type="submit" style="color: white">Search</button>
             </form>
         </div>
     </nav>

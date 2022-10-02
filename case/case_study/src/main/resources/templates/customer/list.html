@@ -10,8 +10,17 @@
     <link rel="stylesheet" href="../bootstrap-5.0.2-dist/js/bootstrap.js">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous">
+    </script>
+    <style>
+        body{
+            background-image: url('../../static/IMG_1140.JPG');
+            width: 100%;
+            height: auto;
+        }
+    </style>
 
+    <!--    <img src="../../static/IMG_1140.JPG" height="4000" width="6000"/>-->
 </head>
 <body>
 
@@ -20,6 +29,7 @@
         <img src="../header.png">
     </div>
     <div class="row" th:replace="/navbar :: navBar" style="position: fixed"></div>
+
     <div class="row">
         <h1 style="color: crimson;text-align: center;font-size: 40px;margin-top: 5px">Customer Management</h1>
     </div>
@@ -55,21 +65,24 @@
                             data-bs-target="#deleteCustomer">
                         <span style="color: white" class='bi bi-trash'></span></span>
                     </button>
-<!--                <button th:onclick="|deleteCustomer('${customer.id}', '${customer.name}')|"-->
-<!--                        class="btn btn-danger btn-outline-secondary" data-bs-toggle="modal"-->
-<!--                        data-bs-target="#deleteCustomer">-->
-<!--                    <span class='bi bi-person-dash-fill'></span>-->
-<!--                </button>-->
-               </td>
+                    <!--                <button th:onclick="|deleteCustomer('${customer.id}', '${customer.name}')|"-->
+                    <!--                        class="btn btn-danger btn-outline-secondary" data-bs-toggle="modal"-->
+                    <!--                        data-bs-target="#deleteCustomer">-->
+                    <!--                    <span class='bi bi-person-dash-fill'></span>-->
+                    <!--                </button>-->
+                </td>
             </tr>
         </table>
     </div>
 
     <div style="text-align: center">
-        <a th:href="@{'/customer'(page=${customerList.number - 1}, search=${search})}" th:if="${customerList.hasPrevious()}">Previous</a>
+        <a th:href="@{'/customer'(page=${customerList.number - 1}, search=${search})}"
+           th:if="${customerList.hasPrevious()}">Previous</a>
         <span th:text="${customerList.number + 1}"></span> / <span th:text="${customerList.totalPages}"></span>
-        <a th:href="@{'/customer'(page=${customerList.number + 1}, search=${search})}" th:if="${customerList.hasNext()}">Next</a>
+        <a th:href="@{'/customer'(page=${customerList.number + 1}, search=${search})}"
+           th:if="${customerList.hasNext()}">Next</a>
     </div>
+
 </div>
 
 

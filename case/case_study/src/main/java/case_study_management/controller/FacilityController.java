@@ -1,9 +1,7 @@
 package case_study_management.controller;
 
-import case_study_management.model.facility.Facility;
 import case_study_management.service.facility.IFacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -20,10 +18,10 @@ public class FacilityController {
     private IFacilityService iFacilityService;
 
     @GetMapping("")
-    public String home(@PageableDefault(value = 4)Pageable pageable, Model model,
-                       @RequestParam(defaultValue = "")String search){
-        model.addAttribute("facilityList",iFacilityService.findAll(pageable));
-        model.addAttribute("search",search);
+    public String home(@PageableDefault(value = 4) Pageable pageable, Model model,
+                       @RequestParam(defaultValue = "") String search) {
+        model.addAttribute("facilityList", iFacilityService.findAll(pageable));
+        model.addAttribute("search", search);
         return "facility/list";
     }
 }
