@@ -37,11 +37,6 @@
 </head>
 
 <body>
-
-<div class="row">
-    <img src="../static/header.png">
-</div>
-
 <div class="row" th:fragment="navBar">
     <nav class="navbar navbar-expand-lg navbar-light" style="background: #0c63e4">
         <a class="navbar-brand chu_menu" href="/furama" style="color: white;margin-left: 10%">Home</a>
@@ -105,7 +100,13 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-
+                        <li><a class="dropdown-item" href="/facility/create2">
+                            <span style="color: green" class='bi bi-shop'></span>
+                            <span style="color: green">Add2</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         <li><a class="dropdown-item" href="/facility">
                             <span style="color: red" class='bi bi-gear-wide-connected'></span>
                             <span style="color: red">Management</span></a>

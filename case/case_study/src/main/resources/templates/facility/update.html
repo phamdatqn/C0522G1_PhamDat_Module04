@@ -4,11 +4,13 @@
 
 </head>
 <body>
-<div class="row">
-    <img src="../header.png">
-</div>
-<div class="row" th:replace="/navbar :: navBar" style="position: fixed"></div>
-<div class="row">
+
+<div class="container-fluid">
+    <div class="row">
+        <img src="../header.png">
+    </div>
+    <div class="row" th:replace="/navbar :: navBar" style="position: fixed"></div>
+
     <form th:action="@{/facility/update}" th:object="${facilityDto}" method="post"
           style="width: 50%;margin-left: 25%">
         <input type="hidden" th:field="*{id}">
@@ -111,12 +113,10 @@
                 </td>
             </tr>
         </table>
-
     </form>
-</div>
-</div>
-<div class="row">
-    <img src="../footter0.jpg" style="width: 100%;height: auto"/>
+    <div class="row">
+        <img src="../footter0.jpg" style="width: 100%;height: auto"/>
+    </div>
 </div>
 </body>
 </html>

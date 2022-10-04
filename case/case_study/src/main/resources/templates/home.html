@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head th:fragment="head">
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/bootstrap.css">
@@ -11,17 +11,147 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
+    <style>
+        a{
+            text-decoration: none;
+            color: rebeccapurple;
+        }
+    </style>
 </head>
+
 <body>
+<header th:fragment="header" class="sticky-top">
+
+    <div class="container-fluid bg-gray-500 d-flex header" style="height: 130px;background: white">
+        <img src="https://furamavietnam.com/wp-content/uploads/2019/02/Ariyana-Tourism-Complex-02-2.png">
+
+    </div>
+
+    <!--        <img class="ms-5 ps-5" src="https://ib.vib.com.vn/banners/Promotion/20220621154454143_furama.png" alt="">-->
+
+
+    <!--        <img class="ms-1 ps-5"-->
+    <!--             src="https://www.furama.com/images/LOGOFurama_4C_Normal.png"-->
+    <!--             alt="">-->
+
+    <!--        <img class="ms-1 ps-5"-->
+    <!--             src="https://previews.123rf.com/images/veronchick84/veronchick842006/veronchick84200601166/149185626-vip-icon-privilage-symbol-vector-logo.jpg"-->
+    <!--             alt="">-->
+    <!--        <div class="container-fluid text-end my-4 me-4">-->
+    <!--            <span class="badge text-bg-warning mt-3">Đạt Phạm</span>-->
+    <!--        </div>-->
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background: #0c63e4">
+        <a class="navbar-brand chu_menu" href="/furama" style="color: white;margin-left: 10%">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarEmployee">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle chu_menu" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+                        Employee
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarEmployee">
+                        <li><a class="dropdown-item" href="/employee/create">
+                            <span style="color: green" class='bi bi-person-plus-fill'></span>
+                            <span style="color: green">Add</span></a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/employee">
+                            <span style="color: red" class='bi bi-gear-wide-connected'></span>
+                            <span style="color: red">Management</span></a></li>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle chu_menu" href="#" id="navbarCustomer" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+                        Customer
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarCustomer">
+                        <li><a class="dropdown-item" href="/customer/create">
+                            <span style="color: green" class='bi bi-person-plus-fill'></span>
+                            <span style="color: green">Add</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li><a class="dropdown-item" href="/customer">
+                            <span style="color: red" class='bi bi-gear-wide-connected'></span>
+                            <span style="color: red">Management</span></a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle chu_menu" href="#" id="navbarFacility" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+                        Facility
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarCustomer">
+                        <li><a class="dropdown-item" href="/facility/create">
+                            <span style="color: green" class='bi bi-shop'></span>
+                            <span style="color: green">Add</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/facility/create2">
+                            <span style="color: green" class='bi bi-shop'></span>
+                            <span style="color: green">Add2</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/facility">
+                            <span style="color: red" class='bi bi-gear-wide-connected'></span>
+                            <span style="color: red">Management</span></a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle chu_menu" href="contract/list.html" id="navbarContract"
+                       role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
+                        Contract
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby="navbarContract">
+                        <li><a class="dropdown-item" href="/contract">
+                            <span style="color: red" class='bi bi-gear-wide-connected'></span>
+                            <span style="color: red">Management</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/contractdetail">
+                            <span style="color: red" class='bi bi-gear-wide-connected'></span>
+                            <span style="color: red">Management Contract Detail</span></a>
+                        </li>
+                    </ul>
+
+                </li>
+            </ul>
+        </div>
+        <form class="d-flex align-items-center m-2 ">
+            <span class="btn btn-outline-success chu_menu"
+                  style="font-family:courier,arial,helvetica;color: orange"><strong>Đạt Phạm</strong></span>
+            <span>&ensp;</span>
+        </form>
+    </nav>
+</header>
+
+
 <div class="container-fluid">
-    <div class="row">
-        <img src="../header.png">
-    </div>
-    <div class="row" th:replace="/navbar :: navBar">
-    </div>
-    <div class="row">
-        <img src="../FURAMA.jpg">
-    </div>
     <div class="row">
         <div class="row" style="height: 10px;background: white">
         </div>
@@ -41,22 +171,27 @@
                     </div>
                     <br><br>
 
-                    <div class="row">Hướng ra bãi biển Đà Nẵng trải dài cát trắng, Furama Resort Đà Nẵng là cửa ngõ đến với 3 di
+                    <div class="row">Hướng ra bãi biển Đà Nẵng trải dài cát trắng, Furama Resort Đà Nẵng là cửa ngõ đến
+                        với 3 di
                         sản văn
                         hoá
                         thế giới: Hội An (20 phút),
-                        Mỹ Sơn (90 phút) và Huế (2 tiếng. 196 phòng hạng sang cùng với 70 căn biệt thự từ hai đến bốn phòng
+                        Mỹ Sơn (90 phút) và Huế (2 tiếng. 196 phòng hạng sang cùng với 70 căn biệt thự từ hai đến bốn
+                        phòng
                         ngủ
                         có hồ bơi riêng đều được
-                        trang trí trang nhã, theo phong cách thiết kế truyền thống của Việt Nam và kiến trúc thuộc địa của
+                        trang trí trang nhã, theo phong cách thiết kế truyền thống của Việt Nam và kiến trúc thuộc địa
+                        của
                         Pháp,
                         biến Furama thành khu
-                        nghỉ dưỡng danh giá nhất tại Việt Nam – vinh dự được đón tiếp nhiều người nổi tiếng, giới hoàng gia,
+                        nghỉ dưỡng danh giá nhất tại Việt Nam – vinh dự được đón tiếp nhiều người nổi tiếng, giới hoàng
+                        gia,
                         chính khách, ngôi sao
                         điện ảnh và các nhà lãnh đạo kinh doanh quốc tế.
                     </div>
                     <br><br>
-                    <div class="row img-fluid"><img src="https://furamavietnam.com/wp-content/uploads/2018/08/06-2.jpg"></div>
+                    <div class="row img-fluid"><img src="https://furamavietnam.com/wp-content/uploads/2018/08/06-2.jpg">
+                    </div>
                     <br>
                     <div class="row img-fluid">
                         <img src="https://furamavietnam.com/wp-content/uploads/2018/08/DES-PHONGNHA-1.jpg">
@@ -72,15 +207,18 @@
                             allowfullscreen></iframe>
                     <br><br>
                     <br><br>
-                    <div>Ẩm thực tại khu nghỉ dưỡng là trải nghiệm kết hợp giữa các món ăn Việt Nam, châu Á, Ý và châu Âu
+                    <div>Ẩm thực tại khu nghỉ dưỡng là trải nghiệm kết hợp giữa các món ăn Việt Nam, châu Á, Ý và châu
+                        Âu
                         cùng các
                         món bít tết
-                        nhập khẩu hảo hạng. Khu nghỉ dưỡng mang đến cho quý khách những không gian ẩm thực đa dạng bao gồm –
+                        nhập khẩu hảo hạng. Khu nghỉ dưỡng mang đến cho quý khách những không gian ẩm thực đa dạng bao
+                        gồm –
                         quầy bar nhìn ra biển,
                         hồ bơi Lagoon được bao quanh bởi khu vườn nhiệt đới, ẩm thực truyền thống Ý tại nhà hàng Don
                         Cipriani’s,
                         chất Á Đông tại Café
-                        Indochine hay nhà hàng bít tết “The Fan – Cái Quạt” nằm ngay trên bãi biển. Khu nghỉ dưỡng Furama Đà
+                        Indochine hay nhà hàng bít tết “The Fan – Cái Quạt” nằm ngay trên bãi biển. Khu nghỉ dưỡng
+                        Furama Đà
                         Nẵng còn gây ấn tượng và
                         tạo nhiều thích thú cho khách thông qua các chương trình vui chơi đầy thú vị như các chuyến du
                         ngoạn,
@@ -89,21 +227,27 @@
                     </div>
                     <br><br>
 
-                    <div>Nằm tại vị trí đắc địa gần trung tâm Đà Nẵng và là nơi kết nối quốc tế thuận tiện đến Singapore,
+                    <div>Nằm tại vị trí đắc địa gần trung tâm Đà Nẵng và là nơi kết nối quốc tế thuận tiện đến
+                        Singapore,
                         Bangkok,
                         Xiêm Riệp,
-                        Kuala Lumpur, Đài Loan, Tokyo, Osaka, Busan, Seoul, Tokyo, Osaka và Hồng Kông – Ma Cao, Trung Quốc
+                        Kuala Lumpur, Đài Loan, Tokyo, Osaka, Busan, Seoul, Tokyo, Osaka và Hồng Kông – Ma Cao, Trung
+                        Quốc
                         bao
                         gồm: Bắc Kinh,
-                        Thượng Hải, Hàng Châu, Quảng Châu, Thành Đô bằng các chuyến bay trực tiếp, khu nghỉ dưỡng Furama Đà
+                        Thượng Hải, Hàng Châu, Quảng Châu, Thành Đô bằng các chuyến bay trực tiếp, khu nghỉ dưỡng Furama
+                        Đà
                         Nẵng
                         là điểm đến
-                        lý tưởng cho các đại lý du lịch, doanh nghiệp, công ty tổ chức sự kiện. Cung Hội nghị có thể chứa
+                        lý tưởng cho các đại lý du lịch, doanh nghiệp, công ty tổ chức sự kiện. Cung Hội nghị có thể
+                        chứa
                         tới
                         3000 người,
-                        cùng với 10 phòng chức năng khác có sức chứa từ 50 đến 300 người. Cung hội nghị Ariyana Convention
+                        cùng với 10 phòng chức năng khác có sức chứa từ 50 đến 300 người. Cung hội nghị Ariyana
+                        Convention
                         Centre (ACC)
-                        được xây dựng để tổ chức sự kiện APEC 2017, kết nối với Cung hội nghị Furama (ICP) tạo thành quần
+                        được xây dựng để tổ chức sự kiện APEC 2017, kết nối với Cung hội nghị Furama (ICP) tạo thành
+                        quần
                         thể
                         MICE lớn nhất
                         Việt Nam có sức chứa lên tới 5,000 khách.
@@ -113,13 +257,15 @@
                     <div>Một loạt các bữa tiệc theo chủ đề trên bãi biển hoặc xung quanh hồ Lagoon, trong phòng đại tiệc
                         hoặc bên
                         ngoài khu
-                        nghỉ dưỡng, kết hợp các dịch vụ đặc biệt như VIP xuất hiện từ trực thăng đáp xuống bãi đáp riêng của
+                        nghỉ dưỡng, kết hợp các dịch vụ đặc biệt như VIP xuất hiện từ trực thăng đáp xuống bãi đáp riêng
+                        của
                         khu
                         nghỉ dưỡng;
                         Thêm vào đó là các hoạt động nhóm và thể thao trên nước, “Trung tâm lặn” đạt tiêu chuẩn lặn biển
                         quốc
                         tế, 2 sân golf
-                        18 lỗ, cũng như các dịch vụ chăm sóc sức khoẻ và sắc đẹp đã khiến Furama Đà Nẵng trở thành địa điểm
+                        18 lỗ, cũng như các dịch vụ chăm sóc sức khoẻ và sắc đẹp đã khiến Furama Đà Nẵng trở thành địa
+                        điểm
                         lý
                         tưởng cho các
                         nhóm MICE.
@@ -128,11 +274,60 @@
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <img src="../footter0.jpg">
-    </div>
 </div>
+<div style="background: white;height: 70px">
+
+</div>
+<footer th:fragment="footer">
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <span style="color: orange;font-size: 40px">Hướng Dẫn Di Chuyển</span>
+                <p class="text-justify">Khu nghỉ dưỡng Furama là cơ sở hàng đầu để khám phá một trong những điểm đến
+                    hấp dẫn nhất Châu Á. Chỉ cách Đà Nẵng một quãng lái xe ngắn là bốn Di sản Văn hóa Thế giới được
+                    UNESCO công nhận:</p>
+                <a style="font-size: 30px;color: crimson" href="https://www.google.com/maps/dir//103+-+105+Vo+Nguyen+Giap+Street,+Khue+My+Ward,+Ngu+Hanh+Son+District,+Danang+City,/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x31420fdbc8cc38ef:0x9a6a3e31121225d2?sa=X&ved=2ahUKEwiKsaaap8b6AhWTc94KHUO2A_0Q9Rd6BAhVEAQ">
+                    <span class='bi bi-pin-map'></span> XEM BẢN ĐỒ
+                </a>
+
+            </div>
+
+            <div class="col-xs-6 col-md-3">
+                <ul class="footer-links">
+                    <li><a href="https://furamavietnam.com/vi/furama-resort-danang-rack-rate/">Giá công bố</a></li>
+                    <li><a href="https://furamavietnam.com/vi/lifestyle-blog/">Lifestyle Blog</a></li>
+                    <li><a href="https://furamavietnam.com/vi/work-with-us/">Tuyển dụng</a></li>
+                    <li><a href="https://furamavietnam.com/vi/contact/">Liên hệ</a></li>
+                </ul>
+            </div>
+
+            <div class="col-xs-6 col-md-3">
+                <h6 style="color: crimson">Liên hệ</h6>
+                <ul class="footer-links">
+                    <li><a style="color: blue"  href="https://www.google.com/maps/dir//103+-+105+Vo+Nguyen+Giap+Street,+Khue+My+Ward,+Ngu+Hanh+Son+District,+Danang+City,/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x31420fdbc8cc38ef:0x9a6a3e31121225d2?sa=X&ved=2ahUKEwiKsaaap8b6AhWTc94KHUO2A_0Q9Rd6BAhVEAQ">
+                        <span class='bi bi-pin-map'></span> <span >103 - 105 Vo Nguyen Giap Street, Khue My Ward, Ngu Hanh Son District, Danang City, Vietnam
+                        </span>
+                    </a></li>
+                    <li><a href="http://scanfcode.com/contact/" style="color: blue">
+                        Tel.: 84-97111-8171/888 * Fax: 84-236-3847 666</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div >
+                <p class="copyright-text" style="text-align: center">Copyright &copy; 2017 All Rights Reserved by
+                    <a href="https://www.facebook.com/" style="color: blue;font-size: 20px">Đạt Phạm</a>.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+</footer>
 
 </body>
 </html>

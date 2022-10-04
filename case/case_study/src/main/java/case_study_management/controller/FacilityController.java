@@ -49,6 +49,13 @@ public class FacilityController {
         return "/facility/create";
     }
 
+    @GetMapping("/create2")
+    public String create2(Model model) {
+        model.addAttribute("newFacilityDto", new FacilityDto());
+        model.addAttribute("facilityTypeList", iFacilityTypeService.findAll());
+        return "/facility/create2";
+    }
+
     @GetMapping("/update/{id}")
     public String showFormUpdate(@PathVariable int id, Model model) {
         Facility facility = iFacilityService.findById(id).get();

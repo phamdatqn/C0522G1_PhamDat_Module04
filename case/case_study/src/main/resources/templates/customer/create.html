@@ -5,13 +5,11 @@
 </head>
 <body>
 
-<div class="row">
-    <img src="../header.png">
-</div>
-
-<div class="row" th:replace="/navbar :: navBar" style="position: fixed"></div>
-
-<div id="background" class="row" >
+<div class="container-fluid">
+    <div class="row">
+        <img src="../header.png">
+    </div>
+    <div class="row" th:replace="/navbar :: navBar" style="position: fixed"></div>
     <form th:object="${newCustomerDto}" th:action="@{/customer/save}" method="post"
           style="margin-left:30%;width: 40%;margin-top: 3%">
         <table class="table table-striped" border="1">
@@ -31,8 +29,10 @@
                     <input class="form-control" placeholder="Giới tính:" readonly>
                 </td>
                 <td>
-                    <input type="radio" value="true" name="gender" checked>Nam<span class='bi bi-gender-male' style="color: darkmagenta">&ensp; &ensp; &ensp; </span>
-                    <input type="radio" value="false" name="gender">Nữ<span class='bi bi-gender-female' style="color: darkmagenta"></span>
+                    <input type="radio" value="true" name="gender" checked>Nam<span class='bi bi-gender-male'
+                                                                                    style="color: darkmagenta">&ensp; &ensp; &ensp; </span>
+                    <input type="radio" value="false" name="gender">Nữ<span class='bi bi-gender-female'
+                                                                            style="color: darkmagenta"></span>
                 </td>
             </tr>
             <tr>
