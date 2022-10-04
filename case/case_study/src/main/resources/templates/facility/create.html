@@ -8,21 +8,26 @@
     <img src="../header.png">
 </div>
 <div class="row" th:replace="/navbar :: navBar" style="position: fixed"></div>
-<br><br>
 
-<form th:object="${customerDto}" th:action="@{/customer/save}" method="post"
+<form th:object="${newFacilityDto}" th:action="@{/facility/save}" method="post"
       style="margin-left:30%;width: 40%;margin-top: 3%">
     <table class="table table-striped" border="1">
         <tr>
             <th colspan="2" style="color: darkmagenta;font-size: 40px;text-align: center">
-                Cập nhật khách hàng
+               THÊM MỚI DỊCH VỤ
             </th>
         </tr>
         <tr>
             <td>
                 <input class="form-control" placeholder="Tên khách hàng:" readonly>
             </td>
-            <td><input  class="form-control"  type="text" th:field="*{name}"></td>
+            <td>
+                <select th:field="*{facilityType}">
+                    <option class="form-control" th:each="facility : ${facilityTypeList}"
+                            th:value="${facility.id}"
+                            th:text="${facility.name}"></option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td>
@@ -37,48 +42,36 @@
             <td>
                 <input class="form-control" placeholder="Ngày sinh:" readonly>
             </td>
-            <td><input  class="form-control"  type="date" th:field="*{dateOfBirth}"></td>
+            <td><input type="date" name="dateOfBirth"></td>
         </tr>
         <tr>
             <td>
                 <input class="form-control" placeholder="Số CMND:" readonly>
             </td>
-            <td><input  class="form-control"  type="text" th:field="*{idCard}"></td>
+            <td><input class="form-control" name="idCard"></td>
         </tr>
         <tr>
             <td>
                 <input class="form-control" placeholder="Số điện thoại:" readonly>
             </td>
-            <td><input  class="form-control"  type="text" th:field="*{phoneNumber}"></td>
+            <td><input class="form-control" name="phoneNumber"></td>
         </tr>
         <tr>
             <td>
                 <input class="form-control" placeholder="Email:" readonly>
             </td>
-            <td><input  class="form-control"  type="text" th:field="*{email}"></td>
+            <td><input class="form-control" name="email"></td>
         </tr>
         <tr>
             <td>
                 <input class="form-control" placeholder="Địa chỉ:" readonly>
             </td>
-            <td><input  class="form-control"  type="text" th:field="*{address}"></td>
-        </tr>
-        <tr>
-            <td>
-                <input class="form-control" placeholder="Loại khách hàng:" readonly>
-            </td>
-            <td>
-                <select th:field="*{customerType}">
-                    <option class="form-control" th:each="customerType : ${customerTypeList}"
-                            th:value="${customerType.id}"
-                            th:text="${customerType.name}"></option>
-                </select>
-            </td>
+            <td><input class="form-control" name="address"></td>
         </tr>
         <tr>
             <td></td>
             <td>
-                <button class="btn btn-primary" type="submit">Cập nhật</button>
+                <button class="btn btn-primary" type="submit" value="Create">Create</button>
             </td>
         </tr>
     </table>

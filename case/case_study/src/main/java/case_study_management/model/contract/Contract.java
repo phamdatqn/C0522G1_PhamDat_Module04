@@ -18,6 +18,7 @@ public class Contract {
     private Date startDate;
     private Date endDate;
     private double deposit;
+    private double totalMoney;
     private boolean isDelete;
 
     @ManyToOne
@@ -38,12 +39,13 @@ public class Contract {
     public Contract() {
     }
 
-    public Contract(int id, Date startDate, Date endDate, double deposit, boolean isDelete, Employee employee,
-                    Customer customer, Facility facility, Set<ContractDetail> contractDetails) {
+    public Contract(int id, Date startDate, Date endDate, double deposit, double totalMoney, boolean isDelete,
+                    Employee employee, Customer customer, Facility facility, Set<ContractDetail> contractDetails) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
         this.deposit = deposit;
+        this.totalMoney = totalMoney;
         this.isDelete = isDelete;
         this.employee = employee;
         this.customer = customer;
@@ -121,5 +123,13 @@ public class Contract {
 
     public void setContractDetails(Set<ContractDetail> contractDetails) {
         this.contractDetails = contractDetails;
+    }
+
+    public double getTotalMoney() {
+        return totalMoney;
+    }
+
+    public void setTotalMoney(double totalMoney) {
+        this.totalMoney = totalMoney;
     }
 }

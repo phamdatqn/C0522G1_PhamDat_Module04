@@ -1,7 +1,6 @@
 package case_study_management.controller;
 
 import case_study_management.dto.EmployeeDto;
-import case_study_management.model.customer.CustomerType;
 import case_study_management.model.employee.Division;
 import case_study_management.model.employee.EducationDegree;
 import case_study_management.model.employee.Employee;
@@ -36,10 +35,25 @@ public class EmployeeController {
     @Autowired
     private IEducationDegreeService iEducationDegreeService;
 
-    @GetMapping("")
-    public String home(@PageableDefault(value = 3) Pageable pageable, @RequestParam(defaultValue = "") String search, Model model) {
+    private void employeeList(@PageableDefault(value = 3) Pageable pageable, @RequestParam(defaultValue = "") String search, Model model) {
         model.addAttribute("employeeList", iEmployeeService.findByNameEmployee(search, pageable));
         model.addAttribute("search", search);
+        model.addAttribute("divisionList", iDivisionService.findAll());
+        model.addAttribute("positionList", iPositionService.findAll());
+        model.addAttribute("educationDegreeList", iEducationDegreeService.findAll());
+    }
+
+    @GetMapping("")
+    public String home(@PageableDefault(value = 3) Pageable pageable, @RequestParam(defaultValue = "") String search, Model model) {
+//        model.addAttribute("employeeList", iEmployeeService.findByNameEmployee(search, pageable));
+//        model.addAttribute("search", search);
+//        model.addAttribute("divisionList",iDivisionService.findAll());
+//        model.addAttribute("positionList",iPositionService.findAll());
+//        model.addAttribute("educationDegreeList",iEducationDegreeService.findAll());
+        employeeList(pageable,search,model);
+        model.addAttribute("createEmployeeDto",new EmployeeDto());
+        model.addAttribute("updateEmployeeDto",new EmployeeDto());
+
         return "/employee/list";
     }
 
@@ -53,25 +67,49 @@ public class EmployeeController {
     }
 
     @GetMapping("/update/{id}")
-    public String showFormUpdate(@PathVariable int id, Model model) {
-        Employee employee = iEmployeeService.findById(id).get();
+    public String showFormUpdate(@PathVariable int id,@PageableDefault(value = 3) Pageable pageable,
+                                 @RequestParam(defaultValue = "") String search, Model model,  RedirectAttributes redirectAttributes) {
+
+        Optional<Employee> employee = iEmployeeService.findById(id);
+        if (!employee.isPresent()) {
+            redirectAttributes.addFlashAttribute("message", "LỖI: ID nhân viên không tồn tại!");
+            return "redirect:/error";
+        }
+        model.addAttribute("createEmployeeDto",new EmployeeDto());
         EmployeeDto employeeDto = new EmployeeDto();
 
-        Division division = employee.getDivision();
+        BeanUtils.copyProperties(employee.get(), employeeDto);
+
+        Division division = employee.get().getDivisions();
         employeeDto.setDivision(division.getId());
 
-        Position position = employee.getPosition();
+        Position position = employee.get().getPosition();
         employeeDto.setPosition(position.getId());
 
-        EducationDegree educationDegree = employee.getEducationDegree();
+        EducationDegree educationDegree = employee.get().getEducationDegree();
         employeeDto.setEducationDegree(educationDegree.getId());
 
-        BeanUtils.copyProperties(employee, employeeDto);
-        model.addAttribute("employeeDto", employeeDto);
-        model.addAttribute("divisionList", iDivisionService.findAll());
-        model.addAttribute("positionList", iPositionService.findAll());
-        model.addAttribute("educationDegreeList", iEducationDegreeService.findAll());
-        return "/employee/update";
+        model.addAttribute("updateEmployeeDto", employeeDto);
+//        model.addAttribute("divisionList", iDivisionService.findAll());
+//        model.addAttribute("positionList", iPositionService.findAll());
+//        model.addAttribute("educationDegreeList", iEducationDegreeService.findAll());
+//        model.addAttribute("employeeList", iEmployeeService.findByNameEmployee(search, pageable));
+//        model.addAttribute("search", search);
+        employeeList(pageable, search, model);
+        model.addAttribute("action","openModalUpdate");
+        return "/employee/list";
+    }
+
+    @PostMapping ("/delete")
+    public String delete(@RequestParam int id, RedirectAttributes redirectAttributes) {
+        Optional<Employee> employee = iEmployeeService.findById(id);
+        if (!employee.isPresent()) {
+            redirectAttributes.addFlashAttribute("message", "LỖI: ID nhân viên không tồn tại!");
+            return "redirect:/error";
+        }
+        iEmployeeService.delete(id);
+        redirectAttributes.addFlashAttribute("message", "Đã xóa " + employee.get().getName() + " thành công !");
+        return "redirect:/employee";
     }
 
     @PostMapping("/save")
@@ -81,7 +119,7 @@ public class EmployeeController {
 
         Division division = new Division();
         division.setId(employeeDto.getDivision());
-        employee.setDivision(division);
+        employee.setDivisions(division);
 
         Position position = new Position();
         position.setId(employeeDto.getPosition());
@@ -106,7 +144,7 @@ public class EmployeeController {
 
         Division division = new Division();
         division.setId(employeeDto.getDivision());
-        employee.get().setDivision(division);
+        employee.get().setDivisions(division);
 
         Position position = new Position();
         position.setId(employeeDto.getPosition());

@@ -1,5 +1,7 @@
 package case_study_management.service.customer;
 
+import case_study_management.dto.ICustomerDto;
+import case_study_management.dto.IFacilityDto;
 import case_study_management.model.customer.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,4 +20,6 @@ public interface ICustomerService {
     Page<Customer> findByNameCustomer(String keySearch, Pageable pageable);
 
     void delete(int id);
+
+    List<ICustomerDto> findByNameDto();
 }

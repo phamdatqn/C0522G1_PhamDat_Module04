@@ -1,6 +1,6 @@
 package case_study_management.service.facility.impl;
 
-import case_study_management.dto.FacilityDto;
+import case_study_management.dto.IFacilityDto;
 import case_study_management.model.facility.Facility;
 import case_study_management.repository.facility.IFacilityRepository;
 import case_study_management.service.facility.IFacilityService;
@@ -18,12 +18,17 @@ public class FacilityService implements IFacilityService {
     private IFacilityRepository iFacilityRepository;
 
     @Override
-    public Page<Facility> findAll(Pageable pageable) {
-        return iFacilityRepository.findAll(pageable);
+    public List<Facility> findAll() {
+        return iFacilityRepository.findAll();
     }
 
     @Override
-    public List<FacilityDto> findAll() {
-        return iFacilityRepository.findA();
+    public Page<Facility> findByNameFacility(String keySearch, Pageable pageable) {
+        return iFacilityRepository.findByNameFacility(keySearch, pageable);
+    }
+
+    @Override
+    public List<IFacilityDto> findByNameDto() {
+        return iFacilityRepository.findByNameDto();
     }
 }

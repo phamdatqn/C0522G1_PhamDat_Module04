@@ -1,5 +1,6 @@
 package case_study_management.service.employee.impl;
 
+import case_study_management.dto.IEmployeeDto;
 import case_study_management.model.employee.Employee;
 import case_study_management.repository.employee.IEmployeeRepository;
 import case_study_management.service.employee.IEmployeeService;
@@ -41,6 +42,11 @@ public class EmployeeService implements IEmployeeService {
     @Override
     public void delete(int id) {
         iEmployeeRepository.deleteById(id);
+    }
+
+    @Override
+    public List<IEmployeeDto> findByNameDto() {
+        return iEmployeeRepository.findByNameDto();
     }
 
 

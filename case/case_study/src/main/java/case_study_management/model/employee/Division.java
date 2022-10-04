@@ -12,7 +12,7 @@ public class Division {
     private String name;
     private boolean isDelete;
 
-    @OneToMany(mappedBy = "division")
+    @OneToMany(mappedBy = "divisions")
     private Set<Employee> employees;
 
     public Division() {

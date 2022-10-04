@@ -32,7 +32,7 @@ public class Employee {
 
     @ManyToOne
     @JoinColumn(name = "division_id",referencedColumnName = "id")
-    private Division division;
+    private Division divisions;
 
     @OneToOne
     @JoinColumn(name = "user_name",referencedColumnName = "userName")
@@ -132,12 +132,12 @@ public class Employee {
         this.educationDegree = educationDegree;
     }
 
-    public Division getDivision() {
-        return division;
+    public Division getDivisions() {
+        return divisions;
     }
 
-    public void setDivision(Division division) {
-        this.division = division;
+    public void setDivisions(Division division) {
+        this.divisions = division;
     }
 
     public User getUser() {
@@ -170,7 +170,7 @@ public class Employee {
                 ", isDelete=" + isDelete +
                 ", position=" + position +
                 ", educationDegree=" + educationDegree +
-                ", division=" + division +
+                ", division=" + divisions +
                 ", user=" + user +
                 ", contracts=" + contracts +
                 '}';

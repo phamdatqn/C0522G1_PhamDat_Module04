@@ -16,8 +16,8 @@ public class Facility {
     private int maxPeople;
     private String standardRoom;
     private String descriptionOtherConvenience;
-    private double poolArea;
-    private int numberOfFloors;
+    private String poolArea ;
+    private String numberOfFloors;
     private String facilityFree;
     private boolean isDelete;
 
@@ -61,22 +61,23 @@ public class Facility {
     public Facility() {
     }
 
-    public Facility(int id, String name, int area, double cost, int maxPeople, RentType rentType,
-                    FacilityType facilityType, String standardRoom, String descriptionOtherConvenience,
-                    double poolArea, int numberOfFloors, String facilityFree, boolean isDelete) {
+    public Facility(int id, String name, int area, double cost, int maxPeople, String standardRoom,
+                    String descriptionOtherConvenience, String poolArea, String numberOfFloors, String facilityFree,
+                    boolean isDelete, RentType rentType, FacilityType facilityType, Set<Contract> contracts) {
         this.id = id;
         this.name = name;
         this.area = area;
         this.cost = cost;
         this.maxPeople = maxPeople;
-        this.rentType = rentType;
-        this.facilityType = facilityType;
         this.standardRoom = standardRoom;
         this.descriptionOtherConvenience = descriptionOtherConvenience;
         this.poolArea = poolArea;
         this.numberOfFloors = numberOfFloors;
         this.facilityFree = facilityFree;
         this.isDelete = isDelete;
+        this.rentType = rentType;
+        this.facilityType = facilityType;
+        this.contracts = contracts;
     }
 
     public int getId() {
@@ -135,19 +136,19 @@ public class Facility {
         this.descriptionOtherConvenience = descriptionOtherConvenience;
     }
 
-    public double getPoolArea() {
+    public String getPoolArea() {
         return poolArea;
     }
 
-    public void setPoolArea(double poolArea) {
+    public void setPoolArea(String poolArea) {
         this.poolArea = poolArea;
     }
 
-    public int getNumberOfFloors() {
+    public String getNumberOfFloors() {
         return numberOfFloors;
     }
 
-    public void setNumberOfFloors(int numberOfFloors) {
+    public void setNumberOfFloors(String numberOfFloors) {
         this.numberOfFloors = numberOfFloors;
     }
 
