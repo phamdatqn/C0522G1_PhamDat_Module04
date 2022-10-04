@@ -11,71 +11,106 @@
 
 <form th:object="${newFacilityDto}" th:action="@{/facility/save}" method="post"
       style="margin-left:30%;width: 40%;margin-top: 3%">
-    <table class="table table-striped" border="1">
-        <tr>
-            <th colspan="2" style="color: darkmagenta;font-size: 40px;text-align: center">
-               THÊM MỚI DỊCH VỤ
-            </th>
-        </tr>
-        <tr>
-            <td>
-                <input class="form-control" placeholder="Tên khách hàng:" readonly>
-            </td>
-            <td>
-                <select th:field="*{facilityType}">
-                    <option class="form-control" th:each="facility : ${facilityTypeList}"
-                            th:value="${facility.id}"
-                            th:text="${facility.name}"></option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input class="form-control" placeholder="Giới tính:" readonly>
-            </td>
-            <td>
-                <input type="radio" value="true" name="gender" checked>Name
-                <input type="radio" value="false" name="gender">Nữ
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input class="form-control" placeholder="Ngày sinh:" readonly>
-            </td>
-            <td><input type="date" name="dateOfBirth"></td>
-        </tr>
-        <tr>
-            <td>
-                <input class="form-control" placeholder="Số CMND:" readonly>
-            </td>
-            <td><input class="form-control" name="idCard"></td>
-        </tr>
-        <tr>
-            <td>
-                <input class="form-control" placeholder="Số điện thoại:" readonly>
-            </td>
-            <td><input class="form-control" name="phoneNumber"></td>
-        </tr>
-        <tr>
-            <td>
-                <input class="form-control" placeholder="Email:" readonly>
-            </td>
-            <td><input class="form-control" name="email"></td>
-        </tr>
-        <tr>
-            <td>
-                <input class="form-control" placeholder="Địa chỉ:" readonly>
-            </td>
-            <td><input class="form-control" name="address"></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <button class="btn btn-primary" type="submit" value="Create">Create</button>
-            </td>
-        </tr>
-    </table>
+    <div>
+        <label>Facility Name</label>
+        <select th:field="*{facilityType}" onchange="changeForm(this)">
+            <option th:each="facilityType: ${facilityTypeList}" th:text="${facilityType.name}"
+                    th:value="${facilityType.id}"></option>
+        </select>
+    </div>
+    <div>
+        <label>Name</label>
+        <input type="text" th:field="*{name}"/>
+        <p style="color: red" th:if="${#fields.hasErrors('name')}"
+           th:errors="*{name}"></p>
+    </div>
+    <div>
+        <label>Area</label>
+        <input type="text" th:field="*{area}"/>
+    </div>
+    <div>
+        <label>Cost</label>
+        <input type="text" th:field="*{cost}"/>
+        <p style="color: red" th:if="${#fields.hasErrors('cost')}"
+           th:errors="*{cost}"></p>
+    </div>
+    <div>
+        <label>Max People</label>
+        <input type="text" th:field="*{maxPeople}"/>
+        <p style="color: red" th:if="${#fields.hasErrors('maxPeople')}"
+           th:errors="*{maxPeople}"></p>
+    </div>
+    <div>Rent Name: </label>
+        <select th:field="*{rentType}">
+<!--            <option th:value="${''}">Rent Type</option>-->
+            <option th:each="facilityType: ${facilityTypeList}" th:text="${facilityType.name}"
+                    th:value="${facilityType.id}"></option>
+        </select>
+    </div>
+
+    <div id="standardRoom">
+        <label>Standard Room</label>
+        <input type="text" th:field="*{standardRoom}"/>
+        <p style="color: red" th:if="${#fields.hasErrors('standardRoom')}"
+           th:errors="*{standardRoom}"></p>
+    </div>
+    <div id="poolArea">
+        <label>Pool Area</label>
+        <input type="text" th:field="*{poolArea}"/>
+    </div>
+    <div id="description">
+        <label>Description</label>
+        <input type="text" th:field="*{descriptionOtherConvenience}"/>
+    </div>
+    <div id="numberOfFloor">
+        <label>Number Of Floor</label>
+        <input type="text" th:field="*{numberOfFloors}"/>
+    </div>
+    <div id="facilityFree">
+        <label>Facility Free</label>
+        <input type="text" th:field="*{facilityFree}"/>
+    </div>
+    <input type="submit" value="Save"/>
 </form>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    function changeForm(type) {
+        let selectForm = type.value;
+        switch (selectForm) {
+            case "1":
+                document.getElementById("standardRoom").style.display = "block";
+                document.getElementById("description").style.display = "block";
+                document.getElementById("poolArea").style.display = "block";
+                document.getElementById("numberOfFloor").style.display = "block";
+                document.getElementById("facilityFree").style.display = "none";
+                break;
+            case "2":
+                document.getElementById("standardRoom").style.display = "block";
+                document.getElementById("description").style.display = "block";
+                document.getElementById("poolArea").style.display = "none";
+                document.getElementById("numberOfFloor").style.display = "block";
+                document.getElementById("facilityFree").style.display = "none";
+                break;
+            case "3":
+                document.getElementById("standardRoom").style.display = "none";
+                document.getElementById("description").style.display = "none";
+                document.getElementById("poolArea").style.display = "none";
+                document.getElementById("numberOfFloor").style.display = "none";
+                document.getElementById("facilityFree").style.display = "block";
+                break;
+            default:
+                document.getElementById("standardRoom").style.display = "none";
+                document.getElementById("description").style.display = "none";
+                document.getElementById("poolArea").style.display = "none";
+                document.getElementById("numberOfFloor").style.display = "none";
+                document.getElementById("facilityFree").style.display = "none";
+                break;
+        }
+
+    }
+</script>
+
 <div class="row">
     <img src="../footter0.jpg" style="width: 100%;height: auto"/>
 </div>

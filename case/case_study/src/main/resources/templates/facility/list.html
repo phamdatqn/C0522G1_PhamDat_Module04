@@ -20,7 +20,8 @@
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
             <form class="d-flex align-items-center m-0 " th:action="@{/facility/}">
-                <input class="form-control me-2 " type="search" placeholder="Input Facility :" aria-label="Search" name="search">
+                <input class="form-control me-2 " type="search" placeholder="Input Facility :" aria-label="Search"
+                       name="search">
                 <button class="btn btn-outline-success chu_menu" type="submit" style="color: black">Search</button>
             </form>
         </div>
@@ -54,24 +55,62 @@
                 <td><a th:href="@{/facility/update/__${facility.id}__}">
                     <button class="btn btn-primary"><span class="bi bi-pencil-square"></span></button>
                 </a></td>
-                <td><a th:href="@{/facility/delete/__${facility.id}__}">
-                    <button class="btn btn-danger">
+                <td>
+                    <button th:attr="onclick=|deleteFacility('${facility.id}', '${facility.name}')|"
+                            class="btn btn-danger btn-outline-secondary" data-bs-toggle="modal"
+                            data-bs-target="#deleteFacility">
                         <span style="color: white" class='bi bi-trash'></span>
                     </button>
-                </a></td>
+                </td>
             </tr>
         </table>
     </div>
 
     <div style="text-align: center">
-        <a th:href="@{'/facility'(page=${facilityList.number - 1}, search=${search})}" th:if="${facilityList.hasPrevious()}">Previous</a>
+        <a th:href="@{'/facility'(page=${facilityList.number - 1}, search=${search})}"
+           th:if="${facilityList.hasPrevious()}">Previous</a>
         <span th:text="${facilityList.number + 1}"></span> / <span th:text="${facilityList.totalPages}"></span>
-        <a th:href="@{'/facility'(page=${facilityList.number + 1}, search=${search})}" th:if="${facilityList.hasNext()}">Next</a>
+        <a th:href="@{'/facility'(page=${facilityList.number + 1}, search=${search})}"
+           th:if="${facilityList.hasNext()}">Next</a>
     </div>
     <div class="row">
         <img src="../footter0.jpg" style="width: 100%;height: auto"/>
     </div>
 </div>
+<!-- Delete Facility -->
+<div class="modal fade" id="deleteFacility" tabindex="-1" aria-labelledby="exampleModalLabel1"
+     aria-hidden="true" style="height: 100%">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Bạn có chắc chắn muốn xóa dịch vụ?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form th:action="@{/facility/delete/}" method="post">
+                <div class="modal-body">
+                    <span class="h6">Khách hàng:</span>
+                    <strong id="nameDelete" class="text-danger ps-2"></strong>
+                    <input type="hidden" name="id" id="idDelete" readonly/>
+                </div>
+
+                <div class="modal-footer">
+                    <button th:href="@{/facility}" t type="submit" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Đóng
+                    </button>
+                    <button type="submit" class="btn btn-danger" value="delete">Xóa</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    function deleteFacility(id, name) {
+        $("#idDelete").val(id);
+        document.getElementById("nameDelete").innerText = name;
+    }
+</script>
 </html>

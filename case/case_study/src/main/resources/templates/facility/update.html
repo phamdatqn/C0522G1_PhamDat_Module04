@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:charset="UTF-8">
+<head th:replace="/navbar :: head">
+
+</head>
+<body>
+<div class="row">
+    <img src="../header.png">
+</div>
+<div class="row" th:replace="/navbar :: navBar" style="position: fixed"></div>
+<div class="row">
+    <form th:action="@{/facility/update}" th:object="${facilityDto}" method="post"
+          style="width: 50%;margin-left: 25%">
+        <input type="hidden" th:field="*{id}">
+        <table class="table table-striped" border="1">
+            <tr>
+                <th colspan="2" style="color: darkmagenta;font-size: 40px;text-align: center">
+                    CẬP NHẬT DỊCH VỤ
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="TÊN DỊCH VỤ:" readonly>
+                </td>
+                <td><input class="form-control" type="text" th:field="*{name}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="DIỆN TÍCH:" readonly>
+                </td>
+                <td><input class="form-control" type="text" th:field="*{area}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="PHÍ THUÊ:" readonly>
+                </td>
+                <td><input class="form-control" type="text" th:field="*{cost}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="SỐ LƯỢNG NGƯỜI TỐI ĐA:" readonly>
+                </td>
+                <td><input class="form-control" type="text" th:field="*{maxPeople}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="TIÊU CHUẨN PHÒNG:" readonly>
+                </td>
+                <td><input class="form-control" type="text" th:field="*{standardRoom}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="DIỆN TÍCH HỒ BƠI:" readonly>
+                </td>
+                <td><input class="form-control" type="text" th:field="*{poolArea}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="MÔ TẢ TIỆN NGHI KHÁC:" readonly>
+                </td>
+                <td><input class="form-control" type="text" th:field="*{descriptionOtherConvenience}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="SỐ TẦNG:" readonly>
+                </td>
+                <td><input class="form-control" type="text" th:field="*{numberOfFloors}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="DỊCH VỤ MIỄN PHÍ:" readonly>
+                </td>
+                <td><input class="form-control" type="text" th:field="*{facilityFree}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="KIỂU THUÊ:" readonly>
+                </td>
+                <td><select th:field="*{rentType}">-->
+                    <option th:each="rentType: ${rentTypeList}" th:text="${rentType.name}"
+                            th:value="${rentType.id}">
+                    </option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="LOẠI DỊCH VỤ:" readonly>
+                </td>
+                <td>
+                    <select th:field="*{facilityType}">
+                        <option th:each="facilityType: ${facilityTypeList}" th:text="${facilityType.name}"
+                                th:value="${facilityType.id}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button class="btn btn-primary" type="submit" value="Update">Update</button>
+                </td>
+            </tr>
+        </table>
+
+    </form>
+</div>
+</div>
+<div class="row">
+    <img src="../footter0.jpg" style="width: 100%;height: auto"/>
+</div>
+</body>
+</html>
