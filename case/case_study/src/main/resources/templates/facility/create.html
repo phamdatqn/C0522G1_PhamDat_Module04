@@ -9,69 +9,106 @@
 </div>
 <div class="row" th:replace="/navbar :: navBar" style="position: fixed"></div>
 
-<form th:object="${newFacilityDto}" th:action="@{/facility/save}" method="post"
-      style="margin-left:30%;width: 40%;margin-top: 3%">
-    <div>
-        <label>Facility Name</label>
-        <select th:field="*{facilityType}" onchange="changeForm(this)">
-            <option th:each="facilityType: ${facilityTypeList}" th:text="${facilityType.name}"
-                    th:value="${facilityType.id}"></option>
-        </select>
-    </div>
-    <div>
-        <label>Name</label>
-        <input type="text" th:field="*{name}"/>
-        <p style="color: red" th:if="${#fields.hasErrors('name')}"
-           th:errors="*{name}"></p>
-    </div>
-    <div>
-        <label>Area</label>
-        <input type="text" th:field="*{area}"/>
-    </div>
-    <div>
-        <label>Cost</label>
-        <input type="text" th:field="*{cost}"/>
-        <p style="color: red" th:if="${#fields.hasErrors('cost')}"
-           th:errors="*{cost}"></p>
-    </div>
-    <div>
-        <label>Max People</label>
-        <input type="text" th:field="*{maxPeople}"/>
-        <p style="color: red" th:if="${#fields.hasErrors('maxPeople')}"
-           th:errors="*{maxPeople}"></p>
-    </div>
-    <div>Rent Name: </label>
-        <select th:field="*{rentType}">
-<!--            <option th:value="${''}">Rent Type</option>-->
-            <option th:each="facilityType: ${facilityTypeList}" th:text="${facilityType.name}"
-                    th:value="${facilityType.id}"></option>
-        </select>
-    </div>
+<div id="background" class="row" >
+    <form th:object="${newFacilityDto}" th:action="@{/facility/save}" method="post"
+          style="margin-left:30%;width: 40%;margin-top: 3%">
+        <table class="table table-striped" border="1">
+            <tr>
+                <th colspan="2" style="color: darkmagenta;font-size: 40px;text-align: center">
+                    THÊM MỚI DỊCH VỤ
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="CHỌN LOẠI DỊCH VỤ:" readonly>
+                </td>
+                <td><select th:field="*{facilityType}" onchange="changeForm(this)">
+                    <option th:each="facilityType: ${facilityTypeList}" th:text="${facilityType.name}"
+                            th:value="${facilityType.id}"></option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="TÊN DỊCH VỤ:" readonly>
+                </td>
+                <td>
+                    <input type="text" th:field="*{name}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="DIỆN TÍCH:" readonly>
+                </td>
+                <td> <input type="text" th:field="*{area}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="PHÍ THUÊ:" readonly>
+                </td>
+                <td> <input type="text" th:field="*{cost}"/></td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="SỐ LƯỢNG NGƯỜI TỐI ĐA:" readonly>
+                </td>
+                <td> <input type="text" th:field="*{maxPeople}"/></td>
+            </tr>
+            <tr >
+                <td>
+                    <input class="form-control" placeholder="TIÊU CHUẨN PHÒNG:" readonly>
+                </td>
+                <td><input id="standardRoom" type="text" th:field="*{standardRoom}"/></td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" placeholder="DỊCH VỤ:" readonly>
+                </td>
+                <td>
+                    <select th:field="*{rentType}">
+                        <option th:each="facilityType: ${facilityTypeList}" th:text="${facilityType.name}"
+                                th:value="${facilityType.id}"></option>
+                    </select>
+                </td>
+            </tr>
 
-    <div id="standardRoom">
-        <label>Standard Room</label>
-        <input type="text" th:field="*{standardRoom}"/>
-        <p style="color: red" th:if="${#fields.hasErrors('standardRoom')}"
-           th:errors="*{standardRoom}"></p>
-    </div>
-    <div id="poolArea">
-        <label>Pool Area</label>
-        <input type="text" th:field="*{poolArea}"/>
-    </div>
-    <div id="description">
-        <label>Description</label>
-        <input type="text" th:field="*{descriptionOtherConvenience}"/>
-    </div>
-    <div id="numberOfFloor">
-        <label>Number Of Floor</label>
-        <input type="text" th:field="*{numberOfFloors}"/>
-    </div>
-    <div id="facilityFree">
-        <label>Facility Free</label>
-        <input type="text" th:field="*{facilityFree}"/>
-    </div>
-    <input type="submit" value="Save"/>
-</form>
+            <tr >
+                <td class="img-fluid">
+                    <input class="form-control " placeholder="DIỆN TÍCH HỒ BƠI:" readonly>
+                </td>
+                <td><input id="poolArea" type="text" th:field="*{poolArea}"/></td>
+            </tr>
+
+            <tr>
+                <td class="img-fluid">
+                    <input class="form-control " placeholder="MÔ TẢ TIỆN NGHI KHÁC:" readonly>
+                </td>
+                <td><input  id="description" type="text" th:field="*{descriptionOtherConvenience}"/></td>
+            </tr>
+
+            <tr >
+                <td class="img-fluid">
+                    <input class="form-control " placeholder="SỐ TẦNG:" readonly>
+                </td>
+                <td><input id="numberOfFloor" type="text" th:field="*{numberOfFloors}"/></td>
+            </tr>
+
+            <tr>
+                <td class="img-fluid">
+                    <input class="form-control " placeholder="DỊCH VỤ ĐI KÈM:" readonly>
+                </td>
+                <td><input  id="facilityFree" type="text" th:field="*{facilityFree}"/></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                    <button class="btn  btn-primary" type="submit" value="Create">Create</button>
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
@@ -79,11 +116,11 @@
         let selectForm = type.value;
         switch (selectForm) {
             case "1":
-                document.getElementById("standardRoom").style.display = "block";
+                document.getElementById("standardRoom").style.display = "dis";
                 document.getElementById("description").style.display = "block";
                 document.getElementById("poolArea").style.display = "block";
                 document.getElementById("numberOfFloor").style.display = "block";
-                document.getElementById("facilityFree").style.display = "none";
+                document.getElementById("facilityFree").s.display = "none";
                 break;
             case "2":
                 document.getElementById("standardRoom").style.display = "block";
