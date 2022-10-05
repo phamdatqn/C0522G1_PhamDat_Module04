@@ -66,8 +66,8 @@
             <td>
                 <select th:field="*{customerType}">
                     <option class="form-control" th:each="customerType : ${customerTypeList}"
-                            th:value="${customerType}"
-                            th:text="${customerType}"></option>
+                            th:value="${customerType.id}"
+                            th:text="${customerType.name}"></option>
                 </select>
             </td>
         </tr>
@@ -80,7 +80,6 @@
     </table>
 </form>
 
-</div>
 <footer th:replace="~{/home::footer}"></footer>
 <div class="row" th:replace="~{/home::phone}"></div>
 <div class="row" th:replace="~{/home::gotop}"></div>

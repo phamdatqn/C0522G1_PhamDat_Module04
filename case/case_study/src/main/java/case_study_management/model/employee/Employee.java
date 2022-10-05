@@ -44,6 +44,25 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(int id, String name, Date dateOfBirth, String idCard, double salary, String phoneNumber,
+                    String email, String address, boolean isDelete, Position position,
+                    EducationDegree educationDegree, Divisions divisions, User user, Set<Contract> contracts) {
+        this.id = id;
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.idCard = idCard;
+        this.salary = salary;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+        this.isDelete = isDelete;
+        this.position = position;
+        this.educationDegree = educationDegree;
+        this.divisions = divisions;
+        this.user = user;
+        this.contracts = contracts;
+    }
+
     public int getId() {
         return id;
     }

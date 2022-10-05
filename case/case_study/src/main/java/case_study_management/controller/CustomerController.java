@@ -29,8 +29,10 @@ public class CustomerController {
     @GetMapping("")
     public String home(@PageableDefault(value = 3) Pageable pageable,
                        Model model, @RequestParam(defaultValue = "") String search) {
+
         model.addAttribute("customerList", iCustomerService.findByNameCustomer(search, pageable));
         model.addAttribute("search", search);
+
         return "customer/list";
     }
 
@@ -38,31 +40,38 @@ public class CustomerController {
     public String create(Model model) {
         model.addAttribute("newCustomerDto", new CustomerDto());
         model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
+
         return "/customer/create";
     }
 
     @GetMapping("/update/{id}")
     public String showFormUpdate(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
         Optional<Customer> customer = iCustomerService.findById(id);
+
         if (!customer.isPresent()) {
             redirectAttributes.addFlashAttribute("message", "LỖI: ID nhân viên không tồn tại!");
             return "redirect:/error";
         }
+
         CustomerDto customerDto = new CustomerDto();
 
-        BeanUtils.copyProperties(customer, customerDto);
+        BeanUtils.copyProperties(customer.get(), customerDto);
+
         model.addAttribute("customerDto", customerDto);
         model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
+
         return "/customer/update";
     }
 
     @GetMapping("/delete")
     public String delete(@RequestParam int id, RedirectAttributes redirectAttributes) {
         Optional<Customer> customer = iCustomerService.findById(id);
+
         if (!customer.isPresent()) {
             redirectAttributes.addFlashAttribute("message", "LỖI: ID khách hàng không tồn tại!");
             return "redirect:/error";
         }
+
         iCustomerService.delete(id);
         redirectAttributes.addFlashAttribute("message", "Đã xóa " + customer.get().getName() + " thành công !");
         return "redirect:/customer";
@@ -75,6 +84,7 @@ public class CustomerController {
         BeanUtils.copyProperties(customerDto, customer);
 
         iCustomerService.save(customer);
+
         redirectAttributes.addFlashAttribute("message", "Thêm mới thành công: " + customerDto.getName());
         return "redirect:/customer";
     }
@@ -82,10 +92,12 @@ public class CustomerController {
     @PostMapping("/update")
     public String update(@ModelAttribute CustomerDto customerDto, RedirectAttributes redirectAttributes) {
         Optional<Customer> customer = iCustomerService.findById(customerDto.getId());
+
         if (!customer.isPresent()) {
             redirectAttributes.addFlashAttribute("message", "LỖI: ID khách hàng không tồn tại!");
             return "redirect:/error";
         }
+
         BeanUtils.copyProperties(customerDto, customer.get());
 
         CustomerType customerType = new CustomerType();

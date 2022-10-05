@@ -47,14 +47,14 @@ public class EmployeeController {
 //        model.addAttribute("divisionList",iDivisionService.findAll());
 //        model.addAttribute("positionList",iPositionService.findAll());
 //        model.addAttribute("educationDegreeList",iEducationDegreeService.findAll());
+        model.addAttribute("employeeDto", new EmployeeDto());
         employeeList(pageable, search, model);
-        model.addAttribute("createEmployeeDto", new EmployeeDto());
         return "/employee/list";
     }
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("newEmployeeDto", new EmployeeDto());
+        model.addAttribute("employeeDto", new EmployeeDto());
         model.addAttribute("divisionList", iDivisionService.findAll());
         model.addAttribute("positionList", iPositionService.findAll());
         model.addAttribute("educationDegreeList", iEducationDegreeService.findAll());
@@ -65,20 +65,22 @@ public class EmployeeController {
     public String showFormUpdate(@PathVariable int id, @PageableDefault(value = 3) Pageable pageable,
                                  @RequestParam(defaultValue = "") String search, Model model, RedirectAttributes redirectAttributes) {
 
-        Optional<Employee> employee = iEmployeeService.findById(id);
-        if (!employee.isPresent()) {
+        Employee employee = iEmployeeService.findById(id).get();
+
+        if (employee == null) {
             redirectAttributes.addFlashAttribute("message", "LỖI: ID nhân viên không tồn tại!");
             return "redirect:/error";
         }
 
         EmployeeDto employeeDto = new EmployeeDto();
 
-        BeanUtils.copyProperties(employee.get(), employeeDto);
-
-        model.addAttribute("updateEmployeeDto", employeeDto);
+        BeanUtils.copyProperties(employee, employeeDto);
 
         employeeList(pageable, search, model);
+        model.addAttribute("employeeDto", employeeDto);
+
         model.addAttribute("action", "openModalUpdate");
+
         return "/employee/list";
     }
 
@@ -106,17 +108,18 @@ public class EmployeeController {
 
     @PostMapping("/update")
     public String update(@ModelAttribute EmployeeDto employeeDto, RedirectAttributes redirectAttributes) {
-        Optional<Employee> employee = iEmployeeService.findById(employeeDto.getId());
-        if (!employee.isPresent()) {
+        Employee employee = iEmployeeService.findById(employeeDto.getId()).get();
+
+        if (employee == null) {
             redirectAttributes.addFlashAttribute("message", "LỖI: ID khách hàng không tồn tại!");
             return "redirect:/error";
         }
 
-        BeanUtils.copyProperties(employeeDto, employee.get());
+        BeanUtils.copyProperties(employeeDto, employee);
 
-        iEmployeeService.save(employee.get());
+        iEmployeeService.save(employee);
 
-        redirectAttributes.addFlashAttribute("message", "Đã cập nhập " + employee.get().getName() + " thành công !");
+        redirectAttributes.addFlashAttribute("message", "Đã cập nhập " + employee.getName() + " thành công !");
         return "redirect:/employee";
     }
 }

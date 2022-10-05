@@ -83,7 +83,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="border border-2 border-success p-3 " th:action="@{/employee/save}" method="POST"
-                  th:object="${createEmployeeDto}">
+                  th:object="${employeeDto}">
                 <div class="modal-title">
                     <h3 style="text-align: center;color: darkmagenta">THÊM MỚI NHÂN VIÊN</h3>
                 </div>
@@ -150,7 +150,7 @@
                         </tr>
                     </table>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Tạo mới</button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Tạo mới</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                     </div>
                 </div>
@@ -159,94 +159,90 @@
     </div>
 </div>
 
+<!-- Modal update-->
+<div class="modal fade" id="modalUpdateShow" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form class="border border-2 border-success p-3 " th:action="@{/employee/update}" method="POST"
+                      th:object="${employeeDto}">
+                    <div class="modal-title">
+                        <h3 style="text-align: center;color: darkmagenta">CẬP NHẬT NHÂN VIÊN</h3>
+                    </div>
+                    <div class="modal-body">
+                        <input hidden type="text" th:field="*{id}">
+                        <table class="table table-striped" border="1">
+                            <tr>
+                                <td>Tên nhân viên:</td>
+                                <td><input type="text" th:field="*{name}"></td>
+                            </tr>
+                            <tr>
+                                <td>Ngày sinh:</td>
+                                <td><input type="date" th:field="*{dateOfBirth}"></td>
+                            </tr>
+                            <tr>
+                                <td>Số CMND:</td>
+                                <td><input th:field="*{idCard}"></td>
+                            </tr>
+                            <tr>
+                                <td>Số điện thoại:</td>
+                                <td><input type="text" th:field="*{phoneNumber}"></td>
+                            </tr>
+                            <tr>
+                                <td>Email:</td>
+                                <td><input th:field="*{email}"></td>
+                            </tr>
+                            <tr>
+                                <td>Địa chỉ:</td>
+                                <td><input th:field="*{address}"></td>
+                            </tr>
+                            <tr>
+                                <td>Lương:</td>
+                                <td><input th:field="*{salary}"></td>
+                            </tr>
+                            <tr>
+                                <td>Bằng cấp:</td>
+                                <td>
+                                    <select th:field="*{educationDegree}">
+                                        <option th:each="educationDegree : ${educationDegreeList}"
+                                                th:value="${educationDegree.id}"
+                                                th:text="${educationDegree.name}">
 
-<!--&lt;!&ndash; update &ndash;&gt;-->
-<!--<button hidden id="openModalUpdate" type="button" class="btn btn-primary" data-bs-toggle="modal"-->
-<!--        data-bs-target="#updateEmployee">-->
-<!--    Launch demo modal-->
-<!--</button>-->
-<!--&lt;!&ndash; Modal &ndash;&gt;-->
-<!--<div class="modal fade" id="updateEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--    <div class="modal-dialog">-->
-<!--        <div class="modal-content">-->
-<!--            <div class="modal-title">-->
-<!--                <h3 style="text-align: center;color: darkmagenta">CẬP NHẬT NHÂN VIÊN</h3>-->
-<!--            </div>-->
-<!--            <form class="border border-2 border-success p-3 " th:action="@{/employee/update}" method="POST"-->
-<!--                  th:object="${updateEmployeeDto}">-->
-<!--                <div class="modal-body">-->
-<!--                    <input hidden type="number" th:field="*{id}">-->
-<!--                    <table class="table table-striped" border="1">-->
-<!--                        <tr>-->
-<!--                            <td>Tên nhân viên:</td>-->
-<!--                            <td><input type="text" th:field="*{name}"></td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Ngày sinh:</td>-->
-<!--                            <td><input type="date" th:field="*{dateOfBirth}"></td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Số CMND:</td>-->
-<!--                            <td><input th:field="*{idCard}"></td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Số điện thoại:</td>-->
-<!--                            <td><input type="text" th:field="*{phoneNumber}"></td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Email:</td>-->
-<!--                            <td><input th:field="*{email}"></td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Địa chỉ:</td>-->
-<!--                            <td><input th:field="*{address}"></td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Lương:</td>-->
-<!--                            <td><input th:field="*{salary}"></td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Bằng cấp:</td>-->
-<!--                            <td>-->
-<!--                                <select th:field="*{educationDegree}">-->
-<!--                                    <option th:each="educationDegree : ${educationDegreeList}"-->
-<!--                                            th:value="${educationDegree.id}"-->
-<!--                                            th:text="${educationDegree.name}"></option>-->
-<!--                                </select>-->
-<!--                                </select>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Chức vụ:</td>-->
-<!--                            <td>-->
-<!--                                <select th:field="*{position}">-->
-<!--                                    <option th:each="position : ${positionList}" th:value="${position.id}"-->
-<!--                                            th:text="${position.name}"></option>-->
-<!--                                </select>-->
-<!--                                </select>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Bộ phận:</td>-->
-<!--                            <td>-->
-<!--                                <select th:field="*{divisions}">-->
-<!--                                    <option th:each="divisions : ${divisionList}" th:value="${divisions.id}"-->
-<!--                                            th:text="${divisions.name}"></option>-->
-<!--                                </select>-->
-<!--                                </select>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                    </table>-->
-<!--                    <div class="modal-footer">-->
-<!--                        <button type="submit" class="btn btn-success">Cập nhật</button>-->
-<!--                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Chức vụ:</td>
+                                <td>
+                                    <select th:field="*{position}">
+                                        <option th:each="position : ${positionList}" th:value="${position.id}"
+                                                th:text="${position.name}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Bộ phận:</td>
+                                <td>
+                                    <select th:field="*{divisions}">
+                                        <option th:each="divisions : ${divisionList}" th:value="${divisions.id}"
+                                                th:text="${divisions.name}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Cập nhật</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    </div>
+                </form>
+            </div>
 
+        </div>
+    </div>
+</div>
 
 <!-- Delete employee -->
 <div class="modal fade" id="deleteEmployee" tabindex="-1" aria-labelledby="exampleModalLabel1"
@@ -280,14 +276,16 @@
 <div class="row" th:replace="~{/home::gotop}"></div>
 
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
 <script>
     $(document).ready(function () {
-        let a = $("#action").val();
-        if (a === "openModalUpdate") {
-            $("#openModalUpdate").click();
+        let target = $("#action").val();
+        if (target === "openModalUpdate") {
+            $("#modalUpdateShow").modal('show');
         }
     })
+
     function deleteEmployee(id, name) {
         $("#idDelete").val(id);
         document.getElementById("nameDelete").innerText = name;

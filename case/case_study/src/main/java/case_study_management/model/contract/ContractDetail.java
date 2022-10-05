@@ -14,7 +14,7 @@ public class ContractDetail {
     private boolean isDelete;
 
     @ManyToOne
-    @JoinColumn(name = "contract_id",referencedColumnName = "id")
+    @JoinColumn(name = "contract_id", referencedColumnName = "id")
     private Contract contract;
 
     public Contract getContract() {
@@ -26,7 +26,7 @@ public class ContractDetail {
     }
 
     @ManyToOne
-    @JoinColumn(name = "attach_facility_id",referencedColumnName = "id")
+    @JoinColumn(name = "attach_facility_id", referencedColumnName = "id")
     private AttachFacility attachFacility;
 
     public ContractDetail() {

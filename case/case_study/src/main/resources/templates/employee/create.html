@@ -5,7 +5,7 @@
 </head>
 <body>
 <div th:replace="~{/home::header}" class="sticky-top"></div>
-<form th:object="${newEmployeeDto}" th:action="@{/employee/save}" method="post"
+<form th:object="${employeeDto}" th:action="@{/employee/save}" method="post"
       style="margin-left:30%;width: 40%;margin-top: 3%">
     <table class="table table-striped" border="1">
         <tr>
