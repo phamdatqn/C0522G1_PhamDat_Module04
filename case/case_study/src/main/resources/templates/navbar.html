@@ -33,35 +33,39 @@
             width: 100%;
             height: auto;
         }
+
+        .h3{
+            text-align: center;
+        }
         </style>
 </head>
 
 <body>
 <div class="row" th:fragment="navBar">
     <nav class="navbar navbar-expand-lg navbar-light" style="background: #0c63e4">
-        <a class="navbar-brand chu_menu" href="/furama" style="color: white;margin-left: 10%">Home</a>
+        <a class="navbar-brand chu_menu" href="/furama" style="color: white;margin-left: 40%">TRANG CHỦ</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarEmployee">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-4 mb-lg-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle chu_menu" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
-                        Employee
+                        NHÂN VIÊN
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarEmployee">
                         <li><a class="dropdown-item" href="/employee/create">
                             <span style="color: green" class='bi bi-person-plus-fill'></span>
-                            <span style="color: green">Add</span></a></li>
+                            <span style="color: green">Thêm Mới</span></a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href="/employee">
                             <span style="color: red" class='bi bi-gear-wide-connected'></span>
-                            <span style="color: red">Management</span></a></li>
+                            <span style="color: red">Quản Lý</span></a></li>
                         </li>
                     </ul>
                 </li>
@@ -69,12 +73,12 @@
                 <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle chu_menu" href="#" id="navbarCustomer" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
-                        Customer
+                        KHÁCH HÀNG
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarCustomer">
                         <li><a class="dropdown-item" href="/customer/create">
                             <span style="color: green" class='bi bi-person-plus-fill'></span>
-                            <span style="color: green">Add</span></a>
+                            <span style="color: green">Thêm Mới</span></a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -82,7 +86,7 @@
 
                         <li><a class="dropdown-item" href="/customer">
                             <span style="color: red" class='bi bi-gear-wide-connected'></span>
-                            <span style="color: red">Management</span></a>
+                            <span style="color: red">Quản Lý</span></a>
                         </li>
                     </ul>
                 </li>
@@ -90,26 +94,19 @@
                 <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle chu_menu" href="#" id="navbarFacility" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
-                        Facility
+                        DỊCH VỤ
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarCustomer">
                         <li><a class="dropdown-item" href="/facility/create">
                             <span style="color: green" class='bi bi-shop'></span>
-                            <span style="color: green">Add</span></a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="/facility/create2">
-                            <span style="color: green" class='bi bi-shop'></span>
-                            <span style="color: green">Add2</span></a>
+                            <span style="color: green">Thêm Mới</span></a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href="/facility">
                             <span style="color: red" class='bi bi-gear-wide-connected'></span>
-                            <span style="color: red">Management</span></a>
+                            <span style="color: red">Quản Lý</span></a>
                         </li>
                     </ul>
                 </li>
@@ -117,21 +114,20 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle chu_menu" href="contract/list.html" id="navbarContract"
                        role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
-                        Contract
+                       data-bs-toggle="dropdown" aria-expanded="false" style="color: white">HỢP ĐỒNG
                     </a>
 
                     <ul class="dropdown-menu" aria-labelledby="navbarContract">
                         <li><a class="dropdown-item" href="/contract">
                             <span style="color: red" class='bi bi-gear-wide-connected'></span>
-                            <span style="color: red">Management</span></a>
+                            <span style="color: red">Quản Lý Hợp Đồng</span></a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href="/contractdetail">
                             <span style="color: red" class='bi bi-gear-wide-connected'></span>
-                            <span style="color: red">Management Contract Detail</span></a>
+                            <span style="color: red">Quản Lý Hợp Đồng Chi Tiết</span></a>
                         </li>
                     </ul>
 

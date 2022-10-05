@@ -1,89 +1,85 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:charset="UTF-8">
-<head th:replace="/navbar :: head">
+<head th:replace="/home :: head">
 
 </head>
 <body>
-
+<div th:replace="~{/home::header}" class="sticky-top"></div>
 <div class="row">
-    <img src="../header.png">
-</div>
 
-<div class="row" th:replace="/navbar :: navBar" style="position: fixed"></div>
-
-<h1 style="color: #0c63e4;text-align: center;font-size: 40px">Cập nhập nhân viên</h1>
-<form th:object="${employeeDto}" th:action="@{/employee/update}" method="post"
-      style="margin-left:30%;width: 40%;margin-top: 5%">
-    <table>
-        <tr>
-            <td><input hidden type="text" th:field="*{id}"></td>
-        </tr>
-        <tr>
-            <td>Tên nhân viên:</td>
-            <td><input type="text" th:field="*{name}"></td>
-        </tr>
-        <tr>
-            <td>Ngày sinh:</td>
-            <td><input type="date" th:field="*{dateOfBirth}" ></td>
-        </tr>
-        <tr>
-            <td>Số CMND:</td>
-            <td><input th:field="*{idCard}"></td>
-        </tr>
-        <tr>
-            <td>Số điện thoại:</td>
-            <td><input type="text" th:field="*{phoneNumber}"></td>
-        </tr>
-        <tr>
-            <td>Email:</td>
-            <td><input th:field="*{email}"></td>
-        </tr>
-        <tr>
-            <td>Địa chỉ:</td>
-            <td><input th:field="*{address}"></td>
-        </tr>
-        <tr>
-            <td>Lương:</td>
-            <td><input th:field="*{salary}"></td>
-        </tr>
-        <tr>
-            <td>Bằng cấp:</td>
-            <td>
-                <select th:field="*{educationDegree}">
-                    <option th:each="educationDegree : ${educationDegreeList}" th:value="${educationDegree.id}"
-                            th:text="${educationDegree.name}"></option>
-                </select>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Chức vụ:</td>
-            <td>
-                <select th:field="*{position}">
-                    <option th:each="position : ${positionList}" th:value="${position.id}"
-                            th:text="${position.name}"></option>
-                </select>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Bộ phận:</td>
-            <td>
-                <select th:field="*{division}">
-                    <option th:each="division : ${divisionList}" th:value="${division.id}"
-                            th:text="${division.name}"></option>
-                </select>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit" value="Cập nhập"></td>
-        </tr>
-    </table>
-</form>
-<div class="row">
-    <img src="case/case_study/src/main/resources/static/footter0.jpg" style="width: 100%;height: auto"/>
+    <h1 style="color: #0c63e4;text-align: center;font-size: 40px">Cập nhập nhân viên</h1>
+    <form th:object="${employeeDto}" th:action="@{/employee/update}" method="post"
+          style="margin-left:30%;width: 40%;margin-top: 5%">
+        <table>
+            <tr>
+                <td><input hidden type="text" th:field="*{id}"></td>
+            </tr>
+            <tr>
+                <td>Tên nhân viên:</td>
+                <td><input type="text" th:field="*{name}"></td>
+            </tr>
+            <tr>
+                <td>Ngày sinh:</td>
+                <td><input type="date" th:field="*{dateOfBirth}"></td>
+            </tr>
+            <tr>
+                <td>Số CMND:</td>
+                <td><input th:field="*{idCard}"></td>
+            </tr>
+            <tr>
+                <td>Số điện thoại:</td>
+                <td><input type="text" th:field="*{phoneNumber}"></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input th:field="*{email}"></td>
+            </tr>
+            <tr>
+                <td>Địa chỉ:</td>
+                <td><input th:field="*{address}"></td>
+            </tr>
+            <tr>
+                <td>Lương:</td>
+                <td><input th:field="*{salary}"></td>
+            </tr>
+            <tr>
+                <td>Bằng cấp:</td>
+                <td>
+                    <select th:field="*{educationDegree}">
+                        <option th:each="educationDegree : ${educationDegreeList}" th:value="${educationDegree.id}"
+                                th:text="${educationDegree.name}"></option>
+                    </select>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Chức vụ:</td>
+                <td>
+                    <select th:field="*{position}">
+                        <option th:each="position : ${positionList}" th:value="${position.id}"
+                                th:text="${position.name}"></option>
+                    </select>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Bộ phận:</td>
+                <td>
+                    <select th:field="*{division}">
+                        <option th:each="division : ${divisionList}" th:value="${division.id}"
+                                th:text="${division.name}"></option>
+                    </select>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Cập nhập"></td>
+            </tr>
+        </table>
+    </form>
+    <footer th:replace="~{/home::footer}"></footer>
+    <div class="row" th:replace="~{/home::phone}"></div>
 </div>
 </body>
 </html>

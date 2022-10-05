@@ -5,6 +5,7 @@
 </head>
 <body>
 <div th:replace="~{/home::header}"></div>
+
 <form th:object="${customerDto}" th:action="@{/customer/save}" method="post"
       style="margin-left:30%;width: 40%;margin-top: 3%">
     <table class="table table-striped" border="1">
@@ -81,8 +82,7 @@
 
 </div>
 <footer th:replace="~{/home::footer}"></footer>
+<div class="row" th:replace="~{/home::phone}"></div>
+<div class="row" th:replace="~{/home::gotop}"></div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-        crossorigin="anonymous"></script>
 </html>

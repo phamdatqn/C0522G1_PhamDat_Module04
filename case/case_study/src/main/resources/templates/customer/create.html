@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:charset="UTF-8">
-<head th:replace="/navbar :: head">
+<head th:replace="/home :: head">
 
 </head>
 <body>
-
+<div th:replace="~{/home::header}" class="sticky-top"></div>
 <div class="container-fluid">
-    <div class="row">
-        <img src="../header.png">
-    </div>
-    <div class="row" th:replace="/navbar :: navBar" style="position: fixed"></div>
     <form th:object="${newCustomerDto}" th:action="@{/customer/save}" method="post"
           style="margin-left:30%;width: 40%;margin-top: 3%">
         <table class="table table-striped" border="1">
@@ -29,10 +25,10 @@
                     <input class="form-control" placeholder="Giới tính:" readonly>
                 </td>
                 <td>
-                    <input type="radio" value="true" name="gender" checked>Nam<span class='bi bi-gender-male'
-                                                                                    style="color: darkmagenta">&ensp; &ensp; &ensp; </span>
-                    <input type="radio" value="false" name="gender">Nữ<span class='bi bi-gender-female'
-                                                                            style="color: darkmagenta"></span>
+                    <label><input type="radio" value="true" name="gender" checked >Nam<span class='bi bi-gender-male'
+                                                                                    style="color: darkmagenta">&ensp; &ensp; &ensp; </span></label>
+                    <label> <input type="radio" value="false" name="gender">Nữ<span class='bi bi-gender-female'
+                                                                            style="color: darkmagenta"></span></label>
                 </td>
             </tr>
             <tr>
@@ -80,14 +76,14 @@
             <tr>
                 <td></td>
                 <td>
-                    <button class="btn btn-primary" type="submit" value="Create">Create</button>
+                    <button class="btn btn-primary" type="submit" value="Create">Thêm mới</button>
                 </td>
             </tr>
         </table>
     </form>
-    <div class="row">
-        <img src="../footter0.jpg" style="width: 100%;height: auto"/>
-    </div>
+    <footer th:replace="~{/home::footer}"></footer>
+    <div class="row" th:replace="~{/home::phone}"></div>
+    <div class="row" th:replace="~{/home::gotop}"></div>
 </div>
 </body>
 </html>

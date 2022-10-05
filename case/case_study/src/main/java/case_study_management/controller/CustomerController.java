@@ -48,7 +48,7 @@ public class CustomerController {
         CustomerDto customerDto = new CustomerDto();
 
         CustomerType customerType = customer.getCustomerType();
-        customerDto.setCustomerType(customerType.getId());
+        customerDto.setCustomerType(customerType);
 
         BeanUtils.copyProperties(customer, customerDto);
 
@@ -76,7 +76,7 @@ public class CustomerController {
         BeanUtils.copyProperties(customerDto, customer);
 
         CustomerType customerType = new CustomerType();
-        customerType.setId(customerDto.getCustomerType());
+        customerType.setId(customerDto.);
         customer.setCustomerType(customerType);
 
         iCustomerService.save(customer);
@@ -95,7 +95,7 @@ public class CustomerController {
 
         CustomerType customerType = new CustomerType();
 
-        customerType.setId(customerDto.getCustomerType());
+        customerType.setId(customerDto);
         customer.get().setCustomerType(customerType);
 
         iCustomerService.save(customer.get());

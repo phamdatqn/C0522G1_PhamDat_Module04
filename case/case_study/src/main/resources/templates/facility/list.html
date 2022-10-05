@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:charset="UTF-8">
-<head th:replace="/navbar :: head">
+<head th:replace="/home :: head">
 
 </head>
 <body>
-
+<div th:replace="~{/home::header}" class="sticky-top"></div>
 <div class="container-fluid">
-
     <div class="row">
-        <img src="../header.png">
-    </div>
-
-    <div class="row" th:replace="/navbar :: navBar" style="position: fixed"></div>
-    <div class="row">
-        <h1 style="color: crimson;text-align: center;font-size: 40px;margin-top: 5px">Facility Management</h1>
+        <h1 style="color: crimson;text-align: center;font-size: 40px;margin-top: 5px">QUẢN LÝ DỊCH VỤ</h1>
     </div>
 
     <div class="row" style="margin-top: 70px">
@@ -51,9 +45,12 @@
                 <td style="color: brown" th:text="${facility.area}"></td>
                 <td th:text="${facility.cost}"></td>
                 <td th:text="${facility.maxPeople}"></td>
-                <td th:text="${facility.rentType.name}"></td>
+                <td >
+                    <span th:if="${facility.rentType}" th:text="${facility.rentType.name}"></span>
+                </td>
                 <td><a th:href="@{/facility/update/__${facility.id}__}">
-                    <button class="btn btn-primary"><span class="bi bi-pencil-square"></span></button>
+                    <button class="btn btn-secondary btn-outline-warning" style="color: white"><span class="bi bi-pencil-square"></span>
+                    </button>
                 </a></td>
                 <td>
                     <button th:attr="onclick=|deleteFacility('${facility.id}', '${facility.name}')|"
@@ -73,9 +70,9 @@
         <a th:href="@{'/facility'(page=${facilityList.number + 1}, search=${search})}"
            th:if="${facilityList.hasNext()}">Next</a>
     </div>
-    <div class="row">
-        <img src="../footter0.jpg" style="width: 100%;height: auto"/>
-    </div>
+    <footer th:replace="~{/home::footer}"></footer>
+    <div class="row" th:replace="~{/home::phone}"></div>
+    <div class="row" th:replace="~{/home::gotop}"></div>
 </div>
 <!-- Delete Facility -->
 <div class="modal fade" id="deleteFacility" tabindex="-1" aria-labelledby="exampleModalLabel1"

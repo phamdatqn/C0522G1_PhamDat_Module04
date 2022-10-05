@@ -2,11 +2,17 @@ package case_study_management.controller;
 
 import case_study_management.dto.ContractDto;
 import case_study_management.dto.CustomerDto;
+import case_study_management.dto.EmployeeDto;
 import case_study_management.dto.FacilityDto;
 import case_study_management.model.customer.Customer;
 import case_study_management.model.customer.CustomerType;
+import case_study_management.model.employee.Division;
+import case_study_management.model.employee.EducationDegree;
+import case_study_management.model.employee.Employee;
+import case_study_management.model.employee.Position;
 import case_study_management.model.facility.Facility;
 import case_study_management.model.facility.FacilityType;
+import case_study_management.model.facility.RentType;
 import case_study_management.service.facility.IFacilityService;
 import case_study_management.service.facility.IFacilityTypeService;
 import case_study_management.service.facility.IRentTypeService;
@@ -16,10 +22,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/facility")
@@ -46,14 +50,8 @@ public class FacilityController {
     public String create(Model model) {
         model.addAttribute("newFacilityDto", new FacilityDto());
         model.addAttribute("facilityTypeList", iFacilityTypeService.findAll());
+        model.addAttribute("rentTypeList", iRentTypeService.findAll());
         return "/facility/create";
-    }
-
-    @GetMapping("/create2")
-    public String create2(Model model) {
-        model.addAttribute("newFacilityDto", new FacilityDto());
-        model.addAttribute("facilityTypeList", iFacilityTypeService.findAll());
-        return "/facility/create2";
     }
 
     @GetMapping("/update/{id}")
@@ -62,8 +60,13 @@ public class FacilityController {
 
         FacilityDto facilityDto = new FacilityDto();
 
-        FacilityType facilityType = facility.getFacilityType();
-        facilityDto.setFacilityType(facilityDto.getId());
+        FacilityType facilityType = new FacilityType();
+        facilityType.setId(facility.getFacilityType().getId());
+        facilityDto.setFacilityType(facilityType);
+
+        RentType rentType = new RentType();
+        rentType.setId(facility.getRentType().getId());
+        facilityDto.setRentType(rentType);
 
         BeanUtils.copyProperties(facility, facilityDto);
 
@@ -73,6 +76,14 @@ public class FacilityController {
         return "/facility/update";
     }
 
+    @PostMapping("/save")
+    public String save(@ModelAttribute FacilityDto facilityDto, RedirectAttributes redirectAttributes) {
+        Facility facility = new Facility();
+        BeanUtils.copyProperties(facilityDto, facility);
+        iFacilityService.save(facility);
+        redirectAttributes.addFlashAttribute("message", "Thêm mới thành công: " + facility.getName());
+        return "redirect:/facility";
+    }
 
 
 }

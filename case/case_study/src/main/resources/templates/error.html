@@ -27,7 +27,9 @@
     <div class="row" th:if="${message}">
         <h4 th:text="${message}" style="color: green"></h4>
     </div>
+    <footer th:replace="~{/home::footer}"></footer>
 </div>
+
 </body>
 <script src="../../static/jquery-3.5.1.min.js"></script>
 

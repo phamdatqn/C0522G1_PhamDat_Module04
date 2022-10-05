@@ -3,10 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel=”stylesheet” href=”https://use.fontawesome.com/releases/v5.0.13/css/all.css”
+          integrity=”sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp” crossorigin=”anonymous”>
+    <style>
+        .call-now {
+            left: 0;
+            bottom: 25px;
+            height: 50px;
+            min-width: 200px;
+            position: fixed;
+            background-color: #e31d1a;
+            border-radius: 0 25px 25px 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,.8);
+            z-index: 998;
+        }
+
+        .call-now .btn-call-now i {
+            position: absolute;
+            color: #e31d1a;
+            background-color: #fff;
+            font-size: 35px;
+            right: 0;
+            height: 50px;
+            width: 50px;
+            line-height: 50px;
+            text-align: center;
+            border-radius: 50%;
+            border: 1px solid #e31d1a;
+        }
+
+        .call-now .btn-call-now p {
+            color: #fff;
+            font-size: 14px;
+            min-width: 150px;
+            text-align: center;
+            vertical-align: middle;
+            display: inline-block;
+        }
+        .call-now .btn-call-now strong {
+            display: block;
+            font-size: 18px;
+        }
+
+        .fa-phone:before {
+            content: "\f095";
+            font-size: 28px !important;
+        }
+
+        @media only screen and (max-width: 480px){
+            .phone-contact strong {
+                font-size: 26px !important;
+                padding-left: 10px;
+                color: #00aeef;
+            }
+        }
+
+        img.btnphone {}
+        .img-responsive,
+        .thumbnail > img,
+        .thumbnail a > img,
+        .carousel-inner > .item > img,
+        .carousel-inner > .item > a > img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .phone-contact {
+            display: inline-block;
+            bottom: 30px;
+            position: fixed;
+            right: 60px;
+            z-index: 9999 !important;
+        }
+
+        .phone-contact strong {
+            font-size: 35px;
+            padding-left: 10px;
+            color: #00aeef;
+        }
+
+    </style>
 </head>
 <body>
-<div class="row" th:fragment="head">
-  <img src="../header.png">
+<div class="call-now" data-toggle="popover" data-trigger="hover" data-html="true" data-placement="top" title="" data-content="<p>Chúng tôi luôn sẵn sàng Tư vấn - Giải đáp mọi thắc mắc của Quý khách.</p><p>Hoạt động 24/7 - Tất cả các ngày trong tuần, kể cả ngày lễ.</p>" data-original-title="Đường dây nóng">
+    <a class="btn-call-now" href="tel:090 25 25 260" onclick="ga('send', 'event', 'Call tracking', 'Click to call', 'Phone in mobile');">
+        <i class="fa fa-phone" aria-hidden="true"></i>
+        <p>Tư vấn miễn phí (24/7) <strong>090 25 25 260</strong></p>
+    </a>
+</div>
+<div class="phone-contact">
+
+    <img src=" http://ttclandsaigon.com/wp-content/uploads/2018/06/ico-phone.png" alt="Alternate Text" class="btnphone">
+    <a href="tel:0908526727"><strong>0908 526 727</strong> </a>
+
 </div>
 </body>
 </html>

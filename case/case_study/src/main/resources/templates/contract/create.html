@@ -1,16 +1,11 @@
 <!--<!DOCTYPE html>-->
 <!--<html lang="en" xmlns:th="http://www.thymeleaf.org" th:charset="UTF-8">-->
-<!--<head th:replace="/navbar :: head">-->
+<!--<head th:replace="/home :: head">-->
 
 <!--</head>-->
 <!--<body>-->
+<div th:replace="~{/home::header}" class="sticky-top"></div>
 
-<!--<div class="row">-->
-<!--    <img src="../header.png">-->
-<!--</div>-->
-
-
-<!--<div class="row" th:replace="/navbar :: navBar"></div>-->
 
 <!--<form th:object="${newContractDto}" th:action="@{/contract/save}" method="post"-->
 <!--      style="margin-left:30%;width: 40%;margin-top: 3%">-->
@@ -86,6 +81,7 @@
 <!--    </table>-->
 <!--</form>-->
 <!--<div class="row" th:replace="/footer :: footer">-->
+<!--<div class="row" th:replace="~{/home::phone}"></div>-->
 <!--</div>-->
 <!--</body>-->
 <!--</html>-->

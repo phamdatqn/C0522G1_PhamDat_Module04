@@ -1,5 +1,8 @@
 package case_study_management.dto;
 
+import case_study_management.model.facility.FacilityType;
+import case_study_management.model.facility.RentType;
+
 public class FacilityDto {
     private int id;
     private String name;
@@ -12,8 +15,8 @@ public class FacilityDto {
     private String numberOfFloors;
     private String facilityFree;
     private boolean isDelete;
-    private int rentType;
-    private int facilityType;
+    private RentType rentType;
+    private FacilityType facilityType;
 
     public FacilityDto() {
     }
@@ -110,19 +113,19 @@ public class FacilityDto {
         isDelete = delete;
     }
 
-    public int getRentType() {
+    public RentType getRentType() {
         return rentType;
     }
 
-    public void setRentType(int rentType) {
+    public void setRentType(RentType rentType) {
         this.rentType = rentType;
     }
 
-    public int getFacilityType() {
+    public FacilityType getFacilityType() {
         return facilityType;
     }
 
-    public void setFacilityType(int facilityType) {
+    public void setFacilityType(FacilityType facilityType) {
         this.facilityType = facilityType;
     }
 }

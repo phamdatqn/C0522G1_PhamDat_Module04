@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:charset="UTF-8">
-<head th:replace="/navbar :: head">
+<head th:replace="/home :: head">
 
 </head>
 <body>
-
+<div th:replace="~{/home::header}" class="sticky-top"></div>
 <div class="container-fluid">
     <div class="row">
-        <img src="../header.png">
-    </div>
-
-    <div class="row" th:replace="/navbar :: navBar" style="position: fixed"></div>
-
-    <div class="row">
-        <h1 style="color: crimson;text-align: center;font-size: 40px;margin-top: 5px">Employee Management</h1>
+        <h1 style="color: crimson;text-align: center;font-size: 40px;margin-top: 5px">QUẢN LÝ NHÂN VIÊN</h1>
     </div>
 
     <div class="row" style="margin-top: 50px">
@@ -32,8 +26,8 @@
         <h4 th:text="${message}" style="color: red"></h4>
     </div>
 
-    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
-        <span style="color: white" class='bi bi-shop'>+ Add Employee Modal</span>
+    <button class="btn btn-success btn-outline-info" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+        <span style="color: white" class='bi bi-shop'>+ Thêm Mới Nhân Viên</span>
     </button>
 
     <div>
@@ -56,7 +50,7 @@
                 <td>
                     <a th:href="@{/employee/update/__${employee.id}__}">
                         <button
-                                class="btn btn-warning btn-outline-secondary">
+                                class="btn btn-secondary btn-outline-warning">
                             <span style="color: white" class="bi bi-pencil-square"></span>
                         </button>
                     </a>
@@ -71,6 +65,7 @@
             </tr>
         </table>
     </div>
+
     <div style="text-align: center">
         <a th:href="@{'/employee'(page=${employeeList.number - 1}, search=${search})}"
            th:if="${employeeList.hasPrevious()}">Previous</a>
@@ -78,9 +73,7 @@
         <a th:href="@{'/employee'(page=${employeeList.number + 1}, search=${search})}"
            th:if="${employeeList.hasNext()}">Next</a>
     </div>
-    <div class="row">
-        <img src="../footter0.jpg" style="width: 100%;height: auto"/>
-    </div>
+
 </div>
 
 <!-- Modal create-->
@@ -90,8 +83,7 @@
             <form class="border border-2 border-success p-3 " th:action="@{/employee/save}" method="POST"
                   th:object="${createEmployeeDto}">
                 <div class="modal-title">
-                    <h3>THÊM MỚI NHÂN VIÊN</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h3 style="text-align: center;color: darkmagenta">THÊM MỚI NHÂN VIÊN</h3>
                 </div>
                 <div class="modal-body">
                     <input hidden type="text" th:field="*{id}">
@@ -168,16 +160,16 @@
 
 
 <!-- update -->
-<button hidden id="openModalUpdate" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateEmployee">
+<button hidden id="openModalUpdate" type="button" class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#updateEmployee">
     Launch demo modal
 </button>
 <!-- Modal -->
 <div class="modal fade" id="updateEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">CẬP NHẬT THÔNG TIN:</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-title">
+                <h3 style="text-align: center;color: darkmagenta">CẬP NHẬT NHÂN VIÊN</h3>
             </div>
             <form class="border border-2 border-success p-3 " th:action="@{/employee/update}" method="POST"
                   th:object="${updateEmployeeDto}">
@@ -273,7 +265,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button  th:href="@{/employee}" t type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                     <button type="submit" class="btn btn-danger" value="delete">Xóa</button>
                 </div>
             </form>
@@ -285,6 +277,9 @@
 <input hidden id="action" th:value="${action}">
 
 <footer th:replace="~{/home::footer}"></footer>
+<div class="row" th:replace="~{/home::phone}"></div>
+<div class="row" th:replace="~{/home::gotop}"></div>
+
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
@@ -294,25 +289,9 @@
             $("#openModalUpdate").click();
         }
     })
-
-    // function updateEmployee(id, name, dateOfBirth, idCard, salary, phoneNumber, email, address, position, educationDegree, division) {
-    //     $("#id").val(id);
-    //     $("#name").val(name);
-    //     $("#dateOfBirth").val(dateOfBirth);
-    //     $("#idCard").val(idCard);
-    //     document.getElementById("salary").value = "₫ " + salary;
-    //     $("#phoneNumber").val(phoneNumber);
-    //     $("#email").val(email );
-    //     $("address").val(address);
-    //     $("position").val(position);
-    //     $("educationDegree").val(educationDegree);
-    //     $("division").val(division);
-    // }
-
     function deleteEmployee(id, name) {
         $("#idDelete").val(id);
         document.getElementById("nameDelete").innerText = name;
     }
 </script>
-
 </html>

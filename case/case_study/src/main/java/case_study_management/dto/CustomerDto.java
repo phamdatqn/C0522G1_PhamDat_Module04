@@ -15,7 +15,7 @@ public class CustomerDto {
     private String phoneNumber;
     private String email;
     private String address;
-    private int customerType;
+    private CustomerType customerType;
     private boolean isDelete;
 
     public CustomerDto() {
@@ -25,11 +25,11 @@ public class CustomerDto {
         this.id = id;
     }
 
-    public int getCustomerType() {
+    public CustomerType getCustomerType() {
         return customerType;
     }
 
-    public void setCustomerType(int customerType) {
+    public void setCustomerType(CustomerType customerType) {
         this.customerType = customerType;
     }
     public int getId() {

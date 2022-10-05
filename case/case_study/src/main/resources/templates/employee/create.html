@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:charset="UTF-8">
-<head th:replace="/navbar :: head">
+<head th:replace="/home :: head">
 
 </head>
 <body>
-<div class="row">
-    <img src="../header.png">
-</div>
-<div class="row" th:replace="/navbar :: navBar" style="position: fixed"></div>
-
+<div th:replace="~{/home::header}" class="sticky-top"></div>
 <form th:object="${newEmployeeDto}" th:action="@{/employee/save}" method="post"
-      style="margin-left:30%;width: 40%;margin-top: 5%">
+      style="margin-left:30%;width: 40%;margin-top: 3%">
     <table class="table table-striped" border="1">
         <tr>
             <th colspan="2" style="color: darkmagenta;font-size: 40px;text-align: center">
@@ -73,10 +69,18 @@
                     <option th:each="division : ${divisionList}" th:value="${division.id}"
                             th:text="${division.name}"></option>
                 </select>
-                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button class="btn btn-primary" type="submit" value="Create">Thêm mới</button>
             </td>
         </tr>
     </table>
 </form>
+<footer th:replace="~{/home::footer}"></footer>
+<div class="row" th:replace="~{/home::phone}"></div>
+<div class="row" th:replace="~{/home::gotop}"></div>
 </body>
 </html>

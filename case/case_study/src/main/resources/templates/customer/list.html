@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:charset="UTF-8">
-<head th:replace="/navbar :: head">
+<head th:replace="/home :: head">
 
 </head>
 <body>
-
+<div th:replace="~{/home::header}" class="sticky-top"></div>
 <div class="container-fluid">
     <div class="row">
-        <img src="../header.png">
-    </div>
-    <div class="row" th:replace="/navbar :: navBar" style="position: fixed"></div>
-
-    <div class="row">
-        <h1 style="color: crimson;text-align: center;font-size: 40px;margin-top: 5px">Customer Management</h1>
+        <h1 style="color: crimson;text-align: center;font-size: 40px;margin-top: 5px">QUẢN LÝ KHÁCH HÀNG</h1>
     </div>
     <div class="row" style="margin-top: 70px">
         <div class="col-lg-4"></div>
@@ -49,7 +44,9 @@
                 <td th:text="${customer.address}"></td>
                 <td>
                     <a th:href="@{/customer/update/__${customer.id}__}">
-                        <button class="btn btn-primary"><span class="bi bi-pencil-square"></span></button>
+                        <button class="btn btn-secondary btn-outline-warning" style="color: white"><span
+                                class="bi bi-pencil-square"></span>
+                        </button>
                     </a>
                 </td>
                 <td>
@@ -67,17 +64,58 @@
             </tr>
         </table>
     </div>
-
-    <div style="text-align: center">
-        <a th:href="@{'/customer'(page=${customerList.number - 1}, search=${search})}"
-           th:if="${customerList.hasPrevious()}">Previous</a>
-        <span th:text="${customerList.number + 1}"></span> / <span th:text="${customerList.totalPages}"></span>
-        <a th:href="@{'/customer'(page=${customerList.number + 1}, search=${search})}"
-           th:if="${customerList.hasNext()}">Next</a>
-    </div>
     <div class="row">
-        <img src="../footter0.jpg" style="width: 100%;height: auto"/>
+        <nav aria-label="Page navigation example" >
+            <ul class="pagination">
+                <li class="page-item">
+                    <a  class="page-link" style="color: black"
+                       th:href="@{'/customer'(page=${0},search=${search})}"
+                       th:if="${customerList.hasPrevious()}"><<
+                    </a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link"  style="color: black"
+                       th:href="@{'/customer'(page=${customerList.number - 1},search=${search})}"
+                       th:if="${customerList.hasPrevious()}"><
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"  style="color: black"
+                       th:href="@{'/customer'(page=${customerList.number - 1},search=${search})}"
+                       th:if="${customerList.hasPrevious()}" th:text="${customerList.number }">
+
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"  style="color: black"
+                       th:href="@{'/customer'(page=${customerList.number },search=${search})}"
+                       th:text="${customerList.number+1}">
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"  style="color: black"
+                       th:href="@{'/customer'(page=${customerList.number + 1},search=${search})}"
+                       th:if="${customerList.hasNext()}" th:text="${customerList.number + 2}">
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"  style="color: black"
+                       th:href="@{'/customer'(page=${customerList.number + 1}, search=${search})}"
+                       th:if="${customerList.hasNext()}">>
+                    </a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link"  style="color: black"
+                       th:href="@{'/customer'(page=${customerList.totalPages - 1},search=${search})}"
+                       th:if="${customerList.hasPrevious()}">>>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
+    <footer th:replace="~{/home::footer}"></footer>
 </div>
 
 
@@ -107,10 +145,11 @@
     </div>
 </div>
 </body>
-<script src="../../static/jquery-3.5.1.min.js"></script>
+<div class="row" th:replace="~{/home::phone}"></div>
+<div class="row" th:replace="~{/home::gotop}"></div>
 <script>
     function deleteCustomer(id, name) {
-       $("#idDelete").val(id);
+        $("#idDelete").val(id);
         document.getElementById("nameDelete").innerText = name;
     }
 </script>

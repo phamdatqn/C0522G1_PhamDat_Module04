@@ -1,6 +1,7 @@
 package case_study_management.service.facility.impl;
 
 import case_study_management.dto.IFacilityDto;
+import case_study_management.model.employee.Employee;
 import case_study_management.model.facility.Facility;
 import case_study_management.repository.facility.IFacilityRepository;
 import case_study_management.service.facility.IFacilityService;
@@ -36,5 +37,10 @@ public class FacilityService implements IFacilityService {
     @Override
     public Optional<Facility> findById(int id) {
         return iFacilityRepository.findById(id);
+    }
+
+    @Override
+    public void save(Facility facility) {
+        iFacilityRepository.save(facility);
     }
 }

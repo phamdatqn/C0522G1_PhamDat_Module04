@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:charset="UTF-8">
-<head th:replace="/navbar :: head">
+<head th:replace="/home :: head">
 
 </head>
 <body>
-
+<div th:replace="~{/home::header}" class="sticky-top"></div>
 <div class="container-fluid">
-    <div class="row">
-        <img src="../header.png">
-    </div>
-
-    <div class="row" th:replace="/navbar :: navBar" style="position: fixed"></div>
 
     <div class="row">
-        <h1 style="color: crimson;text-align: center;font-size: 40px;margin-top: 5px">Contract Management</h1>
+        <h1 style="color: crimson;text-align: center;font-size: 40px;margin-top: 5px">QUẢN LÝ HỢP ĐỒNG</h1>
     </div>
 
     <div class="row" th:if="${message}">
@@ -33,8 +28,8 @@
     </div>
 
     <div>
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addContractModal">
-            <span style="color: white" class='bi bi-shop'>+ Add Contract</span>
+        <button class="btn btn-success btn-outline-info" data-bs-toggle="modal" data-bs-target="#addContractModal">
+            <span style="color: white" class='bi bi-shop'>+ Thêm Mới Hợp Đồng</span>
         </button>
         <table class="table table-striped" style="margin-top: 50px" border="1">
             <tr>
@@ -58,7 +53,7 @@
                 <td th:text="${contract.totalMoney}"></td>
                 <td colspan="2">
                     <button th:attr="onclick=|attachFacility('${contract.id}')|"
-                            class="btn btn-primary btn-outline-secondary" data-bs-toggle="modal"
+                            class="btn btn-secondary btn-outline-warning" data-bs-toggle="modal"
                             data-bs-target="#addAttachFacility" style="color: white">
                         +
                     </button>
@@ -80,9 +75,7 @@
            th:if="${contractList.hasNext()}">Next</a>
     </div>
 
-    <div class="row">
-        <img src="../footter0.jpg" style="width: 100%;height: auto"/>
-    </div>
+    <footer th:replace="~{/home::footer}"></footer>
 </div>
 
 <!-- thêm mới hợp đồng modal -->
@@ -168,6 +161,9 @@
 
         </div>
     </div>
+
 </div>
+<div class="row" th:replace="~{/home::phone}"></div>
+<div class="row" th:replace="~{/home::gotop}"></div>
 </body>
 </html>
