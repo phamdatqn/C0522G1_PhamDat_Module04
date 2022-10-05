@@ -55,59 +55,54 @@
                             data-bs-target="#deleteCustomer">
                         <span style="color: white" class='bi bi-trash'></span>
                     </button>
-                    <!--                <button th:onclick="|deleteCustomer('${customer.id}', '${customer.name}')|"-->
-                    <!--                        class="btn btn-danger btn-outline-secondary" data-bs-toggle="modal"-->
-                    <!--                        data-bs-target="#deleteCustomer">-->
-                    <!--                    <span class='bi bi-person-dash-fill'></span>-->
-                    <!--                </button>-->
                 </td>
             </tr>
         </table>
     </div>
     <div class="row">
-        <nav aria-label="Page navigation example" >
+        <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item">
-                    <a  class="page-link" style="color: black"
+                    <a class="page-link" style="color: black"
                        th:href="@{'/customer'(page=${0},search=${search})}"
                        th:if="${customerList.hasPrevious()}"><<
                     </a>
                 </li>
 
                 <li class="page-item">
-                    <a class="page-link"  style="color: black"
+                    <a class="page-link" style="color: black"
                        th:href="@{'/customer'(page=${customerList.number - 1},search=${search})}"
                        th:if="${customerList.hasPrevious()}"><
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link"  style="color: black"
+                    <a class="page-link" style="color: black"
                        th:href="@{'/customer'(page=${customerList.number - 1},search=${search})}"
                        th:if="${customerList.hasPrevious()}" th:text="${customerList.number }">
 
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link"  style="color: black"
+                    <a class="page-link" style="color: black"
                        th:href="@{'/customer'(page=${customerList.number },search=${search})}"
                        th:text="${customerList.number+1}">
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link"  style="color: black"
+                    <a class="page-link" style="color: black"
                        th:href="@{'/customer'(page=${customerList.number + 1},search=${search})}"
                        th:if="${customerList.hasNext()}" th:text="${customerList.number + 2}">
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link"  style="color: black"
+                    <a class="page-link" style="color: black"
                        th:href="@{'/customer'(page=${customerList.number + 1}, search=${search})}"
                        th:if="${customerList.hasNext()}">>
                     </a>
                 </li>
 
                 <li class="page-item">
-                    <a class="page-link"  style="color: black"
+                    <a class="page-link" style="color: black"
                        th:href="@{'/customer'(page=${customerList.totalPages - 1},search=${search})}"
                        th:if="${customerList.hasPrevious()}">>>
                     </a>
@@ -147,6 +142,11 @@
 </body>
 <div class="row" th:replace="~{/home::phone}"></div>
 <div class="row" th:replace="~{/home::gotop}"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossOrigin="anonymous">
+</script>
+
 <script>
     function deleteCustomer(id, name) {
         $("#idDelete").val(id);

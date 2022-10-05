@@ -1,6 +1,6 @@
 package case_study_management.dto;
 
-import case_study_management.model.employee.Division;
+import case_study_management.model.employee.Divisions;
 import case_study_management.model.employee.EducationDegree;
 import case_study_management.model.employee.Position;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,19 +18,16 @@ public class EmployeeDto {
     private String email;
     private String address;
     private boolean isDelete;
-    private int position;
-    private int educationDegree;
-    private int division;
+    private Position position;
+    private EducationDegree educationDegree;
+    private Divisions divisions;
 
     public EmployeeDto() {
     }
 
-    public EmployeeDto(int id) {
-        this.id = id;
-    }
-
     public EmployeeDto(int id, String name, Date dateOfBirth, String idCard, double salary, String phoneNumber,
-                       String email, String address, boolean isDelete, int position, int educationDegree, int division) {
+                       String email, String address, boolean isDelete, Position position,
+                       EducationDegree educationDegree, Divisions divisions) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -42,7 +39,7 @@ public class EmployeeDto {
         this.isDelete = isDelete;
         this.position = position;
         this.educationDegree = educationDegree;
-        this.division = division;
+        this.divisions = divisions;
     }
 
     public int getId() {
@@ -117,27 +114,29 @@ public class EmployeeDto {
         isDelete = delete;
     }
 
-    public int getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 
-    public int getEducationDegree() {
+    public EducationDegree getEducationDegree() {
         return educationDegree;
     }
 
-    public void setEducationDegree(int educationDegree) {
+    public void setEducationDegree(EducationDegree educationDegree) {
         this.educationDegree = educationDegree;
     }
 
-    public int getDivision() {
-        return division;
+    public Divisions getDivisions() {
+        return divisions;
     }
 
-    public void setDivision(int division) {
-        this.division = division;
+    public void setDivisions(Divisions divisions) {
+        this.divisions = divisions;
     }
 }
+
+

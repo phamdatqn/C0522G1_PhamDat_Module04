@@ -19,4 +19,6 @@ public interface IFacilityService {
     Optional<Facility> findById(int id);
 
     void save(Facility facility);
+
+    void delete(int id);
 }

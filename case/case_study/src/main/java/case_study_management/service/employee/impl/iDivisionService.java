@@ -1,6 +1,6 @@
 package case_study_management.service.employee.impl;
 
-import case_study_management.model.employee.Division;
+import case_study_management.model.employee.Divisions;
 import case_study_management.repository.employee.IDivisionRepository;
 import case_study_management.service.employee.IDivisionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ public class iDivisionService implements IDivisionService {
     private IDivisionRepository iDivisionRepository;
 
     @Override
-    public List<Division> findAll() {
+    public List<Divisions> findAll() {
         return iDivisionRepository.findAll();
     }
 }

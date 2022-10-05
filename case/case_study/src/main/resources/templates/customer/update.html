@@ -66,8 +66,8 @@
             <td>
                 <select th:field="*{customerType}">
                     <option class="form-control" th:each="customerType : ${customerTypeList}"
-                            th:value="${customerType.id}"
-                            th:text="${customerType.name}"></option>
+                            th:value="${customerType}"
+                            th:text="${customerType}"></option>
                 </select>
             </td>
         </tr>

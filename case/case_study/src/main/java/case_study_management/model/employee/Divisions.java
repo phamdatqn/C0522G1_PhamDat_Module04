@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Division {
+public class Divisions {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,10 +15,10 @@ public class Division {
     @OneToMany(mappedBy = "divisions")
     private Set<Employee> employees;
 
-    public Division() {
+    public Divisions() {
     }
 
-    public Division(int id, String name, boolean isDelete, Set<Employee> employees) {
+    public Divisions(int id, String name, boolean isDelete, Set<Employee> employees) {
         this.id = id;
         this.name = name;
         this.isDelete = isDelete;

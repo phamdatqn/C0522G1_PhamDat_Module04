@@ -32,6 +32,7 @@ public class CustomerDto {
     public void setCustomerType(CustomerType customerType) {
         this.customerType = customerType;
     }
+
     public int getId() {
         return id;
     }

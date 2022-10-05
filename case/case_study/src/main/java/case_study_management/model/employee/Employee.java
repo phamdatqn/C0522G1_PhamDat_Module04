@@ -31,8 +31,8 @@ public class Employee {
     private EducationDegree educationDegree;
 
     @ManyToOne
-    @JoinColumn(name = "division_id",referencedColumnName = "id")
-    private Division divisions;
+    @JoinColumn(name = "divisions_id",referencedColumnName = "id")
+    private Divisions divisions;
 
     @OneToOne
     @JoinColumn(name = "user_name",referencedColumnName = "userName")
@@ -132,12 +132,12 @@ public class Employee {
         this.educationDegree = educationDegree;
     }
 
-    public Division getDivisions() {
+    public Divisions getDivisions() {
         return divisions;
     }
 
-    public void setDivisions(Division division) {
-        this.divisions = division;
+    public void setDivisions(Divisions divisions) {
+        this.divisions = divisions;
     }
 
     public User getUser() {

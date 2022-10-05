@@ -38,6 +38,7 @@
                 <th>Ngày sinh</th>
                 <th>Số điện thoại</th>
                 <th>Địa chỉ</th>
+                <th>Bộ phận</th>
                 <th>Cập nhật</th>
                 <th>Xóa</th>
             </tr>
@@ -47,6 +48,7 @@
                 <td style="color: brown" th:text="${employee.dateOfBirth}"></td>
                 <td th:text="${employee.phoneNumber}"></td>
                 <td th:text="${employee.address}"></td>
+                <td th:text="${employee.divisions.name}"></td>
                 <td>
                     <a th:href="@{/employee/update/__${employee.id}__}">
                         <button
@@ -86,7 +88,6 @@
                     <h3 style="text-align: center;color: darkmagenta">THÊM MỚI NHÂN VIÊN</h3>
                 </div>
                 <div class="modal-body">
-                    <input hidden type="text" th:field="*{id}">
                     <table class="table table-striped" border="1">
                         <tr>
                             <td>Tên nhân viên:</td>
@@ -140,9 +141,9 @@
                         <tr>
                             <td>Bộ phận:</td>
                             <td>
-                                <select th:field="*{division}">
-                                    <option th:each="division : ${divisionList}" th:value="${division.id}"
-                                            th:text="${division.name}"></option>
+                                <select th:field="*{divisions}">
+                                    <option th:each="divisions : ${divisionList}" th:value="${divisions.id}"
+                                            th:text="${divisions.name}"></option>
                                 </select>
                                 </select>
                             </td>
@@ -159,93 +160,92 @@
 </div>
 
 
-<!-- update -->
-<button hidden id="openModalUpdate" type="button" class="btn btn-primary" data-bs-toggle="modal"
-        data-bs-target="#updateEmployee">
-    Launch demo modal
-</button>
-<!-- Modal -->
-<div class="modal fade" id="updateEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-title">
-                <h3 style="text-align: center;color: darkmagenta">CẬP NHẬT NHÂN VIÊN</h3>
-            </div>
-            <form class="border border-2 border-success p-3 " th:action="@{/employee/update}" method="POST"
-                  th:object="${updateEmployeeDto}">
-
-                <div class="modal-body">
-                    <input hidden type="number" th:field="*{id}">
-                    <table class="table table-striped" border="1">
-                        <tr>
-                            <td>Tên nhân viên:</td>
-                            <td><input type="text" th:field="*{name}"></td>
-                        </tr>
-                        <tr>
-                            <td>Ngày sinh:</td>
-                            <td><input type="date" th:field="*{dateOfBirth}"></td>
-                        </tr>
-                        <tr>
-                            <td>Số CMND:</td>
-                            <td><input th:field="*{idCard}"></td>
-                        </tr>
-                        <tr>
-                            <td>Số điện thoại:</td>
-                            <td><input type="text" th:field="*{phoneNumber}"></td>
-                        </tr>
-                        <tr>
-                            <td>Email:</td>
-                            <td><input th:field="*{email}"></td>
-                        </tr>
-                        <tr>
-                            <td>Địa chỉ:</td>
-                            <td><input th:field="*{address}"></td>
-                        </tr>
-                        <tr>
-                            <td>Lương:</td>
-                            <td><input th:field="*{salary}"></td>
-                        </tr>
-                        <tr>
-                            <td>Bằng cấp:</td>
-                            <td>
-                                <select th:field="*{educationDegree}">
-                                    <option th:each="educationDegree : ${educationDegreeList}"
-                                            th:value="${educationDegree.id}"
-                                            th:text="${educationDegree.name}"></option>
-                                </select>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Chức vụ:</td>
-                            <td>
-                                <select th:field="*{position}">
-                                    <option th:each="position : ${positionList}" th:value="${position.id}"
-                                            th:text="${position.name}"></option>
-                                </select>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Bộ phận:</td>
-                            <td>
-                                <select th:field="*{division}">
-                                    <option th:each="division : ${divisionList}" th:value="${division.id}"
-                                            th:text="${division.name}"></option>
-                                </select>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Cập nhật</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+<!--&lt;!&ndash; update &ndash;&gt;-->
+<!--<button hidden id="openModalUpdate" type="button" class="btn btn-primary" data-bs-toggle="modal"-->
+<!--        data-bs-target="#updateEmployee">-->
+<!--    Launch demo modal-->
+<!--</button>-->
+<!--&lt;!&ndash; Modal &ndash;&gt;-->
+<!--<div class="modal fade" id="updateEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-title">-->
+<!--                <h3 style="text-align: center;color: darkmagenta">CẬP NHẬT NHÂN VIÊN</h3>-->
+<!--            </div>-->
+<!--            <form class="border border-2 border-success p-3 " th:action="@{/employee/update}" method="POST"-->
+<!--                  th:object="${updateEmployeeDto}">-->
+<!--                <div class="modal-body">-->
+<!--                    <input hidden type="number" th:field="*{id}">-->
+<!--                    <table class="table table-striped" border="1">-->
+<!--                        <tr>-->
+<!--                            <td>Tên nhân viên:</td>-->
+<!--                            <td><input type="text" th:field="*{name}"></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td>Ngày sinh:</td>-->
+<!--                            <td><input type="date" th:field="*{dateOfBirth}"></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td>Số CMND:</td>-->
+<!--                            <td><input th:field="*{idCard}"></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td>Số điện thoại:</td>-->
+<!--                            <td><input type="text" th:field="*{phoneNumber}"></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td>Email:</td>-->
+<!--                            <td><input th:field="*{email}"></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td>Địa chỉ:</td>-->
+<!--                            <td><input th:field="*{address}"></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td>Lương:</td>-->
+<!--                            <td><input th:field="*{salary}"></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td>Bằng cấp:</td>-->
+<!--                            <td>-->
+<!--                                <select th:field="*{educationDegree}">-->
+<!--                                    <option th:each="educationDegree : ${educationDegreeList}"-->
+<!--                                            th:value="${educationDegree.id}"-->
+<!--                                            th:text="${educationDegree.name}"></option>-->
+<!--                                </select>-->
+<!--                                </select>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td>Chức vụ:</td>-->
+<!--                            <td>-->
+<!--                                <select th:field="*{position}">-->
+<!--                                    <option th:each="position : ${positionList}" th:value="${position.id}"-->
+<!--                                            th:text="${position.name}"></option>-->
+<!--                                </select>-->
+<!--                                </select>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td>Bộ phận:</td>-->
+<!--                            <td>-->
+<!--                                <select th:field="*{divisions}">-->
+<!--                                    <option th:each="divisions : ${divisionList}" th:value="${divisions.id}"-->
+<!--                                            th:text="${divisions.name}"></option>-->
+<!--                                </select>-->
+<!--                                </select>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                    <div class="modal-footer">-->
+<!--                        <button type="submit" class="btn btn-success">Cập nhật</button>-->
+<!--                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 
 <!-- Delete employee -->
@@ -269,7 +269,6 @@
                     <button type="submit" class="btn btn-danger" value="delete">Xóa</button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>

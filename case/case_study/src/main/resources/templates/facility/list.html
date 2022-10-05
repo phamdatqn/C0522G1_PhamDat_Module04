@@ -83,9 +83,9 @@
                 <h4 class="modal-title" id="exampleModalLabel1">Bạn có chắc chắn muốn xóa dịch vụ?</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form th:action="@{/facility/delete/}" method="post">
+            <form th:action="@{/facility/delete/}">
                 <div class="modal-body">
-                    <span class="h6">Khách hàng:</span>
+                    <span class="h6">Dịch vụ:</span>
                     <strong id="nameDelete" class="text-danger ps-2"></strong>
                     <input type="hidden" name="id" id="idDelete" readonly/>
                 </div>

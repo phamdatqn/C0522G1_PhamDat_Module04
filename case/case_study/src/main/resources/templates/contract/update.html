@@ -65,9 +65,9 @@
             <tr>
                 <td>Bộ phận:</td>
                 <td>
-                    <select th:field="*{division}">
-                        <option th:each="division : ${divisionList}" th:value="${division.id}"
-                                th:text="${division.name}"></option>
+                    <select th:field="*{divisions}">
+                        <option th:each="divisions : ${divisionList}" th:value="${divisions.id}"
+                                th:text="${divisions.name}"></option>
                     </select>
                     </select>
                 </td>

@@ -8,7 +8,7 @@ public class FacilityDto {
     private String name;
     private int area;
     private double cost;
-    private int maxPeople;
+    private String maxPeople;
     private String standardRoom;
     private String descriptionOtherConvenience;
     private String poolArea;
@@ -57,11 +57,11 @@ public class FacilityDto {
         this.cost = cost;
     }
 
-    public int getMaxPeople() {
+    public String getMaxPeople() {
         return maxPeople;
     }
 
-    public void setMaxPeople(int maxPeople) {
+    public void setMaxPeople(String maxPeople) {
         this.maxPeople = maxPeople;
     }
 
