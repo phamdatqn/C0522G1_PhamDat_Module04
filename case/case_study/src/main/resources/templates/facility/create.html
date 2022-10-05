@@ -20,7 +20,7 @@
                     <input class="form-control" placeholder="CHỌN LOẠI DỊCH VỤ:" readonly>
                 </td>
                 <td><select th:field="*{facilityType}" id="selectFacilityType">
-                                        <option value="" class="text-danger">Mời chọn dịch vụ</option>
+                    <option value="" class="text-danger">Mời chọn dịch vụ</option>
                     <option th:each="facilityType: ${facilityTypeList}" th:text="${facilityType.name}"
                             th:value="${facilityType.id}"></option>
                 </select>

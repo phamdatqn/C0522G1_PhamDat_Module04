@@ -45,11 +45,12 @@
                 <td style="color: brown" th:text="${facility.area}"></td>
                 <td th:text="${facility.cost}"></td>
                 <td th:text="${facility.maxPeople}"></td>
-                <td >
+                <td>
                     <span th:if="${facility.rentType}" th:text="${facility.rentType.name}"></span>
                 </td>
                 <td><a th:href="@{/facility/update/__${facility.id}__}">
-                    <button class="btn btn-secondary btn-outline-warning" style="color: white"><span class="bi bi-pencil-square"></span>
+                    <button class="btn btn-secondary btn-outline-warning" style="color: white"><span
+                            class="bi bi-pencil-square"></span>
                     </button>
                 </a></td>
                 <td>
@@ -63,12 +64,56 @@
         </table>
     </div>
 
-    <div style="text-align: center">
-        <a th:href="@{'/facility'(page=${facilityList.number - 1}, search=${search})}"
-           th:if="${facilityList.hasPrevious()}">Previous</a>
-        <span th:text="${facilityList.number + 1}"></span> / <span th:text="${facilityList.totalPages}"></span>
-        <a th:href="@{'/facility'(page=${facilityList.number + 1}, search=${search})}"
-           th:if="${facilityList.hasNext()}">Next</a>
+    <div class="row">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" style="color: black"
+                       th:href="@{'/facility'(page=${0},search=${search})}"
+                       th:if="${facilityList.hasPrevious()}"><<
+                    </a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" style="color: black"
+                       th:href="@{'/facility'(page=${facilityList.number - 1},search=${search})}"
+                       th:if="${facilityList.hasPrevious()}"><
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" style="color: black"
+                       th:href="@{'/facility'(page=${facilityList.number - 1},search=${search})}"
+                       th:if="${facilityList.hasPrevious()}" th:text="${facilityList.number }">
+
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" style="color: black"
+                       th:href="@{'/facility'(page=${facilityList.number },search=${search})}"
+                       th:text="${facilityList.number+1}">
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" style="color: black"
+                       th:href="@{'/facility'(page=${facilityList.number + 1},search=${search})}"
+                       th:if="${facilityList.hasNext()}" th:text="${facilityList.number + 2}">
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" style="color: black"
+                       th:href="@{'/facility'(page=${facilityList.number + 1}, search=${search})}"
+                       th:if="${facilityList.hasNext()}">>
+                    </a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" style="color: black"
+                       th:href="@{'/facility'(page=${facilityList.totalPages - 1},search=${search})}"
+                       th:if="${facilityList.hasPrevious()}">>>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
     <footer th:replace="~{/home::footer}"></footer>
     <div class="row" th:replace="~{/home::phone}"></div>

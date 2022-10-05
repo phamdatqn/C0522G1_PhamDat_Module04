@@ -1,10 +1,8 @@
 package case_study_management.controller;
 
 import case_study_management.dto.CustomerDto;
-import case_study_management.dto.EmployeeDto;
 import case_study_management.model.customer.Customer;
 import case_study_management.model.customer.CustomerType;
-import case_study_management.model.employee.Employee;
 import case_study_management.service.customer.ICustomerService;
 import case_study_management.service.customer.ICustomerTypeService;
 import org.springframework.beans.BeanUtils;
@@ -31,7 +29,7 @@ public class CustomerController {
     @GetMapping("")
     public String home(@PageableDefault(value = 3) Pageable pageable,
                        Model model, @RequestParam(defaultValue = "") String search) {
-        model.addAttribute("customerList", iCustomerService.findByNameCustomer(search,pageable));
+        model.addAttribute("customerList", iCustomerService.findByNameCustomer(search, pageable));
         model.addAttribute("search", search);
         return "customer/list";
     }
@@ -44,15 +42,15 @@ public class CustomerController {
     }
 
     @GetMapping("/update/{id}")
-    public String showFormUpdate(@PathVariable int id, Model model,RedirectAttributes redirectAttributes) {
+    public String showFormUpdate(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
         Optional<Customer> customer = iCustomerService.findById(id);
         if (!customer.isPresent()) {
-           redirectAttributes.addFlashAttribute("message", "LỖI: ID nhân viên không tồn tại!");
+            redirectAttributes.addFlashAttribute("message", "LỖI: ID nhân viên không tồn tại!");
             return "redirect:/error";
         }
         CustomerDto customerDto = new CustomerDto();
 
-        BeanUtils.copyProperties(customer,customerDto);
+        BeanUtils.copyProperties(customer, customerDto);
         model.addAttribute("customerDto", customerDto);
         model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
         return "/customer/update";

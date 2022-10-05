@@ -45,28 +45,28 @@
                 </td>
             </tr>
             <div th:if="${facilityDto.facilityType != 3}">
-            <tr>
-                <td>
-                    <input class="form-control" placeholder="TIÊU CHUẨN PHÒNG:" readonly>
-                </td>
-                <td><input class="form-control" type="text" th:field="*{standardRoom}">
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <input class="form-control" placeholder="TIÊU CHUẨN PHÒNG:" readonly>
+                    </td>
+                    <td><input class="form-control" type="text" th:field="*{standardRoom}">
+                    </td>
+                </tr>
 
-            <tr>
-                <td>
-                    <input class="form-control" placeholder="MÔ TẢ TIỆN NGHI KHÁC:" readonly>
-                </td>
-                <td><input class="form-control" type="text" th:field="*{descriptionOtherConvenience}">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input class="form-control" placeholder="SỐ TẦNG:" readonly>
-                </td>
-                <td><input class="form-control" type="text" th:field="*{numberOfFloors}">
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <input class="form-control" placeholder="MÔ TẢ TIỆN NGHI KHÁC:" readonly>
+                    </td>
+                    <td><input class="form-control" type="text" th:field="*{descriptionOtherConvenience}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="form-control" placeholder="SỐ TẦNG:" readonly>
+                    </td>
+                    <td><input class="form-control" type="text" th:field="*{numberOfFloors}">
+                    </td>
+                </tr>
             </div>
             <tr>
                 <td>
@@ -83,8 +83,8 @@
                 <td>
                     <input class="form-control" placeholder="DỊCH VỤ MIỄN PHÍ:" readonly>
                 </td>
-                <td >
-                    <input  class="form-control" type="text" th:field="*{facilityFree}">
+                <td>
+                    <input class="form-control" type="text" th:field="*{facilityFree}">
                 </td>
             </tr>
 
@@ -100,8 +100,8 @@
                 <td>
                     <input class="form-control" placeholder="LOẠI DỊCH VỤ:" readonly>
                 </td>
-                <td >
-                    <input   th:field="*{facilityType}">
+                <td>
+                    <input th:field="*{facilityType}">
 
                 </td>
             </tr>
