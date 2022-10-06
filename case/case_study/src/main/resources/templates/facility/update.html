@@ -22,18 +22,45 @@
                 </td>
             </tr>
             <tr>
+                <td colspan="2">
+                    <span style="color: crimson" th:errors="*{name}"
+                          th:if="${#fields.hasErrors('name')}"></span>
+                </td>
+            </tr>
+
+            <tr>
                 <td>DIỆN TÍCH:</td>
                 <td><input class="form-control" type="text" th:field="*{area}">
                 </td>
             </tr>
+            <tr>
+                <td colspan="2">
+                    <span style="color: crimson" th:errors="*{area}"
+                          th:if="${#fields.hasErrors('area')}"></span>
+                </td>
+            </tr>
+
             <tr>
                 <td>PHÍ THUÊ:</td>
                 <td><input class="form-control" type="text" th:field="*{cost}">
                 </td>
             </tr>
             <tr>
+                <td colspan="2">
+                    <span style="color: crimson" th:errors="*{cost}"
+                          th:if="${#fields.hasErrors('cost')}"></span>
+                </td>
+            </tr>
+
+            <tr>
                 <td>SỐ NGƯỜI TỐI ĐA:</td>
                 <td><input class="form-control" type="text" th:field="*{maxPeople}">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span style="color: crimson" th:errors="*{maxPeople}"
+                          th:if="${#fields.hasErrors('maxPeople')}"></span>
                 </td>
             </tr>
             <div th:if="${facilityDto.facilityType != 3}">
@@ -52,6 +79,12 @@
                     <td>SỐ TẦNG:</td>
                     <td>
                         <input class="form-control" type="text" th:field="*{numberOfFloors}">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                    <span style="color: crimson" th:errors="*{numberOfFloors}"
+                          th:if="${#fields.hasErrors('numberOfFloors')}"></span>
                     </td>
                 </tr>
             </div>

@@ -46,7 +46,7 @@
             <tr>
                 <td colspan="2">
                     <span style="color: crimson" th:errors="*{area}"
-                                     th:if="${#fields.hasErrors('area')}"></span>
+                          th:if="${#fields.hasErrors('area')}"></span>
                 </td>
             </tr>
 
@@ -54,14 +54,14 @@
                 <td>PHÍ THUÊ:</td>
                 <td><input class="form-control" type="text" th:field="*{cost}"/></td>
             </tr>
-<!--            <tr>-->
-<!--                <td colspan="2">-->
-<!--                    <span style="color: crimson" th:errors="*{cost}"-->
-<!--                                     th:if="${#fields.hasErrors('cost')}">-->
+            <tr>
+                <td colspan="2">
+                    <span style="color: crimson" th:errors="*{cost}"
+                                     th:if="${#fields.hasErrors('cost')}">
 
-<!--                    </span>-->
-<!--                </td>-->
-<!--            </tr>-->
+                    </span>
+                </td>
+            </tr>
 
             <tr>
                 <td>SỐ NGƯỜI TỐI ĐA:</td>

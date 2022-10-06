@@ -105,14 +105,23 @@ public class FacilityController {
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute FacilityDto facilityDto, RedirectAttributes redirectAttributes) {
-        Facility facility = new Facility();
+    public String update(@ModelAttribute @Validated FacilityDto facilityDto,BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes,Model model) {
+        if (bindingResult.hasFieldErrors()){
+            model.addAttribute("facilityDto", facilityDto);
+            model.addAttribute("facilityTypeList", iFacilityTypeService.findAll());
+            model.addAttribute("rentTypeList", iRentTypeService.findAll());
+            return "/facility/update";
+        }else {
+            Facility facility = new Facility();
 
-        BeanUtils.copyProperties(facilityDto, facility);
+            BeanUtils.copyProperties(facilityDto, facility);
 
-        iFacilityService.save(facility);
+            iFacilityService.save(facility);
 
-        redirectAttributes.addFlashAttribute("message", "Cập nhập thành công: " + facility.getName());
-        return "redirect:/facility";
+            redirectAttributes.addFlashAttribute("message", "Cập nhập thành công: " + facility.getName());
+            return "redirect:/facility";
+        }
+
     }
 }
