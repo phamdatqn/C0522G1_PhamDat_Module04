@@ -48,7 +48,5 @@ public class UserController {
             redirectAttributes.addFlashAttribute("message", "Thêm mới " + user.getLastName() + " thành công !");
             return "redirect:/user";
         }
-
-
     }
 }

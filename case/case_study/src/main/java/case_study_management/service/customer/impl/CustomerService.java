@@ -19,6 +19,11 @@ public class CustomerService implements ICustomerService {
     private ICustomerRepository iCustomerRepository;
 
     @Override
+    public ICustomerDto checkFindIdCard(String idCard) {
+        return iCustomerRepository.checkFindIdCard(idCard);
+    }
+
+    @Override
     public List<Customer> findAll() {
         return iCustomerRepository.findAll();
     }
@@ -35,9 +40,8 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public Page<Customer> findByNameCustomer(String keySearch, Pageable pageable) {
-        return iCustomerRepository.findByNameCustomer(keySearch,pageable);
+        return iCustomerRepository.findByNameCustomer(keySearch, pageable);
     }
-
 
     @Override
     public void delete(int id) {

@@ -9,63 +9,66 @@
       style="margin-left:30%;width: 40%;margin-top: 3%">
     <table class="table table-striped" border="1">
         <tr>
-            <th colspan="2" style="color: darkmagenta;font-size: 40px;text-align: center">
+            <th colspan="2" style="color: darkmagenta;font-size: 40px;text-align: center;font-family: Papyrus,fantasy">
                 THÊM MỚI NHÂN VIÊN
             </th>
         </tr>
         <tr>
             <td>Tên nhân viên:</td>
-            <td><input type="text" th:field="*{name}"></td>
+            <td><input class="form-control" type="text" th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><div style="color: crimson" th:errors="*{name}"
+                                 th:if="${#fields.hasErrors('name')}"></div>
+            </td>
         </tr>
         <tr>
             <td>Ngày sinh:</td>
-            <td><input type="date" th:field="*{dateOfBirth}"></td>
+            <td><input class="form-control"  type="date" th:field="*{dateOfBirth}"></td>
         </tr>
         <tr>
             <td>Số CMND:</td>
-            <td><input th:field="*{idCard}"></td>
+            <td><input class="form-control" th:field="*{idCard}"></td>
         </tr>
         <tr>
             <td>Số điện thoại:</td>
-            <td><input type="text" th:field="*{phoneNumber}"></td>
+            <td><input class="form-control" type="text" th:field="*{phoneNumber}"></td>
         </tr>
         <tr>
             <td>Email:</td>
-            <td><input th:field="*{email}"></td>
+            <td><input class="form-control" th:field="*{email}"></td>
         </tr>
         <tr>
             <td>Địa chỉ:</td>
-            <td><input th:field="*{address}"></td>
+            <td><input class="form-control" th:field="*{address}"></td>
         </tr>
         <tr>
             <td>Lương:</td>
-            <td><input th:field="*{salary}"></td>
+            <td><input class="form-control" th:field="*{salary}"></td>
         </tr>
         <tr>
             <td>Bằng cấp:</td>
             <td>
-                <select th:field="*{educationDegree}">
+                <select class="form-select" th:field="*{educationDegree}">
                     <option th:each="educationDegree : ${educationDegreeList}"
                             th:value="${educationDegree.id}"
                             th:text="${educationDegree.name}"></option>
-                </select>
                 </select>
             </td>
         </tr>
         <tr>
             <td>Chức vụ:</td>
             <td>
-                <select th:field="*{position}">
+                <select class="form-select" th:field="*{position}">
                     <option th:each="position : ${positionList}" th:value="${position.id}"
                             th:text="${position.name}"></option>
-                </select>
                 </select>
             </td>
         </tr>
         <tr>
             <td>Bộ phận:</td>
             <td>
-                <select th:field="*{divisions}">
+                <select class="form-select" th:field="*{divisions}">
                     <option th:each="divisions : ${divisionList}" th:value="${divisions.id}"
                             th:text="${divisions.name}"></option>
                 </select>

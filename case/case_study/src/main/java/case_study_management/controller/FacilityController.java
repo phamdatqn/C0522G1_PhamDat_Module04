@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,7 +32,7 @@ public class FacilityController {
     private IRentTypeService iRentTypeService;
 
     @GetMapping("")
-    public String home(@PageableDefault(value = 4) Pageable pageable, Model model,
+    public String home(@PageableDefault(value = 5) Pageable pageable, Model model,
                        @RequestParam(defaultValue = "") String search) {
 
         model.addAttribute("facilityList", iFacilityService.findByNameFacility(search, pageable));
@@ -41,7 +43,7 @@ public class FacilityController {
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("newFacilityDto", new FacilityDto());
+        model.addAttribute("facilityDto", new FacilityDto());
         model.addAttribute("facilityTypeList", iFacilityTypeService.findAll());
         model.addAttribute("rentTypeList", iRentTypeService.findAll());
 
@@ -82,16 +84,24 @@ public class FacilityController {
         return "redirect:/facility";
     }
 
-    @PostMapping("/save")
-    public String save(@ModelAttribute FacilityDto facilityDto, RedirectAttributes redirectAttributes) {
-        Facility facility = new Facility();
+    @PostMapping("/create")
+    public String saveCreate(@ModelAttribute @Validated FacilityDto facilityDto, BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes, Model model) {
 
-        BeanUtils.copyProperties(facilityDto, facility);
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("facilityTypeList", iFacilityTypeService.findAll());
+            model.addAttribute("rentTypeList", iRentTypeService.findAll());
+            return "/facility/create";
+        } else {
+            Facility facility = new Facility();
 
-        iFacilityService.save(facility);
+            BeanUtils.copyProperties(facilityDto, facility);
 
-        redirectAttributes.addFlashAttribute("message", "Thêm mới thành công: " + facility.getName());
-        return "redirect:/facility";
+            iFacilityService.save(facility);
+
+            redirectAttributes.addFlashAttribute("message", "Thêm mới thành công: " + facility.getName());
+            return "redirect:/facility";
+        }
     }
 
     @PostMapping("/update")

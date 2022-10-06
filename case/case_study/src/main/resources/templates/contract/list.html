@@ -8,14 +8,15 @@
 <div class="container-fluid">
 
     <div class="row">
-        <h1 style="color: crimson;text-align: center;font-size: 40px;margin-top: 5px">QUẢN LÝ HỢP ĐỒNG</h1>
+        <h1 style="color: crimson;text-align: center;font-size: 40px;margin-top: 10px;font-family: monospace">
+            QUẢN LÝ HỢP ĐỒNG</h1>
     </div>
 
     <div class="row" th:if="${message}">
         <h4 th:text="${message}" style="color: red"></h4>
     </div>
 
-    <div class="row" style="margin-top: 70px">
+    <div class="row" style="margin-top: 10px">
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
             <form class="d-flex align-items-center m-0 " th:action="@{/contract/}">
@@ -28,10 +29,10 @@
     </div>
 
     <div>
-        <button class="btn btn-success btn-outline-info" data-bs-toggle="modal" data-bs-target="#addContractModal">
+        <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#addContractModal" style="background: green">
             <span style="color: white" class='bi bi-shop'>+ Thêm Mới Hợp Đồng</span>
         </button>
-        <table class="table table-striped" style="margin-top: 50px" border="1">
+        <table class="table table-striped" style="margin-top: 10px" border="1">
             <tr>
                 <th>STT</th>
                 <th>Tên dịch vụ</th>
@@ -53,7 +54,7 @@
                 <td th:text="${contract.totalMoney}"></td>
                 <td colspan="2">
                     <button th:attr="onclick=|attachFacility('${contract.id}')|"
-                            class="btn btn-secondary btn-outline-warning" data-bs-toggle="modal"
+                            class="btn btn-success btn-outline-info" data-bs-toggle="modal"
                             data-bs-target="#addAttachFacility" style="color: white">
                         +
                     </button>
@@ -67,12 +68,56 @@
         </table>
     </div>
 
-    <div style="text-align: center">
-        <a th:href="@{'/contract'(page=${contractList.number - 1}, search=${search})}"
-           th:if="${contractList.hasPrevious()}">Previous</a>
-        <span th:text="${contractList.number + 1}"></span> / <span th:text="${contractList.totalPages}"></span>
-        <a th:href="@{'/contract'(page=${contractList.number + 1}, search=${search})}"
-           th:if="${contractList.hasNext()}">Next</a>
+    <div class="row float-end">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" style="color: black"
+                       th:href="@{'/contract'(page=${0},search=${search})}"
+                       th:if="${contractList.hasPrevious()}"><<
+                    </a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" style="color: black"
+                       th:href="@{'/contract'(page=${contractList.number - 1},search=${search})}"
+                       th:if="${contractList.hasPrevious()}"><
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" style="color: black"
+                       th:href="@{'/contract'(page=${contractList.number - 1},search=${search})}"
+                       th:if="${contractList.hasPrevious()}" th:text="${contractList.number }">
+
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" style="color: white;background: green;"
+                       th:href="@{'/contract'(page=${contractList.number },search=${search})}"
+                       th:text="${contractList.number + 1}">
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" style="color: black"
+                       th:href="@{'/contract'(page=${contractList.number + 1},search=${search})}"
+                       th:if="${contractList.hasNext()}" th:text="${contractList.number + 2}">
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" style="color: black"
+                       th:href="@{'/contract'(page=${contractList.number + 1}, search=${search})}"
+                       th:if="${contractList.hasNext()}">>
+                    </a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" style="color: black"
+                       th:href="@{'/contract'(page=${contractList.totalPages - 1},search=${search})}"
+                       th:if="${contractList.hasPrevious()}">>>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 
     <footer th:replace="~{/home::footer}"></footer>

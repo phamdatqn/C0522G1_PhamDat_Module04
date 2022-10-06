@@ -7,9 +7,10 @@
 <div th:replace="~{/home::header}" class="sticky-top"></div>
 <div class="container-fluid">
     <div class="row">
-        <h1 style="color: crimson;text-align: center;font-size: 40px;margin-top: 5px">QUẢN LÝ KHÁCH HÀNG</h1>
+        <h1 style="color: crimson;text-align: center;font-size: 40px;margin-top: 20px;font-family: Papyrus,fantasy">
+            <strong>QUẢN LÝ KHÁCH HÀNG</strong></h1>
     </div>
-    <div class="row" style="margin-top: 70px">
+    <div class="row" style="margin-top: 10px">
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
             <form class="d-flex align-items-center m-0 " th:action="@{/customer/}">
@@ -26,7 +27,7 @@
     <br>
 
     <div>
-        <table class="table table-striped" style="margin-top: 50px">
+        <table class="table table-striped" style="margin-top: 10px">
             <tr>
                 <th>STT</th>
                 <th>Tên khách hàng</th>
@@ -37,7 +38,7 @@
                 <th>Xóa</th>
             </tr>
             <tr th:each="customer,status : ${customerList}">
-                <td th:text="${customerList.number * 3 + status.count}"></td>
+                <td th:text="${customerList.number * 5 + status.count}"></td>
                 <td style="color: #0c63e4" th:text="${customer.name}"></td>
                 <td style="color: brown" th:text="${customer.dateOfBirth}"></td>
                 <td th:text="${customer.phoneNumber}"></td>
@@ -45,7 +46,7 @@
                 <td>
                     <a th:href="@{/customer/update/__${customer.id}__}">
                         <button class="btn btn-secondary btn-outline-warning" style="color: white"><span
-                                class="bi bi-pencil-square"></span>
+                                class=" bi-pencil-square"></span>
                         </button>
                     </a>
                 </td>
@@ -59,7 +60,8 @@
             </tr>
         </table>
     </div>
-    <div class="row">
+
+    <div class="row float-end">
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item">
@@ -83,9 +85,9 @@
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" style="color: black"
+                    <a class="page-link" style="color: white;background: green;"
                        th:href="@{'/customer'(page=${customerList.number },search=${search})}"
-                       th:text="${customerList.number+1}">
+                       th:text="${customerList.number + 1}">
                     </a>
                 </li>
                 <li class="page-item">

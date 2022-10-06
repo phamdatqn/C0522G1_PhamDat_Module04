@@ -1,8 +1,8 @@
 package case_study_management.controller;
 
 import case_study_management.dto.CustomerDto;
+import case_study_management.dto.ICustomerDto;
 import case_study_management.model.customer.Customer;
-import case_study_management.model.customer.CustomerType;
 import case_study_management.service.customer.ICustomerService;
 import case_study_management.service.customer.ICustomerTypeService;
 import org.springframework.beans.BeanUtils;
@@ -11,9 +11,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Controller
@@ -27,7 +30,7 @@ public class CustomerController {
     private ICustomerTypeService iCustomerTypeService;
 
     @GetMapping("")
-    public String home(@PageableDefault(value = 3) Pageable pageable,
+    public String home(@PageableDefault(value = 5) Pageable pageable,
                        Model model, @RequestParam(defaultValue = "") String search) {
 
         model.addAttribute("customerList", iCustomerService.findByNameCustomer(search, pageable));
@@ -38,24 +41,26 @@ public class CustomerController {
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("newCustomerDto", new CustomerDto());
+        model.addAttribute("customerDto", new CustomerDto());
         model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
-
+        LocalDate minAge = LocalDate.now().minusYears(80);
+        LocalDate maxAge = LocalDate.now().minusYears(18);
+        model.addAttribute("minAge", minAge);
+        model.addAttribute("maxAge", maxAge);
         return "/customer/create";
     }
 
     @GetMapping("/update/{id}")
     public String showFormUpdate(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
-        Optional<Customer> customer = iCustomerService.findById(id);
+        Customer findCustomer = iCustomerService.findById(id).get();
 
-        if (!customer.isPresent()) {
-            redirectAttributes.addFlashAttribute("message", "LỖI: ID nhân viên không tồn tại!");
+        if (findCustomer == null) {
+            redirectAttributes.addFlashAttribute("message", "LỖI:Khách hàng không tồn tại!");
             return "redirect:/error";
         }
-
         CustomerDto customerDto = new CustomerDto();
 
-        BeanUtils.copyProperties(customer.get(), customerDto);
+        BeanUtils.copyProperties(findCustomer, customerDto);
 
         model.addAttribute("customerDto", customerDto);
         model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
@@ -73,40 +78,80 @@ public class CustomerController {
         }
 
         iCustomerService.delete(id);
-        redirectAttributes.addFlashAttribute("message", "Đã xóa " + customer.get().getName() + " thành công !");
+        redirectAttributes.addFlashAttribute("message", "Đã xóa " +
+                customer.get().getName() + " thành công !");
         return "redirect:/customer";
     }
 
-    @PostMapping("/save")
-    public String save(@ModelAttribute CustomerDto customerDto, RedirectAttributes redirectAttributes) {
-        Customer customer = new Customer();
+    @PostMapping("/create")
+    public String save(@ModelAttribute @Validated CustomerDto customerDto, BindingResult bindingResult,
+                       RedirectAttributes redirectAttributes, Model model) {
+        ICustomerDto findICustomerDto = iCustomerService.checkFindIdCard(customerDto.getIdCard());
+        boolean isDuplicateIdCard = findICustomerDto != null;
+        if (bindingResult.hasFieldErrors() || isDuplicateIdCard) {
+            if (isDuplicateIdCard) {
+                model.addAttribute("duplicateIdCard", "Số CMND/CCCD đã tồn tại, " +
+                        "vui lòng kiểm tra lại.");
+            }
+            LocalDate minAge = LocalDate.now().minusYears(80);
+            LocalDate maxAge = LocalDate.now().minusYears(18);
+            model.addAttribute("minAge", minAge);
+            model.addAttribute("maxAge", maxAge);
+            model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
+            return "/customer/create";
 
-        BeanUtils.copyProperties(customerDto, customer);
+        } else {
+            Customer customer = new Customer();
 
-        iCustomerService.save(customer);
+            BeanUtils.copyProperties(customerDto, customer);
 
-        redirectAttributes.addFlashAttribute("message", "Thêm mới thành công: " + customerDto.getName());
-        return "redirect:/customer";
+            iCustomerService.save(customer);
+
+            redirectAttributes.addFlashAttribute("message", "Thêm mới thành công: " +
+                    customerDto.getName());
+            return "redirect:/customer";
+        }
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute CustomerDto customerDto, RedirectAttributes redirectAttributes) {
-        Optional<Customer> customer = iCustomerService.findById(customerDto.getId());
+    public String update(@ModelAttribute @Validated CustomerDto customerDto, BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes, Model model) {
+        Customer findCustomer = iCustomerService.findById(customerDto.getId()).get();
 
-        if (!customer.isPresent()) {
-            redirectAttributes.addFlashAttribute("message", "LỖI: ID khách hàng không tồn tại!");
+        if (findCustomer == null) {
+            redirectAttributes.addFlashAttribute("message", "LỖI: khách hàng không tồn tại!");
             return "redirect:/error";
         }
 
-        BeanUtils.copyProperties(customerDto, customer.get());
+        ICustomerDto findICustomerDto = iCustomerService.checkFindIdCard(customerDto.getIdCard());
 
-        CustomerType customerType = new CustomerType();
+        boolean isDuplicateIdCard = false;
+        if (findICustomerDto != null) {
+            if (findICustomerDto.getIdDto() != (customerDto.getId())) {
+                isDuplicateIdCard = true;
+            }
+        }
 
-        customer.get().setCustomerType(customerType);
+        if (bindingResult.hasFieldErrors() || isDuplicateIdCard) {
+            if (isDuplicateIdCard) {
+                model.addAttribute("duplicateIdCard", "Số CMND/CCCD đã tồn tại, " +
+                        "vui lòng kiểm tra lại.");
+            }
+            LocalDate minAge = LocalDate.now().minusYears(80);
+            LocalDate maxAge = LocalDate.now().minusYears(18);
+            model.addAttribute("minAge", minAge);
+            model.addAttribute("maxAge", maxAge);
+            model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
+            return "/customer/update";
 
-        iCustomerService.save(customer.get());
+        } else {
+            BeanUtils.copyProperties(customerDto, findCustomer);
 
-        redirectAttributes.addFlashAttribute("message", "Đã cập nhập " + customer.get().getName() + " thành công !");
-        return "redirect:/customer";
+            iCustomerService.save(findCustomer);
+
+            redirectAttributes.addFlashAttribute("message", "Cập nhật thành công: " +
+                    customerDto.getName());
+            return "redirect:/customer";
+        }
     }
 }

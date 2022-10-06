@@ -17,62 +17,47 @@
                 </th>
             </tr>
             <tr>
-                <td>
-                    <input class="form-control" placeholder="TÊN DỊCH VỤ:" readonly>
-                </td>
+                <td>TÊN DỊCH VỤ:</td>
                 <td><input class="form-control" type="text" th:field="*{name}">
                 </td>
             </tr>
             <tr>
-                <td>
-                    <input class="form-control" placeholder="DIỆN TÍCH:" readonly>
-                </td>
+                <td>DIỆN TÍCH:</td>
                 <td><input class="form-control" type="text" th:field="*{area}">
                 </td>
             </tr>
             <tr>
-                <td>
-                    <input class="form-control" placeholder="PHÍ THUÊ:" readonly>
-                </td>
+                <td>PHÍ THUÊ:</td>
                 <td><input class="form-control" type="text" th:field="*{cost}">
                 </td>
             </tr>
             <tr>
-                <td>
-                    <input class="form-control" placeholder="SỐ LƯỢNG NGƯỜI TỐI ĐA:" readonly>
-                </td>
+                <td>SỐ NGƯỜI TỐI ĐA:</td>
                 <td><input class="form-control" type="text" th:field="*{maxPeople}">
                 </td>
             </tr>
             <div th:if="${facilityDto.facilityType != 3}">
                 <tr>
-                    <td>
-                        <input class="form-control" placeholder="TIÊU CHUẨN PHÒNG:" readonly>
-                    </td>
+                    <td>TIÊU CHUẨN PHÒNG:</td>
                     <td><input class="form-control" type="text" th:field="*{standardRoom}">
                     </td>
                 </tr>
 
                 <tr>
-                    <td>
-                        <input class="form-control" placeholder="MÔ TẢ TIỆN NGHI KHÁC:" readonly>
-                    </td>
+                    <td>TIỆN NGHI KHÁC:</td>
                     <td><input class="form-control" type="text" th:field="*{descriptionOtherConvenience}">
                     </td>
                 </tr>
                 <tr>
+                    <td>SỐ TẦNG:</td>
                     <td>
-                        <input class="form-control" placeholder="SỐ TẦNG:" readonly>
-                    </td>
-                    <td><input class="form-control" type="text" th:field="*{numberOfFloors}">
+                        <input class="form-control" type="text" th:field="*{numberOfFloors}">
                     </td>
                 </tr>
             </div>
             <tr>
-                <td>
-                    <input class="form-control" placeholder="KIỂU THUÊ:" readonly>
-                </td>
-                <td><select th:field="*{rentType}">-->
+                <td>KIỂU THUÊ:"</td>
+                <td><select class="form-control" th:field="*{rentType}">-->
                     <option th:each="rentType: ${rentTypeList}" th:text="${rentType.name}"
                             th:value="${rentType.id}">
                     </option>

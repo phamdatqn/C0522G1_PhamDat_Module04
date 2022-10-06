@@ -6,67 +6,105 @@
 <body>
 <div th:replace="~{/home::header}" class="sticky-top"></div>
 <div class="container-fluid">
-    <form th:object="${newCustomerDto}" th:action="@{/customer/save}" method="post"
+
+
+    <form th:object="${customerDto}" th:action="@{/customer/create}" method="post"
           style="margin-left:30%;width: 40%;margin-top: 3%">
         <table class="table table-striped" border="1">
             <tr>
-                <th colspan="2" style="color: darkmagenta;font-size: 40px;text-align: center">
+                <th colspan="2" style="color: darkmagenta;font-size: 35px;text-align: center;font-family: Papyrus,fantasy">
                     THÊM MỚI KHÁCH HÀNG
                 </th>
             </tr>
             <tr>
                 <td>
-                    <input class="form-control" placeholder="Tên khách hàng:" readonly>
+                    Tên khách hàng:
                 </td>
-                <td><input class="form-control" name="name"></td>
+                <td><input class="form-control" name="name" th:field="*{name}" ></td>
+            </tr>
+            <tr>
+                <td colspan="2"><div style="color: crimson" th:errors="*{name}"
+                       th:if="${#fields.hasErrors('name')}"></div>
+                </td>
             </tr>
             <tr>
                 <td>
-                    <input class="form-control" placeholder="Giới tính:" readonly>
+                    Giới tính:
                 </td>
                 <td>
-                    <label><input type="radio" value="true" name="gender" checked>Nam<span class='bi bi-gender-male'
+                    <label><input type="radio" value="true" name="gender" th:field="*{gender}" checked>Nam<span class='bi bi-gender-male'
                                                                                            style="color: darkmagenta">&ensp; &ensp; &ensp; </span></label>
-                    <label> <input type="radio" value="false" name="gender">Nữ<span class='bi bi-gender-female'
+                    <label> <input type="radio" value="false" name="gender" th:field="*{gender}">Nữ<span class='bi bi-gender-female'
                                                                                     style="color: darkmagenta"></span></label>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input class="form-control" placeholder="Ngày sinh:" readonly>
+                    Ngày sinh:
                 </td>
-                <td><input type="date" name="dateOfBirth"></td>
+                <td> <input type="date" id="dateOfBirth" class="form-control" th:field="*{dateOfBirth}"
+                            th:min="${minAge}" th:max="${maxAge}"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}"
+                   th:errors="*{dateOfBirth}"></td>
             </tr>
             <tr>
                 <td>
-                    <input class="form-control" placeholder="Số CMND:" readonly>
+                    Số CMND:
                 </td>
-                <td><input class="form-control" name="idCard"></td>
+                <td><input class="form-control" name="idCard" th:field="*{idCard}"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><span style="color: crimson" th:text="${duplicateIdCard}"
+                                     th:if="${duplicateIdCard}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><span style="color: crimson" th:errors="*{idCard}"
+                                     th:if="${#fields.hasErrors('idCard')}"></span>
+                </td>
             </tr>
             <tr>
                 <td>
-                    <input class="form-control" placeholder="Số điện thoại:" readonly>
+                    Số điện thoại:
                 </td>
-                <td><input class="form-control" name="phoneNumber"></td>
+                <td><input class="form-control" name="phoneNumber" th:field="*{phoneNumber}"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><div style="color: crimson" th:errors="*{phoneNumber}"
+                                     th:if="${#fields.hasErrors('phoneNumber')}"></div>
+                </td>
             </tr>
             <tr>
                 <td>
-                    <input class="form-control" placeholder="Email:" readonly>
+                    Email:
                 </td>
-                <td><input class="form-control" name="email"></td>
+                <td><input class="form-control" name="email" th:field="*{email}"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><div style="color: crimson" th:errors="*{email}"
+                                     th:if="${#fields.hasErrors('email')}"></div>
+                </td>
             </tr>
             <tr>
                 <td>
-                    <input class="form-control" placeholder="Địa chỉ:" readonly>
+                    Địa chỉ:
                 </td>
-                <td><input class="form-control" name="address"></td>
+                <td><input class="form-control" name="address" th:field="*{address}"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><div style="color: crimson" th:errors="*{address}"
+                                     th:if="${#fields.hasErrors('address')}"></div>
+                </td>
             </tr>
             <tr>
                 <td class="img-fluid">
-                    <input class="form-control " placeholder="Loại khách hàng:" readonly>
+                    Loại khách hàng:
                 </td>
                 <td>
-                    <select th:field="*{customerType}">
+                    <select class="form-select" th:field="*{customerType}">
                         <option class="form-control" th:each="customerType : ${customerTypeList}"
                                 th:value="${customerType.id}"
                                 th:text="${customerType.name}"></option>

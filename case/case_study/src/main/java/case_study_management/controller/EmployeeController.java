@@ -12,9 +12,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Controller
@@ -41,7 +44,7 @@ public class EmployeeController {
     }
 
     @GetMapping("")
-    public String home(@PageableDefault(value = 3) Pageable pageable, @RequestParam(defaultValue = "") String search, Model model) {
+    public String home(@PageableDefault(value = 5) Pageable pageable, @RequestParam(defaultValue = "") String search, Model model) {
 //        model.addAttribute("employeeList", iEmployeeService.findByNameEmployee(search, pageable));
 //        model.addAttribute("search", search);
 //        model.addAttribute("divisionList",iDivisionService.findAll());
@@ -49,6 +52,12 @@ public class EmployeeController {
 //        model.addAttribute("educationDegreeList",iEducationDegreeService.findAll());
         model.addAttribute("employeeDto", new EmployeeDto());
         employeeList(pageable, search, model);
+
+        LocalDate minAge = LocalDate.now().minusYears(80);
+        LocalDate maxAge = LocalDate.now().minusYears(18);
+        model.addAttribute("minAge", minAge);
+        model.addAttribute("maxAge", maxAge);
+
         return "/employee/list";
     }
 
@@ -97,7 +106,13 @@ public class EmployeeController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute EmployeeDto employeeDto, RedirectAttributes redirectAttributes) {
+    public String save(@ModelAttribute @Validated EmployeeDto employeeDto, BindingResult bindingResult,
+                       RedirectAttributes redirectAttributes) {
+        new EmployeeDto().validate(employeeDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+
+        }
+
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDto, employee);
 

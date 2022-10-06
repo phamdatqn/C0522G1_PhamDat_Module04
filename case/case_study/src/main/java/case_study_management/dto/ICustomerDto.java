@@ -1,6 +1,9 @@
 package case_study_management.dto;
 
 public interface ICustomerDto {
-    String getIdDto();
+    int getIdDto();
+
     String getNameDto();
+
+    String getIdCardDto();
 }
