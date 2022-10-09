@@ -1,5 +1,6 @@
 package case_study_management.service.contract.impl;
 
+import case_study_management.dto.IContractDto;
 import case_study_management.model.contract.Contract;
 import case_study_management.repository.contract.IContractRepository;
 import case_study_management.service.contract.IContractService;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,5 +36,10 @@ public class ContractService implements IContractService {
     @Override
     public void delete(int id) {
         iContractRepository.deleteById(id);
+    }
+
+    @Override
+    public List<IContractDto> findByNameCustomerDto(String search) {
+        return iContractRepository.findByNameCustomerDto(search);
     }
 }

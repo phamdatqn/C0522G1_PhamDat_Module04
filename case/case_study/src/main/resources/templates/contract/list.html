@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:charset="UTF-8">
 <head th:replace="/home :: head">
 
+
 </head>
 <body>
 <div th:replace="~{/home::header}" class="sticky-top"></div>
@@ -29,8 +30,13 @@
     </div>
 
     <div>
-        <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#addContractModal" style="background: green">
+        <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#addContractModal"
+                style="background: green">
             <span style="color: white" class='bi bi-shop'>+ Thêm Mới Hợp Đồng</span>
+        </button>
+        <button class="btn btn-outline-info float-end" data-bs-toggle="modal" data-bs-target="#showAddJaxModal"
+                style="background: green">
+            <span style="color: white" class='bi bi-shop'>+ Thêm Mới Hợp Đồng Ajax</span>
         </button>
         <table class="table table-striped" style="margin-top: 10px" border="1">
             <tr>
@@ -42,7 +48,7 @@
                 <th>Tiền cọc</th>
                 <th>Tổng tiền</th>
                 <th>Các dịch vụ đi kèm</th>
-                <th></th>
+                <th>Xóa hợp đồng</th>
             </tr>
             <tr th:each="contract,status : ${contractList}">
                 <td th:text="${contractList.number * 3 + status.count}"></td>
@@ -58,11 +64,18 @@
                             data-bs-target="#addAttachFacility" style="color: white">
                         +
                     </button>
-                    <button th:attr="onclick=|attachFacility('${contract.id}')|"
-                            class="btn btn-primary btn-outline-secondary" data-bs-toggle="modal"
-                            data-bs-target="#attachFacility" style="color: white">
-                        danh sách Dịch vụ đi kèm
-                    </button>
+                    <a th:href="@{/contract/showAttachFacilityUse/__${contract.id}__}">
+                        <button
+                                class="btn btn-success btn-outline-info">
+                            Danh sách dịch vụ đi kèm
+                        </button>
+                    </a>
+                    <a th:href="@{/contract/delete/__${contract.id}__}">
+                        <button
+                                class="btn btn-danger btn-outline-success">
+                            <span style="color: white" class='bi bi-trash'></span>
+                        </button>
+                    </a>
                 </td>
             </tr>
         </table>
@@ -113,7 +126,7 @@
                 <li class="page-item">
                     <a class="page-link" style="color: black"
                        th:href="@{'/contract'(page=${contractList.totalPages - 1},search=${search})}"
-                       th:if="${contractList.hasPrevious()}">>>
+                       th:if="${contractList.hasNext()}">>>
                     </a>
                 </li>
             </ul>
@@ -123,92 +136,320 @@
     <footer th:replace="~{/home::footer}"></footer>
 </div>
 
-<!-- thêm mới hợp đồng modal -->
-<div class="modal fade" id="addContractModal" tabindex="-1" aria-labelledby="exampleModalLabel1"
-     aria-hidden="true">
+<!-- thêm mới hợp đồng application modal -->
+<div class="modal fade" id="addContractModal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" style="text-align: center">
-                <h4 class="modal-title">Thêm mới hợp đồng</h4>
-            </div>
-            <div class="modal-body">
-                <table class="table table-striped">
-                    <tr>
+            <form class="border border-2 border-success p-3 " th:action="@{/contract/create}" method="POST"
+                  th:object="${contractDto}">
+                <div class="modal-title">
+                    <h3 style="text-align: center;color: darkmagenta;font-family: Papyrus,fantasy">THÊM MỚI HỢP
+                        ĐỒNG</h3>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped" border="1">
+                        <tr>
+                            <td>NGÀY BẮT ĐẦU:</td>
+                            <td><input class="form-control" type="date" th:field="*{startDate}"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div style="color: crimson" th:errors="*{startDate}"
+                                     th:if="${#fields.hasErrors('startDate')}"></div>
+                            </td>
+                        </tr>
 
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-            </div>
-
+                        <tr>
+                            <td>NGÀY KẾT THÚC:</td>
+                            <td><input class="form-control" type="date" th:field="*{endDate}"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div style="color: crimson" th:errors="*{endDate}"
+                                     th:if="${#fields.hasErrors('endDate')}"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>TIỀN GỬI:</td>
+                            <td><input class="form-control" th:field="*{deposit}"></td>
+                        </tr>
+                        <tr>
+                            <td>TỔNG TIỀN:</td>
+                            <td><input class="form-control" type="text" th:field="*{totalMoney}"></td>
+                        </tr>
+                        <tr>
+                            <td>KHÁCH HÀNG:</td>
+                            <td>
+                                <select class="form-select" th:field="*{customer}">
+                                    <option th:each="customerNameDto : ${customerNameDtoList}"
+                                            th:value="${customerNameDto.idDto}"
+                                            th:text="${customerNameDto.nameDto}">
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>NHÂN VIÊN:</td>
+                            <td>
+                                <select class="form-select" th:field="*{employee}">
+                                    <option th:each="employeeNameDto : ${employeeNameDtoList}"
+                                            th:value="${employeeNameDto.idDto}"
+                                            th:text="${employeeNameDto.nameDto}">
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>DỊCH VỤ:</td>
+                            <td>
+                                <select class="form-select" th:field="*{facility}">
+                                    <option th:each="facilityNameDto : ${facilityNameDtoList}"
+                                            th:value="${facilityNameDto.idDto}"
+                                            th:text="${facilityNameDto.nameDto}">
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Tạo mới</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
+
+<!-- thêm mới hợp đồng AJAX modal -->
+<div class="modal fade" id="showAddJaxModal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="border border-2 border-success p-3 " th:action="@{/contract/create}" method="POST"
+                  th:object="${contractDto}">
+                <div class="modal-title">
+                    <h3 style="text-align: center;color: darkmagenta;font-family: Papyrus,fantasy">THÊM MỚI HỢP
+                        ĐỒNG</h3>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped" border="1">
+                        <tr>
+                            <td>NGÀY BẮT ĐẦU:</td>
+                            <td><input id="startDateDto" class="form-control" type="date" th:field="*{startDate}"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div style="color: crimson" th:errors="*{startDate}"
+                                     th:if="${#fields.hasErrors('startDate')}"></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>NGÀY KẾT THÚC:</td>
+                            <td><input id="endDateDto" class="form-control" type="date" th:field="*{endDate}"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div style="color: crimson" th:errors="*{endDate}"
+                                     th:if="${#fields.hasErrors('endDate')}"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>TIỀN GỬI:</td>
+                            <td><input id="depositDto" class="form-control" th:field="*{deposit}"></td>
+                        </tr>
+                        <tr>
+                            <td>TỔNG TIỀN:</td>
+                            <td><input id="totalMoneyDto" class="form-control" type="text" th:field="*{totalMoney}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>KHÁCH HÀNG:</td>
+                            <td>
+                                <select id="customerDto" class="form-select" th:field="*{customer}">
+                                    <option th:each="customerNameDto : ${customerNameDtoList}"
+                                            th:value="${customerNameDto.idDto}"
+                                            th:text="${customerNameDto.nameDto}">
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>NHÂN VIÊN:</td>
+                            <td>
+                                <select id="employeeDto" class="form-select" th:field="*{employee}">
+                                    <option th:each="employeeNameDto : ${employeeNameDtoList}"
+                                            th:value="${employeeNameDto.idDto}"
+                                            th:text="${employeeNameDto.nameDto}">
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>DỊCH VỤ:</td>
+                            <td>
+                                <select id="facilityDto" class="form-select" th:field="*{facility}">
+                                    <option th:each="facilityNameDto : ${facilityNameDtoList}"
+                                            th:value="${facilityNameDto.idDto}"
+                                            th:text="${facilityNameDto.nameDto}">
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-success" id="btnCreate">Tạo mới</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <!-- them mới dich vu di kem modal -->
 <div class="modal fade" id="addAttachFacility" tabindex="-1" aria-labelledby="exampleModalLabel1"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" style="text-align: center">
-                <h4 class="modal-title">Thêm dịch vụ đi kèm:</h4>
-            </div>
-            <div class="modal-body">
-                <table class="table table-striped">
-                    <tr>
-                        <th>Loại dịch vụ</th>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-            </div>
-
+            <form class="border border-2 border-success p-3 " th:action="@{/contractDetail/create}" method="POST"
+                  th:object="${contractDetailDto}">
+                <div class="modal-title">
+                    <h3 style="text-align: center;color: darkmagenta;font-family: Papyrus,fantasy">THÊM MỚI HỢP
+                        ĐỒNG CHI TIẾT</h3>
+                </div>
+                <div class="modal-body">
+                    <input hidden id="contractId" th:field="*{contract.id}"/>
+                    <table class="table table-striped" border="1">
+                        <tr>
+                            <td>TÊN DỊCH VỤ:</td>
+                            <td>
+                                <select class="form-select" th:field="*{attachFacility.id}">
+                                    <option th:each="item : ${attachFacilityList}" th:value="${item.id}"
+                                            th:text="${item.name + ' (' + item.cost + 'VNĐ)'}">
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Số lượng:</td>
+                            <td>
+                                <input class="form-control" type="text" th:field="*{amount}"
+                                       placeholder="Nhập số lượng..." required
+                                       pattern="^[1-9]\d*$"
+                                       title="Số lượng phải là số nguyên dương."/>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Tạo mới</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 <!-- danh sach di kem modal -->
-<div class="modal fade" id="attachFacility" tabindex="-1" aria-labelledby="exampleModalLabel1"
+<div class="modal fade" id="modalShowDetail" tabindex="-1" aria-labelledby="exampleModalLabel1"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="text-align: center">
                 <h4 class="modal-title">Danh sách dịch vụ đi kèm:</h4>
             </div>
+            <div class="modal-title">
+                <h3 style="text-align: center;color: darkmagenta;font-family: Papyrus,fantasy">Danh sách dịch vụ đi
+                    kèm</h3>
+            </div>
             <div class="modal-body">
-                <table class="table table-striped">
+                <table class="table table-striped" style="margin-top: 10px" border="1">
                     <tr>
-                        <th>Tên dịch vụ</th>
-                        <th>Phí thuê</th>
+                        <th>STT</th>
+                        <th>Tên dịch vụ đi kèm</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
                         <th>Tình trạng</th>
                         <th>Đơn vị</th>
                     </tr>
-                    <tr>
-                        <td></td>
+                    <tr th:each="iContractDetail,status : ${iContractDetailDtos}">
+                        <td th:text="${status.count}"></td>
+                        <td style="color: #0c63e4" th:text="${iContractDetail.nameAttachFacilityDto}"></td>
+                        <td style="color: brown" th:text="${iContractDetail.costDto}"></td>
+                        <td style="color: brown" th:text="${iContractDetail.amountDto}"></td>
+                        <td style="color: brown" th:text="${iContractDetail.statusDto}"></td>
+                        <td style="color: brown" th:text="${iContractDetail.unitDto}"></td>
                     </tr>
                 </table>
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
             </div>
 
         </div>
     </div>
-
 </div>
+
+
 <div class="row" th:replace="~{/home::phone}"></div>
 <div class="row" th:replace="~{/home::gotop}"></div>
 </body>
+<script src="../../static/jquery-3.6.1.js"></script>
+
+<input hidden id="open" th:value="${open}" \>
+<script>
+    $(document).ready(function () {
+        $("#btnCreateContract").click(function () {
+            let startDateDto = $("#startDateDto").val();
+            let endDateDto = $("#endDateDto").val();
+            let depositDto = $("#depositDto").val();
+            let totalMoneyDto = $("#totalMoneyDto").val();
+            let customerDto = $("#customerDto").val();
+            let employeeDto = $("#employeeDto").val();
+            let facilityDto = $("#facilityDto").val();
+            let contractDto = {
+                'startDate': startDateDto,
+                'endDate': endDateDto,
+                'deposit': depositDto,
+                'totalMoney': totalMoneyDto,
+                'customer': {id: customerDto},
+                'employee': {id: employeeDto},
+                'facility': {id: facilityDto},
+            };
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                url: "http://localhost:8080/api/contract",
+                type: "POST",
+                data: JSON.stringify(contractDto),
+                success: function () {
+                    $("#addContractAjaxModal").modal('hide');
+                    alert("Create successfully!");
+                    reload();
+                }
+            })
+        });
+    });
+
+    function reload() {
+        location.reload()
+    }
+
+    function attachFacility(id) {
+        $("#contractId").val(id)
+    }
+
+    $(document).ready(function () {
+        let target = $("#open").val();
+        if (target === "openModalShowDetail") {
+            $("#modalShowDetail").modal('show');
+        }
+    })
+
+</script>
+
 </html>

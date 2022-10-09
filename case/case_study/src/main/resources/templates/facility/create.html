@@ -28,7 +28,7 @@
             <tr>
                 <td>TÊN DỊCH VỤ:</td>
                 <td>
-                    <input class="form-control" type="text" th:field="*{name}"/>
+                    <input class="form-control" th:field="*{name}"/>
                 </td>
             </tr>
             <tr>
@@ -40,7 +40,7 @@
 
             <tr>
                 <td>DIỆN TÍCH:</td>
-                <td><input class="form-control" type="text" th:field="*{area}"/>
+                <td><input class="form-control" th:field="*{area}"/>
                 </td>
             </tr>
             <tr>
@@ -52,7 +52,7 @@
 
             <tr>
                 <td>PHÍ THUÊ:</td>
-                <td><input class="form-control" type="text" th:field="*{cost}"/></td>
+                <td><input class="form-control" th:field="*{cost}"/></td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -65,7 +65,7 @@
 
             <tr>
                 <td>SỐ NGƯỜI TỐI ĐA:</td>
-                <td><input class="form-control" type="text" th:field="*{maxPeople}"/></td>
+                <td><input class="form-control"  th:field="*{maxPeople}"/></td>
             </tr>
             <tr>
                 <td colspan="2"><span style="color: crimson" th:errors="*{maxPeople}"
@@ -85,17 +85,17 @@
             <div id="villaHouse">
                 <tr class="villaHouse">
                     <td>TIÊU CHUẨN PHÒNG:</td>
-                    <td><input class="form-control" type="text" th:field="*{standardRoom}"/></td>
+                    <td><input class="form-control"  th:field="*{standardRoom}"/></td>
                 </tr>
 
                 <tr class="villaHouse">
                     <td>TIỆN NGHI KHÁC:</td>
-                    <td><input class="form-control" type="text" th:field="*{descriptionOtherConvenience}"/></td>
+                    <td><input class="form-control"  th:field="*{descriptionOtherConvenience}"/></td>
                 </tr>
 
                 <tr class="villaHouse">
                     <td>SỐ TẦNG:</td>
-                    <td><input class="form-control" type="text" th:field="*{numberOfFloors}"/></td>
+                    <td><input class="form-control"  th:field="*{numberOfFloors}"/></td>
                 </tr>
                 <tr>
                     <td colspan="2"><span style="color: crimson" th:errors="*{numberOfFloors}"
@@ -106,7 +106,7 @@
 
             <tr id="poolArea">
                 <td>DIỆN TÍCH HỒ BƠI:</td>
-                <td><input class="form-control" type="text" th:field="*{poolArea}"/></td>
+                <td><input class="form-control" th:field="*{poolArea}"/></td>
             </tr>
             <tr>
                 <td colspan="2"><span style="color: crimson" th:errors="*{poolArea}"
@@ -116,7 +116,7 @@
 
             <tr id="facilityFree">
                 <td>DỊCH VỤ MIỄN PHÍ:</td>
-                <td><input class="form-control" type="text" th:field="*{facilityFree}"/></td>
+                <td><input class="form-control" th:field="*{facilityFree}"/></td>
             </tr>
 
             <tr>
@@ -131,10 +131,16 @@
     <div class="row" th:replace="~{/home::phone}"></div>
     <div class="row" th:replace="~{/home::gotop}"></div>
 </div>
+<input id="openField" hidden th:if="${onOffFieldOfFacilityType}" th:value="${onOffFieldOfFacilityType}">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
-    $("#selectFacilityType").on('change', function () {
-        let idFacilityType = $(this).val();
+    let  a = $("#openField").val();
+    if (a==="onOffFieldOfFacilityType"){
+        let t = $("#selectFacilityType").val();
+        onchange(t);
+    }
+
+    function  onchange(idFacilityType){
         switch (idFacilityType) {
             case '1':
                 $(".villaHouse").show();
@@ -156,6 +162,10 @@
                 $("#poolArea").hide();
                 $("#facilityFree").hide();
         }
+    }
+    $("#selectFacilityType").on('change', function () {
+        let idFacilityType = $(this).val();
+        onchange(idFacilityType)
     });
 </script>
 </body>

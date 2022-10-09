@@ -1,6 +1,6 @@
 package case_study_management.dto;
 
 public interface IFacilityDto {
-    String getIdDto();
+    int getIdDto();
     String getNameDto();
 }

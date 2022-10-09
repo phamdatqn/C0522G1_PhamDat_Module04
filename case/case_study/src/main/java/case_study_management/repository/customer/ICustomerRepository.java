@@ -16,7 +16,7 @@ public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
 //            "customer_address like %:addressSearch% and customer_phone like %:phoneSearch% and delete_status = false",
 //            nativeQuery = true)
 
-    @Query(value = "select * from customer where name like %:keySearch% and is_delete = false", nativeQuery = true)
+    @Query(value = "select * from customer where name like %:keySearch% and is_delete = 0", nativeQuery = true)
     Page<Customer> findByNameCustomer(@Param("keySearch") String keySearch, Pageable pageable);
 
     @Query(value = "select id as idDto,name as nameDto,id_card as idCardDto from customer", nativeQuery = true)

@@ -17,7 +17,9 @@ public interface IBlogRepository extends JpaRepository<Blog, Integer> {
     @Query(value = "select * from Blog where title like %:keySearch%", nativeQuery = true)
     Page<Blog> findByName(@Param("keySearch") String keySearch, Pageable pageable);
 
-    @Query(value = "select b.title as titleDto, c.category_name as categoryDto from blog b join category c on b.category_id = c.id", nativeQuery = true)
+    @Query(value = "select b.title as titleDto, c.category_name as categoryDto" +
+            " from blog b" +
+            " join category c on b.category_id = c.id", nativeQuery = true)
     List<IBlogDto> findByNameDto();
 
     @Query(value = "select * from Blog where category_id = :chooseSelect", nativeQuery = true)

@@ -1,5 +1,6 @@
 package case_study_management.dto;
 
+import case_study_management.model.customer.Customer;
 import case_study_management.model.customer.CustomerType;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.Errors;

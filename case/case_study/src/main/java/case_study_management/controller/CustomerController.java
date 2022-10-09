@@ -52,7 +52,7 @@ public class CustomerController {
 
     @GetMapping("/update/{id}")
     public String showFormUpdate(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
-        Customer findCustomer = iCustomerService.findById(id).get();
+        Customer findCustomer = iCustomerService.findById(id).orElse(null);
 
         if (findCustomer == null) {
             redirectAttributes.addFlashAttribute("message", "LỖI:Khách hàng không tồn tại!");
@@ -116,7 +116,7 @@ public class CustomerController {
     @PostMapping("/update")
     public String update(@ModelAttribute @Validated CustomerDto customerDto, BindingResult bindingResult,
                          RedirectAttributes redirectAttributes, Model model) {
-        Customer findCustomer = iCustomerService.findById(customerDto.getId()).get();
+        Customer findCustomer = iCustomerService.findById(customerDto.getId()).orElse(null);
 
         if (findCustomer == null) {
             redirectAttributes.addFlashAttribute("message", "LỖI: khách hàng không tồn tại!");

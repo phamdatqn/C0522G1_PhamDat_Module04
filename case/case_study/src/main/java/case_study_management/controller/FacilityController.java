@@ -87,10 +87,11 @@ public class FacilityController {
     @PostMapping("/create")
     public String saveCreate(@ModelAttribute @Validated FacilityDto facilityDto, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes, Model model) {
-
+        new FacilityDto().validate(facilityDto,bindingResult);
         if (bindingResult.hasFieldErrors()) {
             model.addAttribute("facilityTypeList", iFacilityTypeService.findAll());
             model.addAttribute("rentTypeList", iRentTypeService.findAll());
+            model.addAttribute("onOffFieldOfFacilityType","onOffFieldOfFacilityType");
             return "/facility/create";
         } else {
             Facility facility = new Facility();

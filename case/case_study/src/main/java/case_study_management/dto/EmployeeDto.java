@@ -15,24 +15,22 @@ import java.util.Date;
 public class EmployeeDto implements Validator {
     private int id;
 
-    @NotEmpty(message = "Không được để trống !")
-    @NotBlank(message = "Không được nhập ký tự trống đầu tiên !")
-    @Pattern(regexp = "^([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}$",
-            message = "Tên người dùng phải tiếng Việt có dấu & viết hoa chữ đầu tiên !")
+//    @NotEmpty(message = "Không được để trống !")
+//    @NotBlank(message = "Không được nhập ký tự trống đầu tiên !")
+//    @Pattern(regexp = "^([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}$",
+//            message = "Tên người dùng phải tiếng Việt có dấu & viết hoa chữ đầu tiên !")
     private String name;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
-    @NotEmpty(message = "Không được để trống !")
-    @NotBlank(message = "Không được nhập ký tự trống đầu tiên !")
-    @Pattern(regexp = "^[0-9]{12}|[0-9]{9}$", message = "Số CMND/CCCD: phải 9 hoặc 12 số")
+//    @NotEmpty(message = "Không được để trống !")
+//    @NotBlank(message = "Không được nhập ký tự trống đầu tiên !")
+//    @Pattern(regexp = "^[0-9]{12}|[0-9]{9}$", message = "Số CMND/CCCD: phải 9 hoặc 12 số")
     private String idCard;
 
-    @NotEmpty(message = "Không được để trống !")
-    @NotBlank(message = "Không được nhập ký tự trống đầu tiên !")
-
-
+//    @NotEmpty(message = "Không được để trống !")
+//    @NotBlank(message = "Không được nhập ký tự trống đầu tiên !")
     private double salary;
 
     private String phoneNumber;

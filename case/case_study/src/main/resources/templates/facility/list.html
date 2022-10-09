@@ -110,7 +110,7 @@
                 <li class="page-item">
                     <a class="page-link" style="color: black"
                        th:href="@{'/facility'(page=${facilityList.totalPages - 1},search=${search})}"
-                       th:if="${facilityList.hasPrevious()}">>>
+                       th:if="${facilityList.hasNext()}">>>
                     </a>
                 </li>
             </ul>

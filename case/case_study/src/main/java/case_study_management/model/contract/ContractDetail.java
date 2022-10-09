@@ -29,6 +29,14 @@ public class ContractDetail {
     @JoinColumn(name = "attach_facility_id", referencedColumnName = "id")
     private AttachFacility attachFacility;
 
+    public AttachFacility getAttachFacility() {
+        return attachFacility;
+    }
+
+    public void setAttachFacility(AttachFacility attachFacility) {
+        this.attachFacility = attachFacility;
+    }
+
     public ContractDetail() {
     }
 

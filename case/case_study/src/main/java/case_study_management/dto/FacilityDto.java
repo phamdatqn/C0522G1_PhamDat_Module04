@@ -5,10 +5,7 @@ import case_study_management.model.facility.RentType;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 
 public class FacilityDto implements Validator {
     private int id;
@@ -18,23 +15,23 @@ public class FacilityDto implements Validator {
             message = "Tên dịch vụ được phép chứa số, và các kí tự đầu tiên của mỗi từ phải viết hoa.")
     private String name;
 
-
-    @Min(value = 1, message = "Phải la số dương.")
+    @Min(value = 1, message = "Phải là số nguyên dương ")
     private int area;
 
-    @Min(value = 1, message = "Phải la số dương.")
+    @Min(value = 1, message = "Phải la số dương")
     private double cost;
 
-    @NotBlank(message = "Số người tối đa không được để trống.")
-    @Pattern(regexp = "^[1-9]\\d*$", message = "Số người tối đa phải là số nguyên dương.")
-    private String maxPeople;
+    @Min(value = 1, message = "Phải la số dương < hơn 19")
+    @Max(19)
+    private int maxPeople;
+
     private String standardRoom;
     private String descriptionOtherConvenience;
 
-    @Pattern(regexp = "^[1-9]\\d*$", message = "Diện tích hồ bơi phải là số nguyên dương.")
+   // @Pattern(regexp = "^[1-9]\\d*$", message = "Diện tích hồ bơi phải là số nguyên dương.")
     private String poolArea;
 
-    @Pattern(regexp = "^[1-9]\\d*$", message = "Số tầng phải là số nguyên dương.")
+   // @Pattern(regexp = "^[1-9]\\d*$", message = "Số tầng phải là số nguyên dương.")
     private String numberOfFloors;
     private String facilityFree;
     private boolean isDelete;
@@ -46,7 +43,7 @@ public class FacilityDto implements Validator {
     public FacilityDto() {
     }
 
-    public FacilityDto(int id, String name, int area, double cost, String maxPeople, String standardRoom,
+    public FacilityDto(int id, String name, int area, double cost, int maxPeople, String standardRoom,
                        String descriptionOtherConvenience, String poolArea, String numberOfFloors,
                        String facilityFree, boolean isDelete, RentType rentType, FacilityType facilityType) {
         this.id = id;
@@ -100,11 +97,11 @@ public class FacilityDto implements Validator {
         this.cost = cost;
     }
 
-    public String getMaxPeople() {
+    public int getMaxPeople() {
         return maxPeople;
     }
 
-    public void setMaxPeople(String maxPeople) {
+    public void setMaxPeople(int maxPeople) {
         this.maxPeople = maxPeople;
     }
 
@@ -179,6 +176,21 @@ public class FacilityDto implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
+        FacilityDto facilityDto = (FacilityDto) target;
+        if (facilityDto.getFacilityType().getId() == 1) {
+            if (!facilityDto.getPoolArea().matches("^[1-9]\\d*| $")){
+                errors.rejectValue("poolArea", "", "Không được nhập chữ , vui lòng nhập số !");
+            }else if (Integer.parseInt(facilityDto.getPoolArea()) <= 0) {
+                errors.rejectValue("poolArea", "", "Diện tích phải là số dương");
+            }
+        }
 
+        if (facilityDto.getFacilityType().getId() !=3 ) {
+            if (!facilityDto.getPoolArea().matches("^[1-9]\\d*| $")){
+                errors.rejectValue("numberOfFloors", "", "vui lòng nhập số !");
+            }else if (Integer.parseInt(facilityDto.getPoolArea()) <= 0) {
+                errors.rejectValue("numberOfFloors", "", "Số tầng phải là số dương");
+            }
+        }
     }
 }

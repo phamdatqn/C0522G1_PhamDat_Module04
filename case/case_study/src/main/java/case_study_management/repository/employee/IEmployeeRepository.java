@@ -15,6 +15,6 @@ public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
     Page<Employee> findByNameEmployee(@Param("keySearch") String keySearch, Pageable pageable);
 
 
-    @Query(value = "select id as idDto,name as nameDto from facility", nativeQuery = true)
+    @Query(value = "select id as idDto,name as nameDto from employee", nativeQuery = true)
     List<IEmployeeDto> findByNameDto();
 }

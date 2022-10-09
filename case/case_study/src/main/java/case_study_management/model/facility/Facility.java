@@ -13,7 +13,7 @@ public class Facility {
     private String name;
     private int area;
     private double cost;
-    private String maxPeople;
+    private int maxPeople;
     private String standardRoom;
     private String descriptionOtherConvenience;
     private String poolArea ;
@@ -61,7 +61,7 @@ public class Facility {
     public Facility() {
     }
 
-    public Facility(int id, String name, int area, double cost, String maxPeople, String standardRoom,
+    public Facility(int id, String name, int area, double cost, int maxPeople, String standardRoom,
                     String descriptionOtherConvenience, String poolArea, String numberOfFloors, String facilityFree,
                     boolean isDelete, RentType rentType, FacilityType facilityType, Set<Contract> contracts) {
         this.id = id;
@@ -112,11 +112,11 @@ public class Facility {
         this.cost = cost;
     }
 
-    public String getMaxPeople() {
+    public int getMaxPeople() {
         return maxPeople;
     }
 
-    public void setMaxPeople(String maxPeople) {
+    public void setMaxPeople(int maxPeople) {
         this.maxPeople = maxPeople;
     }
 

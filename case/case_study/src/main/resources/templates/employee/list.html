@@ -115,7 +115,7 @@
                 <li class="page-item">
                     <a class="page-link" style="color: black"
                        th:href="@{'/employee'(page=${employeeList.totalPages - 1},search=${search})}"
-                       th:if="${employeeList.hasPrevious()}">>>
+                       th:if="${employeeList.hasNext()}">>>
                     </a>
                 </li>
             </ul>
@@ -128,7 +128,7 @@
 <div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="border border-2 border-success p-3 " th:action="@{/employee/save}" method="POST"
+            <form class="border border-2 border-success p-3 " th:action="@{/employee/create}" method="POST"
                   th:object="${employeeDto}">
                 <div class="modal-title">
                     <h3 style="text-align: center;color: darkmagenta;font-family: Papyrus,fantasy">THÊM MỚI NHÂN
@@ -322,7 +322,7 @@
     </div>
 </div>
 
-<input hidden id="action" th:value="${action}">
+<input hidden id="action" th:value="${action}"\>
 
 <footer th:replace="~{/home::footer}"></footer>
 <div class="row" th:replace="~{/home::phone}"></div>

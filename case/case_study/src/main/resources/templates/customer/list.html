@@ -106,7 +106,7 @@
                 <li class="page-item">
                     <a class="page-link" style="color: black"
                        th:href="@{'/customer'(page=${customerList.totalPages - 1},search=${search})}"
-                       th:if="${customerList.hasPrevious()}">>>
+                       th:if="${customerList.hasNext()}">>>
                     </a>
                 </li>
             </ul>
